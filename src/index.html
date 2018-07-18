@@ -13,10 +13,10 @@
     function apiRequest() {
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
-            if(this.readyState == 4 && this.status == 200) {
+            if(this.readyState == xhttp.DONE && this.status == 200) {
                 document.getElementById("data").innerHTML = this.responseText;
             } else {
-                document.getElementById("data").innerHTML = "Got Nothing";
+                document.getElementById("data").innerHTML = "Received nothing from server";
             }
         };
         xhttp.open("GET", "http://localhost:8080/api/1.0/twitter/timeline", true);

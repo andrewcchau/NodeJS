@@ -9,8 +9,8 @@ var htmlPath = path.join(__dirname, '..', 'index.html');
 fs.readFile(htmlPath, function (err, html) {
 
     if (err) {
-        console.log(err.name + ': ' + err.message);
-        process.exit(1);
+        console.error(err.name + ': ' + err.message);
+        process.exit(err.code);
     };
 
     http.createServer(function (req, res) {
