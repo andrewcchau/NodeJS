@@ -8,10 +8,12 @@ var htmlPath = path.join(__dirname, '..', 'index.html');
 
 fs.readFile(htmlPath, function (err, html) {
 
-    if (err) throw err;
+    if (err) {
+        console.log(err.name + ': ' + err.message);
+        process.exit(1);
+    };
 
     http.createServer(function (req, res) {
-        res.setHeader('Content-Type', 'text/html');
         res.writeHead(200, {'Content-Type': 'text/html'});
         res.write(html);
         res.end();
