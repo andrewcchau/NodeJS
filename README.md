@@ -1,12 +1,14 @@
 # Onboarding-UI
 A simple UI for the onboarding Dropwizard Application
 
+# Node Version
+This project is currently running on Node v10.6.0
+
 # Getting Started
 Before you start, make sure you have done these few things:
 * Have an up-to-date version of NodeJS installed on your computer
 
-# How To Run
-To run the server, run the following command: ```node src/js/main.js```
-
-# Node Version
-This project is currently running on Node v10.6.0
+# Running the Program
+To run the server, run the following commands:
+ 1. Open command line and navigate to the folder where you have cloned this repo
+ 2. Run ```node src/js/main.js```
