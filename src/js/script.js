@@ -36,7 +36,7 @@ function blockify(s) {
 
         span.appendChild(date);
 
-        hyperlink.href = "https://twitter.com/" + json[i].user.name + "/status/" + json[i].statusId;
+        hyperlink.href = "https://twitter.com/" + json[i].user.name + "/status/" + json[i].Id;
         hyperlink.target = "_blank";
         hyperlink.appendChild(content);
 
