@@ -1,7 +1,3 @@
-function isOdd(n) {
-    return Math.abs(n % 2) == 1;
-}
-
 function clearDiv() {
     while(document.getElementById("tweet") != null) {
         document.getElementById("tweet").remove();
@@ -59,9 +55,6 @@ function blockify(s) {
         newDiv.appendChild(hyperlink);
 
         var currentDiv = document.getElementById("dataInsert");
-        if(isOdd(i)) {
-            document.body.insertBefore(newDiv, currentDiv);
-        }
         document.body.insertBefore(newDiv, currentDiv);
     }
 }
