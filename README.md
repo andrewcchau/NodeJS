@@ -12,3 +12,4 @@ Before you start, make sure you have done these few things:
 To run the server, run the following commands:
 1. Open command line and navigate to the folder where you have cloned this repo
 2. Run ```node src/js/main.js```
+3. Navigate to ```localhost:9000``` to use the UI

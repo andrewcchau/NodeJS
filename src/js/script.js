@@ -2,6 +2,12 @@ function isOdd(n) {
     return Math.abs(n % 2) == 1;
 }
 
+function clearDiv() {
+    while(document.getElementById("tweet") != null) {
+        document.getElementById("tweet").remove();
+    }
+}
+
 function apiCall() {
     var xhttp = new XMLHttpRequest();
 
@@ -21,11 +27,13 @@ function apiCall() {
 }
 
 function blockify(s) {
+    clearDiv();
+
     var json = JSON.parse(s);
 
-    console.log(json);
     for(var i in json) {
         var newDiv = document.createElement("div");
+        newDiv.id = "tweet";
         newDiv.className = "item";
         var content = document.createTextNode(new Date(json[i].createdAt).toLocaleString() + " : " + json[i].twitterMessage);
 
