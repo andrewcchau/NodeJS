@@ -1,28 +1,15 @@
 <!DOCTYPE html>
 <html>
+<head>
+    <script type="text/javascript" src="js/script.js"></script>
+</head>
 <body>
 
 <p>Hello World</p>
 
-<button onclick="apiRequest()">Get Timeline</button>
+<button onclick="apiCall()">Get Timeline</button>
 
 <div id="data"></div>
-
-
-<script>
-    function apiRequest() {
-        var xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function() {
-            if(this.readyState == xhttp.DONE && this.status == 200) {
-                document.getElementById("data").innerHTML = this.responseText;
-            } else {
-                document.getElementById("data").innerHTML = "Received nothing from server";
-            }
-        };
-        xhttp.open("GET", "http://localhost:8080/api/1.0/twitter/timeline", true);
-        xhttp.send();
-    }
-</script>
 
 </body>
 </html>
