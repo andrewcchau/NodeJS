@@ -1,9 +1,3 @@
-function clearDiv() {
-    while(document.getElementById("tweet") != null) {
-        document.getElementById("tweet").remove();
-    }
-}
-
 function redirect(l) {
     window.open(l, '_blank');
 }
@@ -13,7 +7,6 @@ function apiCall() {
 
     xhttp.onreadystatechange = function() {
         if(this.readyState == xhttp.DONE && this.status == 200) {
-            document.getElementById("data").innerHTML = "";
             blockify(this.responseText);
         } else if(this.readyState == xhttp.OPENED || this.readyState == xhttp.HEADERS_RECEIVED
                     || this.readyState == xhttp.LOADING) {
@@ -28,8 +21,6 @@ function apiCall() {
 }
 
 function blockify(s) {
-    clearDiv();
-
     var json = JSON.parse(s);
 
     for(var i in json) {
@@ -48,13 +39,11 @@ function blockify(s) {
         hyperlink.target = "_blank";
         hyperlink.appendChild(content);
 
-        newDiv.id = "tweet";
         newDiv.className = "item";
         newDiv.appendChild(img);
         newDiv.appendChild(span);
         newDiv.appendChild(hyperlink);
 
-        var currentDiv = document.getElementById("dataInsert");
-        document.body.insertBefore(newDiv, currentDiv);
+        document.getElementById("data").appendChild(newDiv);
     }
 }
