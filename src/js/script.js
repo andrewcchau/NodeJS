@@ -36,7 +36,6 @@ function blockify(s) {
 
     var json = JSON.parse(s);
 
-    console.log(json);
     for(var i in json) {
         var newDiv = document.createElement("div");
         var hyperlink = document.createElement("a");
