@@ -7,6 +7,7 @@ function apiCall() {
 
     xhttp.onreadystatechange = function() {
         if(this.readyState == xhttp.DONE && this.status == 200) {
+            document.getElementById("data").innerHTML = '';
             blockify(this.responseText);
         } else if(this.readyState == xhttp.OPENED || this.readyState == xhttp.HEADERS_RECEIVED
                     || this.readyState == xhttp.LOADING) {
