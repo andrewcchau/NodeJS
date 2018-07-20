@@ -2,7 +2,7 @@
     text-align: center;
     font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
     font-weight: bold;
-    font-size: 40pt;
+    font-size: 40px;
 }
 
 #timelineButton {
@@ -11,7 +11,7 @@
     border-radius: 12px;
     border: 1px solid;
     color: black;
-    font-size: 10pt;
+    font-size: 15px;
     -webkit-transition-duration: 0.4s;
     transition-duration: 0.4s;
     justify-content: center;
@@ -26,7 +26,7 @@
 #data {
     text-align: center;
     border-style: solid;
-    border-width: 1pt;
+    border-width: 1.5px;
     width: 80%;
     margin: auto;
 }
@@ -42,9 +42,12 @@
 .item {
     background-color: #e8f5fd;
     align-items: center;
-    padding: 2pt;
+    padding: 2px;
     overflow: hidden;
     display: flex;
+    border-style: solid;
+    border-width: .5px;
+    border-color: #C0C0C0;
 }
 
 .user {
@@ -53,14 +56,14 @@
 }
 
 .twitterHandle {
-    font-size: 15pt;
+    font-size: 20px;
     font-weight: bold;
-    padding-bottom: 2pt;
+    padding-bottom: 3px;
 }
 
 .twitterName {
     font-style: italic;
-    padding-bottom: 5pt;
+    padding-bottom: 5px;
 }
 
 .message {
@@ -72,20 +75,20 @@
     font-style: italic;
     font-family: "Arial";
     font-size: 10pt;
-    padding-bottom: 5pt;
+    padding-bottom: 5px;
 }
 
 .messageText {
-    font-size: 12pt;
+    font-size: 17px;
 }
 
 .buttonContainer {
     text-align: center;
-    padding: 5pt;
+    padding: 5px;
 }
 
 img {
     border-radius: 50%;
-    padding-bottom: 2pt;
-    padding-top: 3pt;
+    padding-bottom: 3px;
+    padding-top: 3px;
 }
