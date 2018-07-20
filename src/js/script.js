@@ -13,14 +13,14 @@ function apiCall() {
                     || this.readyState == xhttp.LOADING) {
             document.getElementById("data").innerHTML = "Pending . . .";
         } else {
-            var errMessageContainer = document.createElement("font");
+            var errorMessageContainer = document.createElement("div");
             var errorMessage = document.createTextNode("Something went wrong. Please come back later!");
 
-            errMessageContainer.color = "red";
-            errMessageContainer.appendChild(errorMessage);
+            errorMessageContainer.appendChild(errorMessage);
+            errorMessageContainer.id = "errorMessage";
 
             document.getElementById("data").innerHTML = '';
-            document.getElementById("data").appendChild(errMessageContainer);
+            document.getElementById("data").appendChild(errorMessageContainer);
         }
     };
 
