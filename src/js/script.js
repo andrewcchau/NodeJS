@@ -13,7 +13,7 @@ function apiCall() {
                     || this.readyState == xhttp.LOADING) {
             document.getElementById("data").innerHTML = "Pending . . .";
         } else {
-            document.getElementById("data").innerHTML = "Received nothing from server";
+            document.getElementById("data").innerHTML = "Nothing to show. Come back later!";
         }
     };
 

@@ -29,6 +29,9 @@
     border-width: 1.5px;
     width: 80%;
     margin: auto;
+    font-style: "Arial";
+    font-size: 25px;
+    font-weight: bold;
 }
 
 #data:empty {
