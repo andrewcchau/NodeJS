@@ -6,7 +6,7 @@
 }
 
 #timelineButton {
-    align-items: center;
+    align-items: left;
     background-color: white;
     border-radius: 12px;
     border: 1px solid;
@@ -48,11 +48,14 @@
     border-style: solid;
     border-width: .5px;
     border-color: #C0C0C0;
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
 }
 
 .user {
     float: left;
-    flex: 0 0 15%;
+    flex: 0 0 17%;
 }
 
 .twitterHandle {
@@ -68,7 +71,6 @@
 
 .message {
     text-align: left;
-    padding: 2rem;
 }
 
 .date {
@@ -83,12 +85,14 @@
 }
 
 .buttonContainer {
-    text-align: center;
+    text-align: right;
     padding: 5px;
+    padding-right: 10%;
 }
 
 img {
     border-radius: 50%;
     padding-bottom: 3px;
-    padding-top: 3px;
+    padding-top: 7px;
+    width: 30%;
 }
