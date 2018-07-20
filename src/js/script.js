@@ -35,7 +35,9 @@ function blockify(s) {
         var dateContainer = document.createElement("div");
         var hyperlink = document.createElement("a");
 
-        var date = document.createTextNode(new Date(json[i].createdAt).toLocaleString());
+        var msgDate = new Date(json[i].createdAt);
+        var formatter = new Intl.DateTimeFormat("eng", { month: "short" });
+        var date = document.createTextNode(formatter.format(msgDate) + " " + msgDate.getDay());
         var content = document.createTextNode(json[i].twitterMessage);
         var handleText = document.createTextNode(json[i].user.twitterHandle);
         var nameText = document.createTextNode(json[i].user.name);
