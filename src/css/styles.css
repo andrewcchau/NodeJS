@@ -1,12 +1,21 @@
-#title {
-    text-align: center;
-    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
-    font-weight: bold;
-    font-size: 40px;
+body {
+    font-family: 'Lato';
 }
 
-#timelineButton {
-    align-items: left;
+.title {
+    text-align: center;
+    font-weight: bold;
+    font-size: 40px;
+    margin-bottom: -10px;
+}
+
+.buttonContainer {
+    text-align: right;
+    margin-right: 5%;
+    margin-bottom: 10px;
+}
+
+.timelineButton {
     background-color: white;
     border-radius: 12px;
     border: 1px solid;
@@ -18,28 +27,25 @@
     padding: 5px 10px;
 }
 
-#timelineButton:hover {
+.timelineButton:hover {
     background-color: #008CBA;
     color: white;
 }
 
-#data {
+.data {
     text-align: center;
-    border-style: solid;
-    border-width: 1.5px;
+    border: 1px solid;
     border-color: black;
-    width: 80%;
+    width: 90%;
     margin: auto;
-    font-style: "Arial";
     font-size: 25px;
-    font-weight: bold;
 }
 
-#data:empty {
+.data:empty {
     display: none;
 }
 
-#errorMessage {
+.errorMessage {
     color: red;
 }
 
@@ -50,20 +56,18 @@
 .item {
     background-color: #e8f5fd;
     align-items: center;
-    padding: 2px;
-    overflow: hidden;
-    display: flex;
-    border-style: solid;
-    border-width: .5px;
+    border: 1px solid;
     border-color: #C0C0C0;
     border-top: 0;
     border-left: 0;
     border-right: 0;
+    display: grid;
+    grid-template-columns: 12% auto;
+    padding-top: 2px;
 }
 
 .user {
-    float: left;
-    flex: 0 0 17%;
+    margin-bottom: 5px;
 }
 
 .twitterHandle {
@@ -73,34 +77,29 @@
 
 .twitterName {
     font-style: italic;
-    padding-bottom: 5px;
+    font-size: 15px;
+    font-weight: normal;
+    margin-bottom: 5px;
 }
 
 .message {
+    display: inline-block;
     text-align: left;
 }
 
 .date {
     font-style: italic;
-    font-family: "Arial";
     font-size: 10pt;
-    padding-bottom: 5px;
+    margin-bottom: -5px;
 }
 
 .messageText {
     font-size: 17px;
 }
 
-.buttonContainer {
-    text-align: right;
-    padding: 5px;
-    padding-right: 10%;
-    padding-bottom: 10px;
-}
-
 img {
     border-radius: 50%;
-    padding-bottom: 3px;
-    padding-top: 15px;
-    width: 30%;
+    margin-top: 10px;
+    width: 60px;
+    height: 60px;
 }

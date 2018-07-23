@@ -6,21 +6,22 @@ function apiCall() {
     var xhttp = new XMLHttpRequest();
 
     xhttp.onreadystatechange = function() {
+        var dataElem = document.getElementsByClassName("data")[0];
         if(this.readyState == xhttp.DONE && this.status == 200) {
-            document.getElementById("data").innerHTML = '';
+            dataElem.innerHTML = '';
             blockify(this.responseText);
         } else if(this.readyState == xhttp.OPENED || this.readyState == xhttp.HEADERS_RECEIVED
                     || this.readyState == xhttp.LOADING) {
-            document.getElementById("data").innerHTML = "Pending . . .";
+            dataElem.innerHTML = "Pending . . .";
         } else {
             var errorMessageContainer = document.createElement("div");
             var errorMessage = document.createTextNode("Something went wrong. Please come back later!");
 
             errorMessageContainer.appendChild(errorMessage);
-            errorMessageContainer.id = "errorMessage";
+            errorMessageContainer.className = "errorMessage";
 
-            document.getElementById("data").innerHTML = '';
-            document.getElementById("data").appendChild(errorMessageContainer);
+            dataElem.innerHTML = '';
+            dataElem.appendChild(errorMessageContainer);
         }
     };
 
@@ -44,7 +45,7 @@ function blockify(s) {
 
         var msgDate = new Date(json[i].createdAt);
         var formatter = new Intl.DateTimeFormat("eng", { month: "short" });
-        var date = document.createTextNode(formatter.format(msgDate) + " " + msgDate.getDay());
+        var date = document.createTextNode(formatter.format(msgDate) + " " + msgDate.getUTCDate());
         var content = document.createTextNode(json[i].twitterMessage);
         var handleText = document.createTextNode(json[i].user.twitterHandle);
         var nameText = document.createTextNode(json[i].user.name);
@@ -81,6 +82,6 @@ function blockify(s) {
         divContainer.appendChild(userContainer);
         divContainer.appendChild(messageContainer);
 
-        document.getElementById("data").appendChild(divContainer);
+        document.getElementsByClassName("data")[0].appendChild(divContainer);
     }
 }
