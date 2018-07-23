@@ -6,14 +6,22 @@ function apiCall() {
     var xhttp = new XMLHttpRequest();
 
     xhttp.onreadystatechange = function() {
+        var dataElem = document.getElementsByClassName("data")[0];
         if(this.readyState == xhttp.DONE && this.status == 200) {
-            document.getElementById("data").innerHTML = '';
+            dataElem.innerHTML = '';
             blockify(this.responseText);
         } else if(this.readyState == xhttp.OPENED || this.readyState == xhttp.HEADERS_RECEIVED
                     || this.readyState == xhttp.LOADING) {
-            document.getElementById("data").innerHTML = "Pending . . .";
+            dataElem.innerHTML = "Pending . . .";
         } else {
-            document.getElementById("data").innerHTML = "Received nothing from server";
+            var errorMessageContainer = document.createElement("div");
+            var errorMessage = document.createTextNode("Something went wrong. Please come back later!");
+
+            errorMessageContainer.appendChild(errorMessage);
+            errorMessageContainer.className = "errorMessage";
+
+            dataElem.innerHTML = '';
+            dataElem.appendChild(errorMessageContainer);
         }
     };
 
@@ -25,26 +33,55 @@ function blockify(s) {
     var json = JSON.parse(s);
 
     for(var i in json) {
-        var newDiv = document.createElement("div");
-        var hyperlink = document.createElement("a");
-        var img = document.createElement("img");
-        var span = document.createElement("span");
-        var date = document.createTextNode(new Date(json[i].createdAt).toLocaleString() + " : ");
-        var content = document.createTextNode(json[i].twitterMessage);
+        var divContainer = document.createElement("div");
+        var userContainer = document.createElement("div");
+        var messageContainer = document.createElement("div");
 
+        var img = document.createElement("img");
+        var handleContainer = document.createElement("div");
+        var nameContainer = document.createElement("div");
+        var dateContainer = document.createElement("div");
+        var hyperlink = document.createElement("a");
+
+        var msgDate = new Date(json[i].createdAt);
+        var formatter = new Intl.DateTimeFormat("eng", { month: "short" });
+        var date = document.createTextNode(formatter.format(msgDate) + " " + msgDate.getUTCDate());
+        var content = document.createTextNode(json[i].twitterMessage);
+        var handleText = document.createTextNode(json[i].user.twitterHandle);
+        var nameText = document.createTextNode(json[i].user.name);
+
+        /* Container for the user info */
         img.src = json[i].user.profileImageURL;
 
-        span.appendChild(date);
+        handleContainer.appendChild(handleText);
+        handleContainer.className = "twitterHandle";
 
-        hyperlink.href = "https://twitter.com/" + json[i].user.name + "/status/" + json[i].Id;
+        nameContainer.appendChild(nameText);
+        nameContainer.className = "twitterName";
+
+        userContainer.className = "user";
+        userContainer.appendChild(img);
+        userContainer.appendChild(handleContainer);
+        userContainer.appendChild(nameContainer);
+
+        /* Container for the message data */
+        dateContainer.className = "date";
+        dateContainer.appendChild(date);
+
+        hyperlink.className = "messageText";
+        hyperlink.href = "https://twitter.com/" + json[i].user.name + "/status/" + json[i].id;
         hyperlink.target = "_blank";
         hyperlink.appendChild(content);
 
-        newDiv.className = "item";
-        newDiv.appendChild(img);
-        newDiv.appendChild(span);
-        newDiv.appendChild(hyperlink);
+        messageContainer.className = "message";
+        messageContainer.appendChild(dateContainer);
+        messageContainer.appendChild(hyperlink);
 
-        document.getElementById("data").appendChild(newDiv);
+        /* Place containers into html*/
+        divContainer.className = "item";
+        divContainer.appendChild(userContainer);
+        divContainer.appendChild(messageContainer);
+
+        document.getElementsByClassName("data")[0].appendChild(divContainer);
     }
 }
