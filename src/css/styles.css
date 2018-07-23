@@ -6,7 +6,8 @@ body {
     text-align: center;
     font-size: 40px;
     font-weight: bold;
-    margin-bottom: -10px;
+    position: relative;
+    top: 10px;
 }
 
 .buttonContainer {
