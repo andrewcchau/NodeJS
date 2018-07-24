@@ -1,99 +1,69 @@
 body {
-    font-family: 'Lato';
-}
+  font-family: "Lato"; }
 
 .title {
-    text-align: center;
-    font-size: 40px;
-    font-weight: bold;
-    position: relative;
-    top: 10px;
-}
+  text-align: center;
+  font-weight: bold;
+  font-size: 40px;
+  position: relative;
+  top: 10px; }
 
 .buttonContainer {
-    text-align: right;
-    margin-right: 5%;
-    margin-bottom: 10px;
-}
-
-.timelineButton {
+  text-align: right;
+  margin-right: 5%;
+  margin-bottom: 10px; }
+  .buttonContainer .timelineButton {
     background-color: white;
     border-radius: 12px;
     border: 1px solid;
-    color: black;
     font-size: 15px;
     -webkit-transition-duration: 0.4s;
     transition-duration: 0.4s;
     justify-content: center;
-    padding: 5px 10px;
-}
-
-.timelineButton:hover {
+    padding: 5px 10px; }
+  .buttonContainer .timelineButton:hover {
     background-color: #008CBA;
-    color: white;
-}
+    color: white; }
 
 .data {
-    text-align: center;
-    border: 1px solid black;
-    width: 90%;
-    margin: auto;
-    font-size: 25px;
-}
-
-.data:empty {
-    display: none;
-}
-
-.errorMessage {
-    color: red;
-}
-
-.item:nth-child(even) {
-    background-color: #e9e9e9;
-}
-
-.item {
+  text-align: center;
+  border: 1px solid black;
+  width: 90%;
+  margin: auto;
+  font-size: 25px; }
+  .data .errorMessage {
+    color: red; }
+  .data .item {
     background-color: #e8f5fd;
     align-items: center;
     border-bottom: 1px solid #C0C0C0;
     display: grid;
-    grid-template-columns: 12% auto;
-    padding-top: 2px;
-}
+    grid-template-columns: 13% auto;
+    padding-top: 2px; }
+    .data .item .user {
+      margin-bottom: 5px; }
+      .data .item .user .twitterHandle {
+        font-weight: bold;
+        font-size: 20px; }
+      .data .item .user .twitterName {
+        font: italic normal 15px 'Lato';
+        margin-bottom: 5px; }
+    .data .item .message {
+      text-align: left; }
+      .data .item .message .date {
+        font-style: italic;
+        font-size: 13px;
+        position: relative;
+        top: 5px; }
+      .data .item .message .messageText {
+        font-size: 17px; }
+    .data .item img {
+      border-radius: 50%;
+      margin-top: 10px;
+      width: 60px;
+      height: 60px; }
+  .data .item:nth-child(even) {
+    background-color: #e9e9e9; }
 
-.user {
-    margin-bottom: 5px;
-}
-
-.twitterHandle {
-    font-weight: bold;
-    font-size: 20px;
-}
-
-.twitterName {
-    font: italic normal 15px 'Lato';
-    margin-bottom: 5px;
-}
-
-.message {
-    text-align: left;
-}
-
-.date {
-    font-style: italic;
-    font-size: 13px;
-    position: relative;
-    top: 5px;
-}
-
-.messageText {
-    font-size: 17px;
-}
-
-img {
-    border-radius: 50%;
-    margin-top: 10px;
-    width: 60px;
-    height: 60px;
-}
+.data:empty {
+  display: none; }

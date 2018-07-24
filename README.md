@@ -12,7 +12,10 @@ Before you start, make sure you have done these few things:
 * Run ```npm install``` from the root directory to install all the dependencies needed
 
 # Running the Program
-To run the frontend server, do the following:
-1. Open command line and navigate to the folder where you have cloned this repo
-2. Run ```gulp dev```
-3. Navigate to ```localhost:9000``` from your favorite browser to use the UI
+Start in the root directory before running.
+* To run everything: run ```gulp```
+* To just compile the SASS file into CSS: run ```gulp sass```
+* To just start the frontend server on its own: run ```gulp dev```
+
+Navigate to ```localhost:9000``` from your favorite browser to use the UI
+
