@@ -1,0 +1,114 @@
+$font: 'Lato';
+$blue: #008CBA;
+$tan: #e9e9e9;
+$light-blue: #e8f5fd;
+$border-color: #C0C0C0;
+$item-width: 90%;
+
+@mixin shiftDown($pix) {
+	position: relative;
+	top: $pix;
+}
+
+@mixin boldFontSize($pix) {
+	font-weight: bold;
+	font-size: $pix;
+}
+
+body {
+	font-family: $font;
+}
+
+.title {
+	text-align: center;
+	@include boldFontSize(40px);
+	@include shiftDown(10px);
+}
+
+
+.buttonContainer {
+	text-align: right;
+	margin-right: (100% - $item-width) / 2;
+	margin-bottom: 10px;
+
+	.timelineButton {
+		background-color: white;
+		border-radius: 12px;
+		border: 1px solid;
+		font-size: 15px;
+		-webkit-transition-duration: 0.4s;
+		transition-duration: 0.4s;
+		justify-content: center;
+		padding: 5px 10px;
+	}
+
+	.timelineButton:hover {
+		background-color: $blue;
+		color: white;
+	}
+}
+
+
+.data {
+	text-align: center;
+	border: 1px solid black;
+	width: $item-width;
+	margin: auto;
+	font-size: 25px;
+
+	.errorMessage {
+		color: red;
+	}
+
+	.item {
+		background-color: $light-blue;
+		align-items: center;
+		border-bottom: 1px solid $border-color;
+		display: grid;
+		grid-template-columns: 13% auto;
+		padding-top: 2px;
+
+		.user {
+			margin-bottom: 5px;
+
+			.twitterHandle {
+				@include boldFontSize(20px);
+			}
+
+			.twitterName {
+				font: italic normal 15px $font;
+				margin-bottom: 5px;
+			}
+		}
+
+		.message {
+			text-align: left;
+
+			.date {
+				font-style: italic;
+				font-size: 13px;
+				@include shiftDown(5px);
+			}
+
+			.messageText {
+				font-size: 17px;
+			}
+		}
+
+		img {
+			border-radius: 50%;
+			margin-top: 10px;
+			width: 60px;
+			height: 60px;
+		}
+	}
+
+	.item:nth-child(even) {
+		background-color: $tan;
+	}
+}
+
+
+.data:empty {
+	display: none;
+}
