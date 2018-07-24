@@ -8,7 +8,7 @@ gulp.task('hello', function() {
 });
 
 /* Starts the UI server */
-gulp.task('dev', function() {
+gulp.task('server', function() {
     connect.server( {
         root: ['src', 'js'],
         port: 9000
@@ -22,5 +22,5 @@ gulp.task('sass', function() {
         .pipe(gulp.dest('./src/css'));
 });
 
-/* Default GULP command that executes everything */
-gulp.task('default', ['sass', 'dev']);
+/* GULP command that executes everything */
+gulp.task('dev', ['sass', 'server']);

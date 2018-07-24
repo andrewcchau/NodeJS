@@ -13,9 +13,9 @@ Before you start, make sure you have done these few things:
 
 # Running the Program
 Start in the root directory before running.
-* To run everything: run ```gulp```
+* To run everything: run ```gulp dev```
 * To just compile the SASS file into CSS: run ```gulp sass```
-* To just start the frontend server on its own: run ```gulp dev```
+* To just start the frontend server on its own: run ```gulp server```
 
 Navigate to ```localhost:9000``` from your favorite browser to use the UI
 
