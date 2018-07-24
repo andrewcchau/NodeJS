@@ -33,18 +33,18 @@ body {
 
 	.timelineButton {
 		background-color: white;
-	    border-radius: 12px;
-	    border: 1px solid;
-	    font-size: 15px;
-	    -webkit-transition-duration: 0.4s;
-	    transition-duration: 0.4s;
-	    justify-content: center;
-	    padding: 5px 10px;
+		border-radius: 12px;
+		border: 1px solid;
+		font-size: 15px;
+		-webkit-transition-duration: 0.4s;
+		transition-duration: 0.4s;
+		justify-content: center;
+		padding: 5px 10px;
 	}
 
 	.timelineButton:hover {
 		background-color: $blue;
-    	color: white;
+		color: white;
 	}
 }
 
