@@ -6,12 +6,12 @@ var gulp = require('gulp'),
     source = require('vinyl-source-stream');
 
 
-gulp.task('hello', function() {
+gulp.task('hello', () => {
     console.log("Hello World!");
 });
 
 /* Starts the UI server */
-gulp.task('server', function() {
+gulp.task('server', () => {
     connect.server( {
         root: ['src', 'js'],
         port: 9000
@@ -19,7 +19,7 @@ gulp.task('server', function() {
 });
 
 /* Compiles the SCSS to CSS */
-gulp.task('sass', function() {
+gulp.task('sass', () => {
     return gulp.src('./src/scss/*.scss')
         .pipe(sass().on('error', sass.logError))
         .pipe(gulp.dest('./src/css'));
@@ -28,9 +28,9 @@ gulp.task('sass', function() {
 /* GULP command that executes everything */
 gulp.task('dev', ['js', 'sass', 'server']);
 
-function bundle(b) {
+const bundle = (b) => {
     return b.bundle()
-        .on('error', function (err) {
+        .on('error', (err) => {
             gutil.log(err.toString());
             this.emit('end');
         })
@@ -42,7 +42,7 @@ function bundle(b) {
 }
 
 
-gulp.task('js', function() {
+gulp.task('js', () => {
     return browserify({
         debug: true,
         entries: ['./src/js/main.js'],
@@ -51,7 +51,7 @@ gulp.task('js', function() {
         packageCache: {}
     }).transform(babelify)
         .bundle()
-        .on('error', function (err) {
+        .on('error', (err) => {
             gutil.log(err.toString());
             this.emit('end');
         })
