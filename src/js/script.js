@@ -1,3 +1,8 @@
+function init() {
+    document.getElementsByClassName("timelineButton")[0].onclick = function() { apiCall(); }
+    apiCall();
+}
+
 function redirect(l) {
     window.open(l, '_blank');
 }
@@ -85,3 +90,5 @@ function blockify(s) {
         document.getElementsByClassName("data")[0].appendChild(divContainer);
     }
 }
+
+document.getElementsByTagName("BODY")[0].onload = function() { init(); }
