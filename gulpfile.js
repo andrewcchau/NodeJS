@@ -1,6 +1,9 @@
 var gulp = require('gulp'),
     connect = require('gulp-connect'),
-    sass = require('gulp-sass');
+    sass = require('gulp-sass'),
+    browserify = require('browserify'),
+    babelify = require('babelify'),
+    source = require('vinyl-source-stream');
 
 
 gulp.task('hello', function() {
@@ -23,7 +26,7 @@ gulp.task('sass', function() {
 });
 
 /* GULP command that executes everything */
-gulp.task('dev', ['sass', 'server']);
+gulp.task('dev', ['js', 'sass', 'server']);
 
 function bundle(b) {
     return b.bundle()
@@ -34,10 +37,7 @@ function bundle(b) {
         .pipe(source('bundle.js'))
         .pipe(buffer())
         .pipe(sourcemaps.init({loadMaps: true}))
-// Add transformation tasks to the pipeline here.
-//        .pipe(config.production ? uglify() : gulpUtil.noop())
         .pipe(sourcemaps.write('./'))
-//        .pipe(gulp.dest('./build' + config.versionPath + '/js/'));
         .pipe(gulp.dest('./dist/js/'));
 }
 

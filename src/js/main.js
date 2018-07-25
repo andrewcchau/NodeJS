@@ -5,11 +5,11 @@ var fs = require('fs');
 var path = require('path');
 var url = require('url');
 
-http.createServer(function (req, res) {
-    var pathname = url.parse(req.url).pathname;
-    var htmlPath = path.join(__dirname, '..', 'index.html');
-    var scriptPath = path.join(__dirname, 'script.js');
-    var cssPath = path.join(__dirname, '..', 'css', 'styles.css');
+http.createServer((req, res) => {
+    let pathname = url.parse(req.url).pathname;
+    let htmlPath = path.join(__dirname, '..', 'index.html');
+    let scriptPath = path.join(__dirname, 'script.js');
+    let cssPath = path.join(__dirname, '..', 'css', 'styles.css');
 
     console.log("Received request for " + pathname);
 

@@ -1,17 +1,17 @@
-function init() {
-    document.getElementsByClassName("timelineButton")[0].onclick = function() { apiCall(); }
+const init = () => {
+    document.getElementsByClassName("timelineButton")[0].onclick = () => { apiCall(); }
     apiCall();
 }
 
-function redirect(l) {
+const redirect = (l) => {
     window.open(l, '_blank');
 }
 
-function apiCall() {
-    var xhttp = new XMLHttpRequest();
+const apiCall = () => {
+    let xhttp = new XMLHttpRequest();
 
-    xhttp.onreadystatechange = function() {
-        var dataElem = document.getElementsByClassName("data")[0];
+    xhttp.onreadystatechange = () => {
+        let dataElem = document.getElementsByClassName("data")[0];
         if(this.readyState == xhttp.DONE && this.status == 200) {
             dataElem.innerHTML = '';
             blockify(this.responseText);
@@ -19,8 +19,8 @@ function apiCall() {
                     || this.readyState == xhttp.LOADING) {
             dataElem.innerHTML = "Pending . . .";
         } else {
-            var errorMessageContainer = document.createElement("div");
-            var errorMessage = document.createTextNode("Something went wrong. Please come back later!");
+            let errorMessageContainer = document.createElement("div");
+            let errorMessage = document.createTextNode("Something went wrong. Please come back later!");
 
             errorMessageContainer.appendChild(errorMessage);
             errorMessageContainer.className = "errorMessage";
@@ -34,26 +34,26 @@ function apiCall() {
     xhttp.send();
 }
 
-function blockify(s) {
-    var json = JSON.parse(s);
+const blockify = (s) => {
+    let json = JSON.parse(s);
 
     for(var i in json) {
-        var divContainer = document.createElement("div");
-        var userContainer = document.createElement("div");
-        var messageContainer = document.createElement("div");
+        let divContainer = document.createElement("div");
+        let userContainer = document.createElement("div");
+        let messageContainer = document.createElement("div");
 
-        var img = document.createElement("img");
-        var handleContainer = document.createElement("div");
-        var nameContainer = document.createElement("div");
-        var dateContainer = document.createElement("div");
-        var hyperlink = document.createElement("a");
+        let img = document.createElement("img");
+        let handleContainer = document.createElement("div");
+        let nameContainer = document.createElement("div");
+        let dateContainer = document.createElement("div");
+        let hyperlink = document.createElement("a");
 
-        var msgDate = new Date(json[i].createdAt);
-        var formatter = new Intl.DateTimeFormat("eng", { month: "short" });
-        var date = document.createTextNode(formatter.format(msgDate) + " " + msgDate.getUTCDate());
-        var content = document.createTextNode(json[i].twitterMessage);
-        var handleText = document.createTextNode(json[i].user.twitterHandle);
-        var nameText = document.createTextNode(json[i].user.name);
+        let msgDate = new Date(json[i].createdAt);
+        let formatter = new Intl.DateTimeFormat("eng", { month: "short" });
+        let date = document.createTextNode(formatter.format(msgDate) + " " + msgDate.getUTCDate());
+        let content = document.createTextNode(json[i].twitterMessage);
+        let handleText = document.createTextNode(json[i].user.twitterHandle);
+        let nameText = document.createTextNode(json[i].user.name);
 
         /* Container for the user info */
         img.src = json[i].user.profileImageURL;
@@ -91,4 +91,4 @@ function blockify(s) {
     }
 }
 
-document.getElementsByTagName("BODY")[0].onload = function() { init(); }
+document.getElementsByTagName("BODY")[0].onload = () => { init(); }
