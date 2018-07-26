@@ -49,23 +49,12 @@ const apiCall = () => {
     xhttp.send();
 }
 
-/* Checks the properties of the object and returns true if any are null */
-const checkPropNull = (obj) => {
-    for(let i in obj) {
-        if(obj[i] == null) {
-            return true;
-        }
-    }
-
-    return false;
-}
-
 const blockify = (s) => {
     let json = JSON.parse(s);
 
     for(let i in json) {
-        /* Null check */
-        if(json[i] == null || checkPropNull(json[i])) { break; }
+        /* Object null check */
+        if(json[i] == null) { break; }
 
         /* Var creations */
         let divContainer = document.createElement("div");
@@ -78,15 +67,33 @@ const blockify = (s) => {
         let dateContainer = document.createElement("div");
         let hyperlink = document.createElement("a");
 
-        let msgDate = new Date(json[i].createdAt);
-        let formatter = new Intl.DateTimeFormat("eng", { month: "short" });
-        let date = document.createTextNode(formatter.format(msgDate) + " " + msgDate.getUTCDate());
-        let content = document.createTextNode(json[i].twitterMessage);
-        let handleText = document.createTextNode(json[i].user.twitterHandle);
-        let nameText = document.createTextNode(json[i].user.name);
+        let msgDate, formatter, date, content, handleText, nameText;
+
+        if(json[i].createdAt != null) {
+            msgDate = new Date(json[i].createdAt);
+            formatter = new Intl.DateTimeFormat("eng", { month: "short" });
+        }
+
+        if(msgDate != null) {
+            date = document.createTextNode(formatter.format(msgDate) + " " + msgDate.getUTCDate());
+        }
+
+        if(json[i].twitterMessage != null) {
+            content = document.createTextNode(json[i].twitterMessage);
+        }
+
+        if(json[i].user.twitterHandle != null) {
+            handleText = document.createTextNode(json[i].user.twitterHandle);
+        }
+
+        if(json[i].user.name != null) {
+            nameText = document.createTextNode(json[i].user.name);
+        }
 
         /* Container for the user info */
-        img.src = json[i].user.profileImageURL;
+        if(json[i].user.profileImageURL != null) {
+            img.src = json[i].user.profileImageURL;
+        }
 
         if(handleText != null) {
             handleContainer.appendChild(handleText);
@@ -108,7 +115,9 @@ const blockify = (s) => {
         dateContainer.appendChild(date);
 
         hyperlink.className = "messageText";
-        hyperlink.href = "https://twitter.com/" + json[i].user.name + "/status/" + json[i].id;
+        if(nameText != null && json[i].id != null) {
+            hyperlink.href = "https://twitter.com/" + json[i].user.name + "/status/" + json[i].id;
+        }
         hyperlink.target = "_blank";
         hyperlink.appendChild(content);
 
