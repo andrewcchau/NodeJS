@@ -24,23 +24,22 @@ const apiCall = () => {
 
     xhttp.onreadystatechange = () => {
         let dataElem = document.getElementsByClassName("data") && document.getElementsByClassName("data")[0];
+        let insert;
         if(dataElem != null) {
             if(xhttp.readyState == xhttp.DONE && xhttp.status == 200) {
-                dataElem.innerHTML = '';
+                insert = e('div', null, '');
                 blockify(xhttp.responseText);
             } else if(xhttp.readyState == xhttp.OPENED || xhttp.readyState == xhttp.HEADERS_RECEIVED
                         || xhttp.readyState == xhttp.LOADING) {
-                dataElem.innerHTML = "Pending . . .";
+                insert = e('div', null, 'Pending . . .');
             } else {
-                let errorMessageContainer = document.createElement("div");
-                let errorMessage = document.createTextNode("Something went wrong. Please come back later!");
-
-                errorMessageContainer.appendChild(errorMessage);
-                errorMessageContainer.className = "errorMessage";
-
-                dataElem.innerHTML = '';
-                dataElem.appendChild(errorMessageContainer);
+                insert = e('div', {className: 'errorMessage'}, 'Something went wrong. Please come back later!');
             }
+
+            ReactDOM.render(
+                insert,
+                dataElem
+            )
         }
     };
 
