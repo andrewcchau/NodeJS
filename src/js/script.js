@@ -4,12 +4,17 @@ const ReactDOM = require('react-dom');
 const e = React.createElement;
 
 ReactDOM.render(
-	e("div", null, "Hello React!"),
-	document.getElementsByClassName("insert")[0]
+    e("div", null, "Hello React!"),
+    (document.getElementsByClassName("insert") && document.getElementsByClassName("insert")[0])
 );
 
+let body = document.getElementsByTagName("body") && document.getElementsByTagName("body")[0];
+if(body != null) {
+    body.onload = () => { init(); }
+}
+
 const init = () => {
-    let button = document.getElementsByClassName("timelineButton")[0];
+    let button = document.getElementsByClassName("timelineButton") && document.getElementsByClassName("timelineButton")[0];
     if(button != null) {
         button.onclick = () => { apiCall(); }
     }
@@ -24,7 +29,7 @@ const apiCall = () => {
     let xhttp = new XMLHttpRequest();
 
     xhttp.onreadystatechange = () => {
-        let dataElem = document.getElementsByClassName("data")[0];
+        let dataElem = document.getElementsByClassName("data") && document.getElementsByClassName("data")[0];
         if(dataElem != null) {
             if(xhttp.readyState == xhttp.DONE && xhttp.status == 200) {
                 dataElem.innerHTML = '';
@@ -56,7 +61,10 @@ const blockify = (s) => {
         /* Object null check */
         if(json[i] == null) { break; }
 
+        let jsonObj = json[i];
+
         /* Var creations */
+        let dataContainer = document.getElementsByClassName("data") && document.getElementsByClassName("data")[0];
         let divContainer = document.createElement("div");
         let userContainer = document.createElement("div");
         let messageContainer = document.createElement("div");
@@ -69,8 +77,8 @@ const blockify = (s) => {
 
         let msgDate, formatter, date, content, handleText, nameText;
 
-        if(json[i].createdAt != null) {
-            msgDate = new Date(json[i].createdAt);
+        if(jsonObj.createdAt != null) {
+            msgDate = new Date(jsonObj.createdAt);
             formatter = new Intl.DateTimeFormat("eng", { month: "short" });
         }
 
@@ -78,21 +86,23 @@ const blockify = (s) => {
             date = document.createTextNode(formatter.format(msgDate) + " " + msgDate.getUTCDate());
         }
 
-        if(json[i].twitterMessage != null) {
-            content = document.createTextNode(json[i].twitterMessage);
+        if(jsonObj.twitterMessage != null) {
+            content = document.createTextNode(jsonObj.twitterMessage);
         }
 
-        if(json[i].user.twitterHandle != null) {
-            handleText = document.createTextNode(json[i].user.twitterHandle);
-        }
+        if(jsonObj.user != null) {
+            if(jsonObj.user.twitterHandle != null) {
+                handleText = document.createTextNode(jsonObj.user.twitterHandle);
+            }
 
-        if(json[i].user.name != null) {
-            nameText = document.createTextNode(json[i].user.name);
-        }
+            if(jsonObj.user.name != null) {
+                nameText = document.createTextNode(jsonObj.user.name);
+            }
 
-        /* Container for the user info */
-        if(json[i].user.profileImageURL != null) {
-            img.src = json[i].user.profileImageURL;
+            /* Container for the user info */
+            if(jsonObj.user.profileImageURL != null) {
+                img.src = jsonObj.user.profileImageURL;
+            }
         }
 
         if(handleText != null) {
@@ -115,8 +125,8 @@ const blockify = (s) => {
         dateContainer.appendChild(date);
 
         hyperlink.className = "messageText";
-        if(nameText != null && json[i].id != null) {
-            hyperlink.href = "https://twitter.com/" + json[i].user.name + "/status/" + json[i].id;
+        if(nameText != null && jsonObj.id != null) {
+            hyperlink.href = "https://twitter.com/" + jsonObj.user.name + "/status/" + jsonObj.id;
         }
         hyperlink.target = "_blank";
         hyperlink.appendChild(content);
@@ -130,11 +140,6 @@ const blockify = (s) => {
         divContainer.appendChild(userContainer);
         divContainer.appendChild(messageContainer);
 
-        document.getElementsByClassName("data")[0].appendChild(divContainer);
+        dataContainer.appendChild(divContainer);
     }
-}
-
-let body = document.getElementsByTagName("body")[0];
-if(body != null) {
-    body.onload = () => { init(); }
 }
