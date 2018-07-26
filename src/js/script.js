@@ -27,8 +27,7 @@ const apiCall = () => {
         let insert;
         if(dataElem != null) {
             if(xhttp.readyState == xhttp.DONE && xhttp.status == 200) {
-                insert = e('div', null, '');
-                blockify(xhttp.responseText);
+                insert = blockify(xhttp.responseText);
             } else if(xhttp.readyState == xhttp.OPENED || xhttp.readyState == xhttp.HEADERS_RECEIVED
                         || xhttp.readyState == xhttp.LOADING) {
                 insert = e('div', null, 'Pending . . .');
@@ -50,89 +49,72 @@ const apiCall = () => {
 const blockify = (s) => {
     let json = JSON.parse(s);
 
+    let timelineContainer = [];
+    let dataContainer = document.getElementsByClassName("data") && document.getElementsByClassName("data")[0];
+
     for(let i in json) {
-        /* Object null check */
         if(json[i] == null) { break; }
 
         let jsonObj = json[i];
 
-        /* Var creations */
-        let dataContainer = document.getElementsByClassName("data") && document.getElementsByClassName("data")[0];
-        let divContainer = document.createElement("div");
-        let userContainer = document.createElement("div");
-        let messageContainer = document.createElement("div");
+        let divContainer,
+            userContainer,
+            messageContainer,
+            img,
+            handleContainer,
+            nameContainer,
+            dateContainer,
+            hyperlink,
+            msgDate,
+            formatter,
+            content;
 
-        let img = document.createElement("img");
-        let handleContainer = document.createElement("div");
-        let nameContainer = document.createElement("div");
-        let dateContainer = document.createElement("div");
-        let hyperlink = document.createElement("a");
-
-        let msgDate, formatter, date, content, handleText, nameText;
-
+        /* Date of the post */
         if(jsonObj.createdAt != null) {
             msgDate = new Date(jsonObj.createdAt);
-            formatter = new Intl.DateTimeFormat("eng", { month: "short" });
+            formatter = new Intl.DateTimeFormat("eng", {month: "short" });
+            dateContainer = e('div', { className: 'date' },
+                formatter.format(msgDate) + " " + msgDate.getUTCDate());
         }
 
-        if(msgDate != null) {
-            date = document.createTextNode(formatter.format(msgDate) + " " + msgDate.getUTCDate());
+        /* Message text with hyperlink */
+        if(jsonObj.twitterMessage != null && jsonObj.id != null) {
+            content = e('a',
+                { className: "messageText",
+                    href: "https://twitter.com/" +
+                            jsonObj.user.name +
+                            "/status/" +
+                            jsonObj.id,
+                    target: "_blank" },
+                jsonObj.twitterMessage);
         }
 
-        if(jsonObj.twitterMessage != null) {
-            content = document.createTextNode(jsonObj.twitterMessage);
-        }
+        /* Put 'message' parts into a container */
+        messageContainer = e('div', { className: "message" }, dateContainer, content)
 
+        /* User data such as profile pic, twitter handle, and twitter username */
         if(jsonObj.user != null) {
             if(jsonObj.user.twitterHandle != null) {
-                handleText = document.createTextNode(jsonObj.user.twitterHandle);
+                handleContainer = e('div', { className: "twitterHandle" }, jsonObj.user.twitterHandle);
             }
 
             if(jsonObj.user.name != null) {
-                nameText = document.createTextNode(jsonObj.user.name);
+                nameContainer = e('div', { className: "twitterName" }, jsonObj.user.name);
             }
 
-            /* Container for the user info */
             if(jsonObj.user.profileImageURL != null) {
-                img.src = jsonObj.user.profileImageURL;
+                img = e('img', { src: jsonObj.user.profileImageURL }, null);
             }
         }
 
-        if(handleText != null) {
-            handleContainer.appendChild(handleText);
-        }
-        handleContainer.className = "twitterHandle";
+        /* Put 'user' parts into a container */
+        userContainer = e('div', { className: "user" },
+            img, handleContainer, nameContainer);
 
-        if(nameText != null) {
-            nameContainer.appendChild(nameText);
-        }
-        nameContainer.className = "twitterName";
-
-        userContainer.className = "user";
-        userContainer.appendChild(img);
-        userContainer.appendChild(handleContainer);
-        userContainer.appendChild(nameContainer);
-
-        /* Container for the message data */
-        dateContainer.className = "date";
-        dateContainer.appendChild(date);
-
-        hyperlink.className = "messageText";
-        if(nameText != null && jsonObj.id != null) {
-            hyperlink.href = "https://twitter.com/" + jsonObj.user.name + "/status/" + jsonObj.id;
-        }
-        hyperlink.target = "_blank";
-        hyperlink.appendChild(content);
-
-        messageContainer.className = "message";
-        messageContainer.appendChild(dateContainer);
-        messageContainer.appendChild(hyperlink);
-
-        /* Place containers into html*/
-        divContainer.className = "item";
-        divContainer.appendChild(userContainer);
-        divContainer.appendChild(messageContainer);
-
-        dataContainer.appendChild(divContainer);
+        /* Put containers together and add to array */
+        divContainer = e('div', { className: "item" , key: i}, userContainer, messageContainer);
+        timelineContainer.push(divContainer);
     }
+
+    return timelineContainer;
 }
