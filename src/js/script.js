@@ -3,14 +3,13 @@ const ReactDOM = require('react-dom');
 
 const e = React.createElement;
 
-ReactDOM.render(
-    e("div", null, "Hello React!"),
-    (document.getElementsByClassName("insert") && document.getElementsByClassName("insert")[0])
-);
+window.onload = () => {
+    ReactDOM.render(
+        e("div", null, "Hello React!"),
+        (document.getElementsByClassName("insert") && document.getElementsByClassName("insert")[0])
+    );
 
-let body = document.getElementsByTagName("body") && document.getElementsByTagName("body")[0];
-if(body != null) {
-    body.onload = () => { init(); }
+    init();
 }
 
 const init = () => {
