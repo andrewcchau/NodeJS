@@ -49,12 +49,23 @@ const apiCall = () => {
     xhttp.send();
 }
 
+/* Checks the properties of the object and returns true if any are null */
+const checkPropNull = (obj) => {
+    for(let i in obj) {
+        if(obj[i] == null) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
 const blockify = (s) => {
     let json = JSON.parse(s);
 
     for(let i in json) {
         /* Null check */
-        if(json[i] == null) { break; }
+        if(json[i] == null || checkPropNull(json[i])) { break; }
 
         /* Var creations */
         let divContainer = document.createElement("div");
@@ -113,6 +124,7 @@ const blockify = (s) => {
         document.getElementsByClassName("data")[0].appendChild(divContainer);
     }
 }
+
 let body = document.getElementsByTagName("body")[0];
 if(body != null) {
     body.onload = () => { init(); }
