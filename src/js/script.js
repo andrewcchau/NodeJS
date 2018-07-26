@@ -4,11 +4,6 @@ const ReactDOM = require('react-dom');
 const e = React.createElement;
 
 window.onload = () => {
-    ReactDOM.render(
-        e("div", null, "Hello React!"),
-        (document.getElementsByClassName("insert") && document.getElementsByClassName("insert")[0])
-    );
-
     init();
 }
 
