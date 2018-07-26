@@ -1,30 +1,30 @@
 const PORT = 9000;
 
-var http = require('http');
-var fs = require('fs');
-var path = require('path');
-var url = require('url');
+const http = require('http');
+const fs = require('fs');
+const path = require('path');
+const url = require('url');
 
 http.createServer((req, res) => {
     let pathname = url.parse(req.url).pathname;
     let htmlPath = path.join(__dirname, '..', 'index.html');
-    let scriptPath = path.join(__dirname, 'script.js');
-    let cssPath = path.join(__dirname, '..', 'css', 'styles.css');
+    let scriptPath = path.join(__dirname, '..', '..', 'dist', 'js', 'bundle.js');
+    let cssPath = path.join(__dirname, '..', '..', 'dist', 'css', 'styles.css');
 
     console.log("Received request for " + pathname);
 
     // router for requests
     if(pathname == "/") {
         res.writeHead(200, {'Content-Type': 'text/html'});
-        var html = fs.readFileSync(htmlPath);
+        let html = fs.readFileSync(htmlPath);
         res.write(html);
-    } else if(pathname == "/js/script.js") {
+    } else if(pathname == "/js/bundle.js") {
         res.writeHead(200, {'Content-Type': 'text/javascript'});
-        var script = fs.readFileSync(scriptPath);
+        let script = fs.readFileSync(scriptPath);
         res.write(script);
     } else if(pathname == "/css/styles.css") {
         res.writeHead(200, {'Content-Type': 'text/css'});
-        var css = fs.readFileSync(cssPath);
+        let css = fs.readFileSync(cssPath);
         res.write(css);
     }
 

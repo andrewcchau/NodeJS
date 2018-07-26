@@ -1,11 +1,12 @@
-var gulp = require('gulp'),
+const gulp = require('gulp'),
     connect = require('gulp-connect'),
     sass = require('gulp-sass'),
     browserify = require('browserify'),
     babelify = require('babelify'),
-    source = require('vinyl-source-stream');
+    source = require('vinyl-source-stream'),
+    reload = require('gulp-livereload');
 
-
+/* Standard Hello World */
 gulp.task('hello', () => {
     console.log("Hello World!");
 });
@@ -13,7 +14,7 @@ gulp.task('hello', () => {
 /* Starts the UI server */
 gulp.task('server', () => {
     connect.server( {
-        root: ['src', 'js'],
+        root: ['src', 'dist'],
         port: 9000
     })
 });
@@ -22,11 +23,8 @@ gulp.task('server', () => {
 gulp.task('sass', () => {
     return gulp.src('./src/scss/*.scss')
         .pipe(sass().on('error', sass.logError))
-        .pipe(gulp.dest('./src/css'));
+        .pipe(gulp.dest('./dist/css'));
 });
-
-/* GULP command that executes everything */
-gulp.task('dev', ['js', 'sass', 'server']);
 
 const bundle = (b) => {
     return b.bundle()
@@ -41,11 +39,11 @@ const bundle = (b) => {
         .pipe(gulp.dest('./dist/js/'));
 }
 
-
+/* Created bundle.js from .js files */
 gulp.task('js', () => {
     return browserify({
         debug: true,
-        entries: ['./src/js/main.js'],
+        entries: ['./src/js/script.js'],
         paths: ['./src/js', './node_modules'],
         cache: {},
         packageCache: {}
@@ -57,5 +55,9 @@ gulp.task('js', () => {
         })
         .pipe(source('bundle.js'))
         .pipe(gulp.dest('./dist/js/'))
+        .pipe(reload())
         .pipe(connect.reload());
 });
+
+/* GULP command that executes everything */
+gulp.task('dev', ['sass', 'js', 'server']);

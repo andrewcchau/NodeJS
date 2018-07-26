@@ -1,5 +1,18 @@
+const React = require('react');
+const ReactDOM = require('react-dom');
+
+const e = React.createElement;
+
+ReactDOM.render(
+	e("div", null, "Hello React!"),
+	document.getElementsByClassName("insert")[0]
+);
+
 const init = () => {
-    document.getElementsByClassName("timelineButton")[0].onclick = () => { apiCall(); }
+    let button = document.getElementsByClassName("timelineButton")[0];
+    if(button != null) {
+        button.onclick = () => { apiCall(); }
+    }
     apiCall();
 }
 
@@ -12,21 +25,23 @@ const apiCall = () => {
 
     xhttp.onreadystatechange = () => {
         let dataElem = document.getElementsByClassName("data")[0];
-        if(this.readyState == xhttp.DONE && this.status == 200) {
-            dataElem.innerHTML = '';
-            blockify(this.responseText);
-        } else if(this.readyState == xhttp.OPENED || this.readyState == xhttp.HEADERS_RECEIVED
-                    || this.readyState == xhttp.LOADING) {
-            dataElem.innerHTML = "Pending . . .";
-        } else {
-            let errorMessageContainer = document.createElement("div");
-            let errorMessage = document.createTextNode("Something went wrong. Please come back later!");
+        if(dataElem != null) {
+            if(xhttp.readyState == xhttp.DONE && xhttp.status == 200) {
+                dataElem.innerHTML = '';
+                blockify(xhttp.responseText);
+            } else if(xhttp.readyState == xhttp.OPENED || xhttp.readyState == xhttp.HEADERS_RECEIVED
+                        || xhttp.readyState == xhttp.LOADING) {
+                dataElem.innerHTML = "Pending . . .";
+            } else {
+                let errorMessageContainer = document.createElement("div");
+                let errorMessage = document.createTextNode("Something went wrong. Please come back later!");
 
-            errorMessageContainer.appendChild(errorMessage);
-            errorMessageContainer.className = "errorMessage";
+                errorMessageContainer.appendChild(errorMessage);
+                errorMessageContainer.className = "errorMessage";
 
-            dataElem.innerHTML = '';
-            dataElem.appendChild(errorMessageContainer);
+                dataElem.innerHTML = '';
+                dataElem.appendChild(errorMessageContainer);
+            }
         }
     };
 
@@ -37,7 +52,11 @@ const apiCall = () => {
 const blockify = (s) => {
     let json = JSON.parse(s);
 
-    for(var i in json) {
+    for(let i in json) {
+        /* Null check */
+        if(json[i] == null) { break; }
+
+        /* Var creations */
         let divContainer = document.createElement("div");
         let userContainer = document.createElement("div");
         let messageContainer = document.createElement("div");
@@ -58,10 +77,14 @@ const blockify = (s) => {
         /* Container for the user info */
         img.src = json[i].user.profileImageURL;
 
-        handleContainer.appendChild(handleText);
+        if(handleText != null) {
+            handleContainer.appendChild(handleText);
+        }
         handleContainer.className = "twitterHandle";
 
-        nameContainer.appendChild(nameText);
+        if(nameText != null) {
+            nameContainer.appendChild(nameText);
+        }
         nameContainer.className = "twitterName";
 
         userContainer.className = "user";
@@ -90,5 +113,7 @@ const blockify = (s) => {
         document.getElementsByClassName("data")[0].appendChild(divContainer);
     }
 }
-
-document.getElementsByTagName("BODY")[0].onload = () => { init(); }
+let body = document.getElementsByTagName("body")[0];
+if(body != null) {
+    body.onload = () => { init(); }
+}
