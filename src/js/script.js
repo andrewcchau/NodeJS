@@ -1,32 +1,46 @@
-function init() {
-    document.getElementsByClassName("timelineButton")[0].onclick = function() { apiCall(); }
+const React = require('react');
+const ReactDOM = require('react-dom');
+
+const e = React.createElement;
+
+window.onload = () => {
+    init();
+}
+
+const init = () => {
+    let button = document.getElementsByClassName("timelineButton") && document.getElementsByClassName("timelineButton")[0];
+    if(button != null) {
+        button.onclick = () => { apiCall(); }
+    }
     apiCall();
 }
 
-function redirect(l) {
+const redirect = (l) => {
     window.open(l, '_blank');
 }
 
-function apiCall() {
-    var xhttp = new XMLHttpRequest();
+const apiCall = () => {
+    let xhttp = new XMLHttpRequest();
 
-    xhttp.onreadystatechange = function() {
-        var dataElem = document.getElementsByClassName("data")[0];
-        if(this.readyState == xhttp.DONE && this.status == 200) {
-            dataElem.innerHTML = '';
-            blockify(this.responseText);
-        } else if(this.readyState == xhttp.OPENED || this.readyState == xhttp.HEADERS_RECEIVED
-                    || this.readyState == xhttp.LOADING) {
-            dataElem.innerHTML = "Pending . . .";
-        } else {
-            var errorMessageContainer = document.createElement("div");
-            var errorMessage = document.createTextNode("Something went wrong. Please come back later!");
+    xhttp.onreadystatechange = () => {
+        let dataElem = document.getElementsByClassName("data") && document.getElementsByClassName("data")[0];
+        if(dataElem != null) {
+            if(xhttp.readyState == xhttp.DONE && xhttp.status == 200) {
+                dataElem.innerHTML = '';
+                blockify(xhttp.responseText);
+            } else if(xhttp.readyState == xhttp.OPENED || xhttp.readyState == xhttp.HEADERS_RECEIVED
+                        || xhttp.readyState == xhttp.LOADING) {
+                dataElem.innerHTML = "Pending . . .";
+            } else {
+                let errorMessageContainer = document.createElement("div");
+                let errorMessage = document.createTextNode("Something went wrong. Please come back later!");
 
-            errorMessageContainer.appendChild(errorMessage);
-            errorMessageContainer.className = "errorMessage";
+                errorMessageContainer.appendChild(errorMessage);
+                errorMessageContainer.className = "errorMessage";
 
-            dataElem.innerHTML = '';
-            dataElem.appendChild(errorMessageContainer);
+                dataElem.innerHTML = '';
+                dataElem.appendChild(errorMessageContainer);
+            }
         }
     };
 
@@ -34,34 +48,65 @@ function apiCall() {
     xhttp.send();
 }
 
-function blockify(s) {
-    var json = JSON.parse(s);
+const blockify = (s) => {
+    let json = JSON.parse(s);
 
-    for(var i in json) {
-        var divContainer = document.createElement("div");
-        var userContainer = document.createElement("div");
-        var messageContainer = document.createElement("div");
+    for(let i in json) {
+        /* Object null check */
+        if(json[i] == null) { break; }
 
-        var img = document.createElement("img");
-        var handleContainer = document.createElement("div");
-        var nameContainer = document.createElement("div");
-        var dateContainer = document.createElement("div");
-        var hyperlink = document.createElement("a");
+        let jsonObj = json[i];
 
-        var msgDate = new Date(json[i].createdAt);
-        var formatter = new Intl.DateTimeFormat("eng", { month: "short" });
-        var date = document.createTextNode(formatter.format(msgDate) + " " + msgDate.getUTCDate());
-        var content = document.createTextNode(json[i].twitterMessage);
-        var handleText = document.createTextNode(json[i].user.twitterHandle);
-        var nameText = document.createTextNode(json[i].user.name);
+        /* Var creations */
+        let dataContainer = document.getElementsByClassName("data") && document.getElementsByClassName("data")[0];
+        let divContainer = document.createElement("div");
+        let userContainer = document.createElement("div");
+        let messageContainer = document.createElement("div");
 
-        /* Container for the user info */
-        img.src = json[i].user.profileImageURL;
+        let img = document.createElement("img");
+        let handleContainer = document.createElement("div");
+        let nameContainer = document.createElement("div");
+        let dateContainer = document.createElement("div");
+        let hyperlink = document.createElement("a");
 
-        handleContainer.appendChild(handleText);
+        let msgDate, formatter, date, content, handleText, nameText;
+
+        if(jsonObj.createdAt != null) {
+            msgDate = new Date(jsonObj.createdAt);
+            formatter = new Intl.DateTimeFormat("eng", { month: "short" });
+        }
+
+        if(msgDate != null) {
+            date = document.createTextNode(formatter.format(msgDate) + " " + msgDate.getUTCDate());
+        }
+
+        if(jsonObj.twitterMessage != null) {
+            content = document.createTextNode(jsonObj.twitterMessage);
+        }
+
+        if(jsonObj.user != null) {
+            if(jsonObj.user.twitterHandle != null) {
+                handleText = document.createTextNode(jsonObj.user.twitterHandle);
+            }
+
+            if(jsonObj.user.name != null) {
+                nameText = document.createTextNode(jsonObj.user.name);
+            }
+
+            /* Container for the user info */
+            if(jsonObj.user.profileImageURL != null) {
+                img.src = jsonObj.user.profileImageURL;
+            }
+        }
+
+        if(handleText != null) {
+            handleContainer.appendChild(handleText);
+        }
         handleContainer.className = "twitterHandle";
 
-        nameContainer.appendChild(nameText);
+        if(nameText != null) {
+            nameContainer.appendChild(nameText);
+        }
         nameContainer.className = "twitterName";
 
         userContainer.className = "user";
@@ -74,7 +119,9 @@ function blockify(s) {
         dateContainer.appendChild(date);
 
         hyperlink.className = "messageText";
-        hyperlink.href = "https://twitter.com/" + json[i].user.name + "/status/" + json[i].id;
+        if(nameText != null && jsonObj.id != null) {
+            hyperlink.href = "https://twitter.com/" + jsonObj.user.name + "/status/" + jsonObj.id;
+        }
         hyperlink.target = "_blank";
         hyperlink.appendChild(content);
 
@@ -87,8 +134,6 @@ function blockify(s) {
         divContainer.appendChild(userContainer);
         divContainer.appendChild(messageContainer);
 
-        document.getElementsByClassName("data")[0].appendChild(divContainer);
+        dataContainer.appendChild(divContainer);
     }
 }
-
-document.getElementsByTagName("BODY")[0].onload = function() { init(); }
