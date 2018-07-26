@@ -3,8 +3,7 @@ const gulp = require('gulp'),
     sass = require('gulp-sass'),
     browserify = require('browserify'),
     babelify = require('babelify'),
-    source = require('vinyl-source-stream'),
-    reload = require('gulp-livereload');
+    source = require('vinyl-source-stream');
 
 /* Standard Hello World */
 gulp.task('hello', () => {
@@ -55,7 +54,6 @@ gulp.task('js', () => {
         })
         .pipe(source('bundle.js'))
         .pipe(gulp.dest('./dist/js/'))
-        .pipe(reload())
         .pipe(connect.reload());
 });
 
