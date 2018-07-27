@@ -7,18 +7,23 @@ window.onload = () => {
     init();
 }
 
-const init = () => {
-    let button = document.getElementsByClassName("timelineButton") && document.getElementsByClassName("timelineButton")[0];
-    if(button != null) {
-        button.onclick = () => { apiCall(); }
-    }
-    apiCall();
+const renderUI = (items, location) => {
+    ReactDOM.render(
+        items,
+        location);
 }
 
 class Button extends React.Component {
     render() {
-        return e('button', { className: "timelineButton" }, this.props.buttonMessage);
+        return e('button', { className: "timelineButton", onClick: this.props.onclick }, this.props.buttonMessage);
     }
+}
+
+const init = () => {
+    let buttonLocation = document.getElementsByClassName("buttonContainer") && document.getElementsByClassName("buttonContainer")[0];
+    let button = e(Button, { onclick:() => apiCall() , buttonMessage: "Get Timeline" });
+    renderUI(button, buttonLocation);
+    apiCall();
 }
 
 class Status extends React.Component {
@@ -43,10 +48,7 @@ const apiCall = () => {
                 insert = e(Status, { className: 'errorMessage', message: 'Something went wrong. Please come back later!' }, null);
             }
 
-            ReactDOM.render(
-                insert,
-                dataElem
-            )
+            renderUI(insert, dataElem);
         }
     };
 
