@@ -3,7 +3,8 @@ const gulp = require('gulp'),
     sass = require('gulp-sass'),
     browserify = require('browserify'),
     babelify = require('babelify'),
-    source = require('vinyl-source-stream');
+    source = require('vinyl-source-stream'),
+    log = require('fancy-log');
 
 /* Standard Hello World */
 gulp.task('hello', () => {
@@ -28,7 +29,7 @@ gulp.task('sass', () => {
 const bundle = (b) => {
     return b.bundle()
         .on('error', (err) => {
-            gutil.log(err.toString());
+            log(err.toString());
             this.emit('end');
         })
         .pipe(source('bundle.js'))
@@ -49,7 +50,7 @@ gulp.task('js', () => {
     }).transform(babelify)
         .bundle()
         .on('error', (err) => {
-            gutil.log(err.toString());
+            log(err.toString());
             this.emit('end');
         })
         .pipe(source('bundle.js'))
