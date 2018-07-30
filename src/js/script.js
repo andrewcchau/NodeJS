@@ -3,7 +3,6 @@ const ReactDOM = require('react-dom');
 
 const e = React.createElement;
 
-let json, timeline;
 
 const Title = (title) => {
     return e('div', { className: "title" }, title);
@@ -18,6 +17,9 @@ class Status extends React.Component {
         return e('div', { className: this.props.className }, this.props.message);
     }
 }
+
+
+
 
 const MessageDate = (date) => {
     let msgDate;
@@ -43,6 +45,9 @@ const Message = (jsonObj) => {
         MessageLink(jsonObj.user.name, jsonObj.id, jsonObj.twitterMessage));
 }
 
+
+
+
 const Image = (src) => {
     return e('img', { src: src }, null);
 }
@@ -60,19 +65,28 @@ const User = (user) => {
         Image(user.profileImageURL), Handle(user.twitterHandle), Name(user.name));
 }
 
+
+const Pending = () => {
+    return e(Status, { message: 'Pending . . .' });
+}
+
+const Error = () => {
+    return e(Status, { className: 'errorMessage', message: 'Something went wrong. Please come back later!' });
+}
+
 class TweetList extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             tweets: [],
-            status: null
+            status: Pending()
         }
         this.update();
     }
 
     update() {
         let xhttp = new XMLHttpRequest();
-        let stat;
+        let stat = Error();
 
         xhttp.onreadystatechange = () => {
             let dataElem = document.getElementsByClassName("data") && document.getElementsByClassName("data")[0];
@@ -81,19 +95,16 @@ class TweetList extends React.Component {
                     this.changeTimeline(JSON.parse(xhttp.responseText));
                 } else if(xhttp.readyState == xhttp.OPENED || xhttp.readyState == xhttp.HEADERS_RECEIVED
                             || xhttp.readyState == xhttp.LOADING) {
-                    stat = e(Status, { message: 'Pending . . .' });
+                    stat = Pending();
                     this.changeTimeline(null);
                 } else {
-                    stat = null;
                     this.changeTimeline(null);
                 }
             }
 
-            if(stat != null) {
-                this.setState({
-                    status: stat
-                })
-            }
+            this.setState({
+                status: stat
+            });
         };
 
         xhttp.open("GET", "http://localhost:8080/api/1.0/twitter/timeline", true);
@@ -119,7 +130,7 @@ class TweetList extends React.Component {
         } else if(this.state.status != null) {
             append = this.state.status;
         } else {
-            append = e(Status, { className: 'errorMessage', message: 'Something went wrong. Please come back later!' });
+            append = Error();
         }
 
         return e('div', {},  e('div', { className: "buttonContainer" }, Button(() => this.update(), "Get Timeline")), e('div', { className: "data" }, append));
