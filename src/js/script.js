@@ -13,16 +13,37 @@ const renderUI = (items, location) => {
         location);
 }
 
-class Button extends React.Component {
-    render() {
-        return e('button', { className: "timelineButton", onClick: this.props.onclick }, this.props.buttonMessage);
-    }
+const Title = (title) => {
+    return e('div', { className: "title" }, title);
+}
+
+const Button = (onclick, buttonMessage) => {
+    return e('button', { className: "timelineButton", onClick: onclick }, buttonMessage);
+}
+
+const ButtonContainer = (onclick, buttonMessage) => {
+    return e('div', { className: "buttonContainer" }, Button(onclick, buttonMessage));
+}
+
+const DataContainer = () => {
+    return e('div', { className: "data" });
 }
 
 const init = () => {
-    let buttonLocation = document.getElementsByClassName("buttonContainer") && document.getElementsByClassName("buttonContainer")[0];
-    let button = e(Button, { onclick:() => apiCall() , buttonMessage: "Get Timeline" });
-    renderUI(button, buttonLocation);
+    /* Render Title */
+    let title = Title("Lab for Andrew");
+
+    /* Render the Button */
+    let button = ButtonContainer(() => apiCall(), "Get Timeline" );
+
+    /* Render the placement divs */
+    let dataContainer = DataContainer();
+
+    /* Location to Render */
+    let location = document.getElementsByClassName("interfaceInsert") && document.getElementsByClassName("interfaceInsert")[0];
+
+    /* Render Everything */
+    renderUI([title, button, dataContainer], location);
     apiCall();
 }
 
