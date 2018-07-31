@@ -44,16 +44,15 @@ class TweetList extends React.Component {
                     this.changeTimeline(JSON.parse(xhttp.responseText));
                 } else if(xhttp.readyState == xhttp.OPENED || xhttp.readyState == xhttp.HEADERS_RECEIVED
                             || xhttp.readyState == xhttp.LOADING) {
+                    this.setState({
+                        status: Pending()
+                    });
                     stat = Pending();
                     this.changeTimeline(null);
                 } else {
                     this.changeTimeline(null);
                 }
             }
-
-            this.setState({
-                status: stat
-            });
         };
 
         xhttp.open("GET", "http://localhost:8080/api/1.0/twitter/timeline", true);
@@ -75,7 +74,7 @@ class TweetList extends React.Component {
     render() {
         let append;
         if(this.state.tweets) {
-            append = this.state.tweets.map(i => e('div', { className: "item" , key: i.id}, User(i.user), Message(i)));
+            append = this.state.tweets.map(i => e('div', { className: "item" , key: i.id }, User(i.user), Message(i)));
         } else if(this.state.status) {
             append = this.state.status;
         } else {
