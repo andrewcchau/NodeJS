@@ -1,7 +1,7 @@
 import User from '../components/User';
 import Message from '../components/Message';
 import React from 'react';
-import HTTP from '../services/httpCall';
+import Request from '../services/httpCall';
 
 const e = React.createElement;
 
@@ -32,7 +32,7 @@ class TweetList extends React.Component {
             status: Pending()
         }
         this.update = this.update.bind(this);
-        HTTP(this.update);
+        Request(this.update);
     }
 
     update(jsonList) {
@@ -65,7 +65,7 @@ class TweetList extends React.Component {
             append = Error();
         }
 
-        return e('div', {},  e('div', { className: "buttonContainer" }, Button(() => HTTP(this.update), "Get Timeline")), e('div', { className: "data" }, append));
+        return e('div', {},  e('div', { className: "buttonContainer" }, Button(() => Request(this.update), "Get Timeline")), e('div', { className: "data" }, append));
     }
 }
 

@@ -4,17 +4,19 @@ const Request = (callback) => {
 
     xhttp.onreadystatechange = () => {
         let dataElem = document.getElementsByClassName("data") && document.getElementsByClassName("data")[0];
+        let ret;
         if(dataElem) {
             if(xhttp.readyState == xhttp.DONE && xhttp.status == 200) {
-                let json = JSON.parse(xhttp.responseText);
-                callback(json);
+                ret = JSON.parse(xhttp.responseText);
             } else if(xhttp.readyState == xhttp.OPENED || xhttp.readyState == xhttp.HEADERS_RECEIVED
                         || xhttp.readyState == xhttp.LOADING) {
-                callback("Pending");
+                ret = "Pending";
             } else {
-                callback(null);
+                ret = null;
             }
         }
+
+        callback(ret);
     };
 
     xhttp.open("GET", "http://localhost:8080/api/1.0/twitter/timeline", true);
