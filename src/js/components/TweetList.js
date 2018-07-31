@@ -1,6 +1,7 @@
-import User from './User';
-import Message from './Message';
+import User from '../components/User';
+import Message from '../components/Message';
 import React from 'react';
+import HTTP from '../services/httpCall';
 
 const e = React.createElement;
 
@@ -30,43 +31,26 @@ class TweetList extends React.Component {
             tweets: null,
             status: Pending()
         }
-        this.update();
+        this.update = this.update.bind(this);
+        HTTP(this.update);
     }
 
-    update() {
-        let xhttp = new XMLHttpRequest();
-        let stat = Error();
-
-        xhttp.onreadystatechange = () => {
-            let dataElem = document.getElementsByClassName("data") && document.getElementsByClassName("data")[0];
-            if(dataElem) {
-                if(xhttp.readyState == xhttp.DONE && xhttp.status == 200) {
-                    this.changeTimeline(JSON.parse(xhttp.responseText));
-                } else if(xhttp.readyState == xhttp.OPENED || xhttp.readyState == xhttp.HEADERS_RECEIVED
-                            || xhttp.readyState == xhttp.LOADING) {
-                    this.setState({
-                        status: Pending()
-                    });
-                    stat = Pending();
-                    this.changeTimeline(null);
-                } else {
-                    this.changeTimeline(null);
-                }
+    update(jsonList) {
+        if(jsonList && jsonList !== undefined) {
+            if(jsonList === "Pending") {
+                this.setState({
+                    tweets: null,
+                    status: Pending()
+                });
+            } else {
+                this.setState({
+                    tweets: jsonList
+                });
             }
-        };
-
-        xhttp.open("GET", "http://localhost:8080/api/1.0/twitter/timeline", true);
-        xhttp.send();
-    }
-
-    changeTimeline(jsonList) {
-        if(jsonList) {
-            this.setState({
-                tweets: jsonList
-            });
         } else {
             this.setState({
-                tweets: null
+                tweets: null,
+                status: Error()
             });
         }
     }
@@ -81,7 +65,7 @@ class TweetList extends React.Component {
             append = Error();
         }
 
-        return e('div', {},  e('div', { className: "buttonContainer" }, Button(() => this.update(), "Get Timeline")), e('div', { className: "data" }, append));
+        return e('div', {},  e('div', { className: "buttonContainer" }, Button(() => HTTP(this.update), "Get Timeline")), e('div', { className: "data" }, append));
     }
 }
 
