@@ -1,7 +1,7 @@
 import User from './User';
 import Message from './Message';
+import React from 'react';
 
-const React = require('react');
 const e = React.createElement;
 
 class Status extends React.Component {

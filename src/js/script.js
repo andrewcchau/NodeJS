@@ -1,7 +1,7 @@
 import TweetList from './components/TweetList';
+import React from 'react';
+import ReactDOM from 'react-dom';
 
-const React = require('react');
-const ReactDOM = require('react-dom');
 const e = React.createElement;
 
 const Title = (title) => {
