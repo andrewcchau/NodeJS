@@ -36,7 +36,7 @@ class TweetList extends React.Component {
     }
 
     update(jsonList) {
-        if(jsonList && jsonList !== undefined) {
+        if(jsonList) {
             if(jsonList === "Pending") {
                 this.setState({
                     tweets: null,
@@ -69,5 +69,5 @@ class TweetList extends React.Component {
     }
 }
 
-export {Status, Pending, Error, Button};
+export {Status, Pending, Error, Button, TweetList};
 export default TweetList;

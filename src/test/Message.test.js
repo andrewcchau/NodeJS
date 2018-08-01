@@ -1,6 +1,5 @@
 import configure from '../setupTests';
 import {shallow} from 'enzyme';
-import React from 'react';
 import {MessageDate, MessageLink, Message} from '../js/components/Message';
 
 let user = "Tester",

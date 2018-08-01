@@ -14,8 +14,14 @@ const Name = (name) => {
 }
 
 const User = (user) => {
-    return e('div', { className: "user" },
-        Image(user.profileImageURL), Handle(user.twitterHandle), Name(user.name));
+    if(user) {
+        return e('div', { className: "user" },
+            Image(user.profileImageURL), Handle(user.twitterHandle), Name(user.name));
+    } else {
+        return e('div', { className: "user" },
+            Image(), Handle(), Name());
+    }
 }
 
 export default User;
+export {Image, Handle, Name, User};
