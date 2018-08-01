@@ -11,6 +11,10 @@ Before you start, make sure you have done these few things:
 * Have an up-to-date version of npm installed on your computer
 * Run ```npm install``` from the root directory to install all the dependencies needed
 
+# Running Unit Tests
+Start in the root directory before running.
+* To run jest unit tests, run ```npm test```
+
 # Running the Program
 Start in the root directory before running.
 * To run everything: run ```gulp dev```
