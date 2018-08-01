@@ -4,7 +4,11 @@
   "description": "A simple UI for the onboarding Dropwizard Application",
   "main": "dist/js/bundle.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
+  },
+  "jest": {
+    "verbose": true,
+    "testURL": "http://localhost/"
   },
   "repository": {
     "type": "git",
@@ -33,6 +37,7 @@
     "babel-preset-env": "^1.7.0",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
-    "jest": "^23.4.2"
+    "jest": "^23.4.2",
+    "react-test-renderer": "^16.4.1"
   }
 }
