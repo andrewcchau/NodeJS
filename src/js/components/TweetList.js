@@ -69,4 +69,5 @@ class TweetList extends React.Component {
     }
 }
 
+export {Status, Pending, Error, Button};
 export default TweetList;

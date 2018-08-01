@@ -15,15 +15,26 @@ const MessageDate = (date) => {
 }
 
 const MessageLink = (user, id, message) => {
-    let link = "https://twitter.com/" + user + "/status/" + id;
+    let link;
+    if(user && id) {
+        link = "https://twitter.com/" + user + "/status/" + id;
+    } else {
+        link = "https://twitter.com";
+    }
 
     return e('a', { className: "messageText", href: link, target: "_blank" }, message);
 }
 
 const Message = (jsonObj) => {
-    return e('div', { className: "message" },
-        MessageDate(jsonObj.createdAt),
-        MessageLink(jsonObj.user.name, jsonObj.id, jsonObj.twitterMessage));
+    if(jsonObj) {
+        return e('div', { className: "message" },
+            MessageDate(jsonObj.createdAt),
+            MessageLink(jsonObj.user.name, jsonObj.id, jsonObj.twitterMessage));
+    } else {
+        return e('div', { className: "message" },
+            MessageDate(), MessageLink());
+    }
 }
 
 export default Message;
+export {MessageDate, MessageLink, Message};
