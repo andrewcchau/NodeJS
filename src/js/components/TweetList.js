@@ -32,11 +32,13 @@ class TweetList extends React.Component {
             status: Pending()
         }
         this.update = this.update.bind(this);
-        Request(this.update);
+        if(this.props.callBack){
+            this.props.callBack(this.update);
+        }
     }
 
     update(jsonList) {
-        if(jsonList && jsonList !== undefined) {
+        if(jsonList) {
             if(jsonList === "Pending") {
                 this.setState({
                     tweets: null,
@@ -65,8 +67,9 @@ class TweetList extends React.Component {
             append = Error();
         }
 
-        return e('div', {},  e('div', { className: "buttonContainer" }, Button(() => Request(this.update), "Get Timeline")), e('div', { className: "data" }, append));
+        return e('div', {},  e('div', { className: "buttonContainer" }, Button(() => this.props.callBack(this.update), "Get Timeline")), e('div', { className: "data" }, append));
     }
 }
 
+export {Status, Pending, Error, Button, TweetList};
 export default TweetList;

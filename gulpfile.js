@@ -4,7 +4,8 @@ const gulp = require('gulp'),
     browserify = require('browserify'),
     babelify = require('babelify'),
     source = require('vinyl-source-stream'),
-    log = require('fancy-log');
+    log = require('fancy-log'),
+    jest = require('gulp-jest').default;
 
 /* Standard Hello World */
 gulp.task('hello', () => {
