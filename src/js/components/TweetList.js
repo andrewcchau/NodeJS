@@ -46,16 +46,9 @@ class TweetList extends React.Component {
 
     update(jsonList) {
         if(jsonList) {
-            if(jsonList === "Pending") {
-                this.setState({
-                    tweets: null,
-                    status: Pending()
-                });
-            } else {
-                this.setState({
-                    tweets: jsonList
-                });
-            }
+            this.setState({
+                tweets: jsonList
+            });
         } else {
             this.setState({
                 tweets: null,
