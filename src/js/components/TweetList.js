@@ -1,6 +1,7 @@
 import User from '../components/User';
 import Message from '../components/Message';
 import React from 'react';
+import _ from 'lodash';
 
 const e = React.createElement;
 
@@ -60,7 +61,9 @@ class TweetList extends React.Component {
     render() {
         let append;
         if(this.state.tweets) {
-            append = this.state.tweets.map(i => e('div', { className: "item" , key: i.id }, User(i.user), Message(i)));
+            append = _.map(this.state.tweets, (i) => {
+                return e('div', { className: "item" }, User(i.user), Message(i));
+            });
         } else if(this.state.status) {
             append = this.state.status;
         } else {
