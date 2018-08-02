@@ -37,7 +37,7 @@ describe('Handle Test Valid Input', () => {
     it('Should create a div with a child', () => {
         const wrapper = shallow(Handle(handle));
         expect(wrapper.children().exists()).toEqual(true);
-        expect(wrapper.contains(handle)).toEqual(true);
+        expect(wrapper.text()).toEqual(handle);
     });
 });
 
@@ -56,7 +56,7 @@ describe('Name Test Valid Input', () => {
     it('Should create a div with a child', () => {
         const wrapper = shallow(Name(name));
         expect(wrapper.children().exists()).toEqual(true);
-        expect(wrapper.contains(name)).toEqual(true);
+        expect(wrapper.text()).toEqual(name);
     });
 });
 
@@ -90,8 +90,8 @@ describe('User Test Valid Input', () => {
         const wrapper = shallow(User(jsonObj));
         expect(wrapper.childAt(0).props().src).toEqual(img);
         expect(wrapper.childAt(1).children().exists()).toEqual(true);
-        expect(wrapper.childAt(1).contains(handle)).toEqual(true);
+        expect(wrapper.childAt(1).text()).toEqual(handle);
         expect(wrapper.childAt(2).children().exists()).toEqual(true);
-        expect(wrapper.childAt(2).contains(name)).toEqual(true);
+        expect(wrapper.childAt(2).text()).toEqual(name);
     });
 });

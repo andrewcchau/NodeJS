@@ -22,8 +22,7 @@ describe('MessageDate Test Normal Input', () => {
     it('Should create a div with a date', () => {
         const wrapper = shallow(MessageDate(date));
         expect(wrapper.children().exists()).toEqual(true);
-        expect(wrapper.contains('Dec 17')).toEqual(true);
-        expect(wrapper.contains('December 17')).toEqual(false);
+        expect(wrapper.text()).toEqual('Dec 17');
     });
 });
 
@@ -69,7 +68,7 @@ describe('MessageLink Test User, ID, and Message Input', () => {
     it('Should create a div with message and custom link', () => {
         const wrapper = shallow(MessageLink(user, id, message));
         expect(wrapper.children().exists()).toEqual(true);
-        expect(wrapper.contains(message)).toEqual(true);
+        expect(wrapper.text()).toEqual(message);
         expect(wrapper.props().href).toEqual("https://twitter.com/" + user + "/status/" + id);
     });
 });
@@ -105,7 +104,7 @@ describe('Message Test Valid Input', () => {
         expect(wrapper.children().exists()).toEqual(true);
         expect(wrapper.childAt(0).hasClass('date')).toEqual(true);
         expect(wrapper.childAt(1).hasClass('messageText')).toEqual(true);
-        expect(wrapper.childAt(0).contains("Dec 17")).toEqual(true);
+        expect(wrapper.childAt(0).text()).toEqual('Dec 17');
         expect(wrapper.childAt(1).props().href).toEqual("https://twitter.com/" + user + "/status/" + id);
     });
 });

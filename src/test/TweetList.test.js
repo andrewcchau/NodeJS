@@ -17,7 +17,7 @@ describe('Pending Test', () => {
     it('Should create a div with "Pending . . ." child', () => {
         const wrapper = shallow(Pending());
         expect(wrapper.find('div').length).toEqual(1);
-        expect(wrapper.contains('Pending . . .')).toEqual(true);
+        expect(wrapper.text()).toEqual('Pending . . .');
     });
 });
 
@@ -27,7 +27,7 @@ describe('Error Test', () => {
         const wrapper = shallow(Error());
         expect(wrapper.find('div').length).toEqual(1);
         expect(wrapper.hasClass('errorMessage')).toEqual(true);
-        expect(wrapper.contains('Something went wrong. Please come back later!'));
+        expect(wrapper.text()).toEqual('Something went wrong. Please come back later!');
     });
 });
 
@@ -53,7 +53,7 @@ describe('Button Test Message Only', () => {
         const wrapper = shallow(Button(null, message));
         expect(wrapper.props().onClick).toEqual(null);
         expect(wrapper.children().exists()).toEqual(true);
-        expect(wrapper.contains(message)).toEqual(true);
+        expect(wrapper.text()).toEqual(message);
     });
 });
 
@@ -61,7 +61,7 @@ describe('Button Test Valid Inputs + Simulate Click', () => {
     it('Should create a button with a message and callback function', () => {
         const wrapper = shallow(Button(() => dummyFunction(), message));
         expect(wrapper.children().exists()).toEqual(true);
-        expect(wrapper.contains(message)).toEqual(true);
+        expect(wrapper.text()).toEqual(message);
         wrapper.find('button').simulate('click');
         expect(counter).toEqual(1);
     });
@@ -108,5 +108,12 @@ describe('TweetList Test Valid Inputs and Button Press', () => {
         expect(itemElem.hasClass('item')).toEqual(true);
         expect(itemElem.childAt(0).hasClass('user')).toEqual(true);
         expect(itemElem.childAt(1).hasClass('message')).toEqual(true);
+
+        let userElem = itemElem.childAt(0);
+        let messageElem = itemElem.childAt(1);
+        expect(userElem.childAt(1).text()).toEqual(handle);
+        expect(userElem.childAt(2).text()).toEqual(name);
+        expect(messageElem.childAt(0).text()).toEqual('Dec 17');
+        expect(messageElem.childAt(1).text()).toEqual(message);
     });
 });
