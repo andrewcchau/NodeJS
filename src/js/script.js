@@ -1,7 +1,7 @@
 import TweetList from './components/TweetList';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Request from './services/httpCall';
+import {fetching} from './services/httpCall';
 
 const e = React.createElement;
 
@@ -17,7 +17,7 @@ const init = () => {
     let location = document.getElementsByClassName("interfaceInsert") && document.getElementsByClassName("interfaceInsert")[0];
 
     /* Render timeline */
-    let timeline = e(TweetList, { callBack: Request });
+    let timeline = e(TweetList, { callBack: fetching });
 
     /* Render Everything */
     ReactDOM.render(

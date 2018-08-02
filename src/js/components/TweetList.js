@@ -1,7 +1,6 @@
 import User from '../components/User';
 import Message from '../components/Message';
 import React from 'react';
-import Request from '../services/httpCall';
 
 const e = React.createElement;
 
@@ -32,9 +31,17 @@ class TweetList extends React.Component {
             status: Pending()
         }
         this.update = this.update.bind(this);
-        if(this.props.callBack){
+        this.pending = this.pending.bind(this);
+        if(this.props.callBack) {
             this.props.callBack(this.update);
         }
+    }
+
+    pending(callback) {
+        this.setState({
+            status: Pending()
+        });
+        callback();
     }
 
     update(jsonList) {
@@ -67,7 +74,7 @@ class TweetList extends React.Component {
             append = Error();
         }
 
-        return e('div', {},  e('div', { className: "buttonContainer" }, Button(() => this.props.callBack(this.update), "Get Timeline")), e('div', { className: "data" }, append));
+        return e('div', {},  e('div', { className: "buttonContainer" }, Button(() => this.pending(() => this.props.callBack(this.update)), "Get Timeline")), e('div', { className: "data" }, append));
     }
 }
 

@@ -1,26 +1,34 @@
 const Request = (callback) => {
-    let xhttp = new XMLHttpRequest();
-    let ret;
+    return new Promise((resolve, reject) => {
+        let xhttp = new XMLHttpRequest();
+        xhttp.open('GET', 'http://localhost:8080/api/1.0/twitter/timeline', true);
+        xhttp.onload = () => {
+            let dataElem = document.getElementsByClassName("data") && document.getElementsByClassName("data")[0];
 
-    xhttp.onreadystatechange = () => {
-        let dataElem = document.getElementsByClassName("data") && document.getElementsByClassName("data")[0];
-        let ret;
-        if(dataElem) {
-            if(xhttp.readyState == xhttp.DONE && xhttp.status == 200) {
-                ret = JSON.parse(xhttp.responseText);
-            } else if(xhttp.readyState == xhttp.OPENED || xhttp.readyState == xhttp.HEADERS_RECEIVED
-                        || xhttp.readyState == xhttp.LOADING) {
-                ret = "Pending";
-            } else {
-                ret = null;
+            if(dataElem) {
+                if(xhttp.readyState == xhttp.DONE && xhttp.status == 200) {
+                    resolve(JSON.parse(xhttp.responseText));
+                }
             }
-        }
+        };
+        xhttp.onerror = () => reject(null);
+        xhttp.send();
 
-        callback(ret);
-    };
+    }).then((data) => {
+        callback(data);
+    }).catch((reject) => {
+        callback(reject);
+    });
+}
 
-    xhttp.open("GET", "http://localhost:8080/api/1.0/twitter/timeline", true);
-    xhttp.send();
+const fetching = (callback) => {
+    return fetch('http://localhost:8080/api/1.0/twitter/timeline', {method: 'GET'})
+        .then(res => {
+            res.json().then((data) => { callback(data); });
+        }).catch(() => {
+            callback(null);
+        });
 }
 
 export default Request;
+export {fetching};
