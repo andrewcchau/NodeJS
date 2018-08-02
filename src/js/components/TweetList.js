@@ -2,6 +2,7 @@ import User from '../components/User';
 import Message from '../components/Message';
 import React from 'react';
 import _ from 'lodash';
+import Request from '../services/httpCall';
 
 const e = React.createElement;
 
@@ -33,9 +34,7 @@ class TweetList extends React.Component {
         }
         this.update = this.update.bind(this);
         this.pending = this.pending.bind(this);
-        if(this.props.callBack) {
-            this.props.callBack(this.update);
-        }
+        Request(this.update);
     }
 
     pending(callback) {
@@ -62,7 +61,7 @@ class TweetList extends React.Component {
         let append;
         if(this.state.tweets) {
             append = _.map(this.state.tweets, (i) => {
-                return e('div', { className: "item" }, User(i.user), Message(i));
+                return e('div', { className: "item" , key: i.id}, User(i.user), Message(i));
             });
         } else if(this.state.status) {
             append = this.state.status;
@@ -70,7 +69,7 @@ class TweetList extends React.Component {
             append = Error();
         }
 
-        return e('div', {},  e('div', { className: "buttonContainer" }, Button(() => this.pending(() => this.props.callBack(this.update)), "Get Timeline")), e('div', { className: "data" }, append));
+        return e('div', {},  e('div', { className: "buttonContainer" }, Button(() => this.pending(() => Request(this.update)), "Get Timeline")), e('div', { className: "data" }, append));
     }
 }
 
