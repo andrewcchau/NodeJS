@@ -8,7 +8,11 @@
   },
   "jest": {
     "verbose": true,
-    "testURL": "http://localhost/"
+    "testURL": "http://localhost/",
+    "automock": false,
+    "setupFiles": [
+      "./src/setupTests.js"
+    ]
   },
   "repository": {
     "type": "git",
@@ -41,6 +45,7 @@
     "gulp-jest": "^4.0.2",
     "jest": "^23.4.2",
     "jest-cli": "^23.4.2",
+    "jest-fetch-mock": "^1.6.5",
     "react-test-renderer": "^16.4.1"
   }
 }
