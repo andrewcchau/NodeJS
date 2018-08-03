@@ -5,6 +5,10 @@ import _ from 'lodash';
 import Request from '../services/httpCall';
 
 const e = React.createElement;
+const statusEnum = {
+    PENDING: "Pending",
+    ERROR: "Error"
+}
 
 class Status extends React.Component {
     render() {
@@ -30,7 +34,7 @@ class TweetList extends React.Component {
         super(props);
         this.state = {
             tweets: null,
-            status: Pending()
+            status: statusEnum.PENDING
         }
         this.update = this.update.bind(this);
         this.pending = this.pending.bind(this);
@@ -39,7 +43,7 @@ class TweetList extends React.Component {
 
     pending(callback) {
         this.setState({
-            status: Pending()
+            status: statusEnum.PENDING
         });
         callback();
     }
@@ -52,24 +56,24 @@ class TweetList extends React.Component {
         } else {
             this.setState({
                 tweets: null,
-                status: Error()
+                status: statusEnum.ERROR
             });
         }
     }
 
     render() {
-        let append;
+        let component;
         if(this.state.tweets) {
-            append = _.map(this.state.tweets, (i) => {
+            component = _.map(this.state.tweets, (i) => {
                 return e('div', { className: "item" , key: i.id}, User(i.user), Message(i));
             });
-        } else if(this.state.status) {
-            append = this.state.status;
+        } else if(_.isEqual(this.state.status, statusEnum.PENDING)) {
+            component = Pending();
         } else {
-            append = Error();
+            component = Error();
         }
 
-        return e('div', {},  e('div', { className: "buttonContainer" }, Button(() => this.pending(() => Request(this.update)), "Get Timeline")), e('div', { className: "data" }, append));
+        return e('div', {},  e('div', { className: "buttonContainer" }, Button(() => this.pending(() => Request(this.update)), "Get Timeline")), e('div', { className: "data" }, component));
     }
 }
 

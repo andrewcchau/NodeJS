@@ -98,7 +98,7 @@ describe('TweetList Test No Input', () => {
 
 describe('TweetList Test Valid Inputs and Button Press', () => {
     it('Should have proper children components after button press', () => {
-        const wrapper = shallow(e(TweetList, { callBack: callBackFunc }));
+        const wrapper = shallow(e(TweetList));
         expect(wrapper.find('div').length).toEqual(3);
         wrapper.find('button').simulate('click');
         expect(wrapper.find('div').length).toEqual(9);
