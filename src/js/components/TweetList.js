@@ -73,7 +73,9 @@ class TweetList extends React.Component {
             component = Error();
         }
 
-        return e('div', {},  e('div', { className: "buttonContainer" }, Button(() => this.pending(() => Request(this.update)), "Get Timeline")), e('div', { className: "data" }, component));
+        return e('div', {},
+                e('div', { className: "buttonContainer" }, Button(() => this.pending(() => Request(this.update)), "Get Timeline")),
+                e('div', { className: "data" }, component));
     }
 }
 
