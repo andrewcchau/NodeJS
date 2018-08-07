@@ -73,6 +73,13 @@ class TweetList extends React.Component {
             component = Error();
         }
 
+        /* Used solely for purpose of testing, as mocking service endpoint is difficult */
+        if(this.props.test && this.props.testFunc) {
+            return e('div', {},
+                    e('div', { className: "buttonContainer" }, Button(() => this.pending(() => this.props.testFunc(this.update)), "Get Timeline")),
+                    e('div', { className: "data" }, component));
+        }
+
         return e('div', {},
                 e('div', { className: "buttonContainer" }, Button(() => this.pending(() => Request(this.update)), "Get Timeline")),
                 e('div', { className: "data" }, component));

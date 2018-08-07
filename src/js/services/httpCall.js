@@ -5,6 +5,4 @@ const Request = (callback) => {
         .catch(() => callback(null));
 }
 
-/* Promise chain above? */
-
 export default Request;
