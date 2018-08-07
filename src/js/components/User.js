@@ -13,15 +13,18 @@ const Name = (name) => {
     return e('div', { className: "twitterName" }, name);
 }
 
-const User = (user, isUserTimeline) => {
-    if(user) {
-        return e('div', { className: "user" },
-            Image(user.profileImageURL),
-            Name(user.name),
-            (isUserTimeline ? null : Handle(user.twitterHandle)));
-    } else {
-        return e('div', { className: "user" },
-            Image(), Handle(), Name());
+class User extends React.Component {
+    render() {
+        if(this.props.user) {
+            return e('div', {className: "user"},
+                Image(this.props.user.profileImageURL),
+                Name(this.props.user.name),
+                (this.props.excludeHandle ? null : Handle(this.props.user.twitterHandle))
+            );
+        } else {
+            return e('div', { className: "user" },
+                    Image(), Handle(), Name());
+        }
     }
 }
 

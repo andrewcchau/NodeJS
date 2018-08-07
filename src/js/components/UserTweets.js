@@ -52,7 +52,7 @@ class UserTweets extends React.Component {
                 component = Error('No tweets are available, post a tweet!');
             } else {
                 component = _.map(this.state.tweets, (i) => {
-                    return e('div', { className: "item" , key: i.id}, User(i.user, true), Message(i));
+                    return e('div', { className: "item" , key: i.id}, e(User, {user: i.user, excludeHandle: true}), Message(i));
                 });
             }
         } else if(_.isEqual(this.state.status, statusEnum.PENDING)) {

@@ -44,7 +44,7 @@ describe('HomeTimeline Test Valid Inputs and Button Press', () => {
         const wrapper = shallow(e(HomeTimeline, {test: true, testFunc: callBackFunc}));
         expect(wrapper.find('div').length).toEqual(3);
         wrapper.find('button').simulate('click');
-        expect(wrapper.find('div').length).toEqual(9);
+        expect(wrapper.find('div').length).toEqual(6);
 
         let itemElem = wrapper.childAt(2).childAt(0);
         expect(itemElem.children().length).toEqual(2);

@@ -49,7 +49,7 @@ class HomeTimeline extends React.Component {
         let component;
         if(this.state.tweets) {
             component = _.map(this.state.tweets, (i) => {
-                return e('div', { className: "item" , key: i.id}, User(i.user), Message(i));
+                return e('div', { className: "item" , key: i.id}, e(User, {user: i.user}), Message(i));
             });
         } else if(_.isEqual(this.state.status, statusEnum.PENDING)) {
             component = Pending();
