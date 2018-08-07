@@ -15,18 +15,10 @@ const Name = (name) => {
 
 const User = (user) => {
     if(user) {
-        return UserVerbose(user.profileImageURL, user.name, user.twitterHandle);
-    }else {
-        return UserVerbose();
-    }
-}
-
-const UserVerbose = (img, name, handle) => {
-    if(img || name || handle) {
         return e('div', { className: "user" },
-            (img ? Image(img) : null),
-            (name ? Name(name) : null),
-            (handle ? Handle(handle) : null));
+            (user.profileImageURL ? Image(user.profileImageURL) : null),
+            (user.name ? Name(user.name) : null),
+            (user.twitterHandle? Handle(user.twitterHandle) : null));
     } else {
         return e('div', { className: "user" },
             Image(), Handle(), Name());
@@ -34,4 +26,4 @@ const UserVerbose = (img, name, handle) => {
 }
 
 export default User;
-export {Image, Handle, Name, User, UserVerbose};
+export {Image, Handle, Name, User};

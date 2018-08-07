@@ -1,6 +1,6 @@
 import {shallow} from 'enzyme';
 import React from 'react';
-import HomeTimeline from '../js/components/HomeTimeline';
+import UserTweets from '../js/components/UserTweets';
 
 const e = React.createElement;
 
@@ -11,7 +11,7 @@ let message = "button message",
     date = "December 17, 1995 03:24:00",
     id = "123456";
 
-/* Test HomeTimeline Component */
+/* Test UserTweets Component */
 const callBackFunc = (cb) => {
     cb(jsonObj);
 }
@@ -28,20 +28,20 @@ const json = (message, handle, name, img, created, id) => {
 
 let jsonObj = JSON.parse(json(message, handle, name, img, date, id));
 
-describe('HomeTimeline Test No Input', () => {
+describe('UserTweets Test No Input', () => {
     it('Should have children components but nothing else', () => {
-        const wrapper = shallow(e(HomeTimeline));
+        const wrapper = shallow(e(UserTweets));
         expect(wrapper.find('div').length).toEqual(3);
-        expect(wrapper.childAt(0).childAt(0).text()).toEqual("Home Timeline");
-        expect(wrapper.childAt(1).hasClass('buttonContainer1')).toEqual(true);
-        expect(wrapper.childAt(2).hasClass('dataHome')).toEqual(true);
+        expect(wrapper.childAt(0).childAt(0).text()).toEqual("User Timeline");
+        expect(wrapper.childAt(1).hasClass('buttonContainer2')).toEqual(true);
+        expect(wrapper.childAt(2).hasClass('dataUser')).toEqual(true);
         expect(wrapper.childAt(2).children().length).toEqual(1);
     });
 });
 
-describe('HomeTimeline Test Valid Inputs and Button Press', () => {
+describe('UserTweets Test Valid Inputs and Button Press', () => {
     it('Should have proper children components after button press', () => {
-        const wrapper = shallow(e(HomeTimeline, {test: true, testFunc: callBackFunc}));
+        const wrapper = shallow(e(UserTweets, {test: true, testFunc: callBackFunc}));
         expect(wrapper.find('div').length).toEqual(3);
         wrapper.find('button').simulate('click');
         expect(wrapper.find('div').length).toEqual(9);

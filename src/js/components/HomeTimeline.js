@@ -13,18 +13,15 @@ const statusEnum = {
     ERROR: "Error"
 }
 
-class TweetList extends React.Component {
+class HomeTimeline extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             tweets: null,
-            status: statusEnum.PENDING,
-            exclude: null
+            status: statusEnum.PENDING
         }
         this.update = this.update.bind(this);
         this.pending = this.pending.bind(this);
-        this.excludeUser = this.excludeUser.bind(this);
-        RequestUser(this.excludeUser);
         Request(this.update);
     }
 
@@ -48,21 +45,11 @@ class TweetList extends React.Component {
         }
     }
 
-    excludeUser(exclude) {
-        if(exclude) {
-            this.setState({
-                exclude: exclude
-            });
-        }
-    }
-
     render() {
         let component;
         if(this.state.tweets) {
             component = _.map(this.state.tweets, (i) => {
-                if(!_.isEqual(i.user.twitterHandle, this.state.exclude)){
-                    return e('div', { className: "item" , key: i.id}, User(i.user), Message(i));
-                }
+                return e('div', { className: "item" , key: i.id}, User(i.user), Message(i));
             });
         } else if(_.isEqual(this.state.status, statusEnum.PENDING)) {
             component = Pending();
@@ -80,14 +67,9 @@ class TweetList extends React.Component {
 
         return e('div', {},
                 e('header', {}, Header('Home Timeline')),
-                e('div', { className: "buttonContainer1" },
-                    Button(BUTTON_CLASS, () => {
-                        RequestUser(this.excludeUser);
-                        this.pending(() => Request(this.update));
-                    },
-                    BUTTON_MESSAGE)),
+                e('div', { className: "buttonContainer1" }, Button(BUTTON_CLASS, () => this.pending(() => Request(this.update)), BUTTON_MESSAGE)),
                 e('div', { className: "dataHome" }, component));
     }
 }
 
-export default TweetList;
+export default HomeTimeline;

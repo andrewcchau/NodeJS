@@ -1,4 +1,4 @@
-import {UserVerbose} from '../components/User';
+import {User} from '../components/User';
 import Message from '../components/Message';
 import React from 'react';
 import _ from 'lodash';
@@ -52,7 +52,7 @@ class UserTweets extends React.Component {
                 component = Error('No tweets are available, post a tweet!');
             } else {
                 component = _.map(this.state.tweets, (i) => {
-                    return e('div', { className: "item" , key: i.id}, UserVerbose(i.user.profileImageURL, i.user.name), Message(i));
+                    return e('div', { className: "item" , key: i.id}, User(i.user), Message(i));
                 });
             }
         } else if(_.isEqual(this.state.status, statusEnum.PENDING)) {

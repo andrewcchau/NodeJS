@@ -1,4 +1,4 @@
-import TweetList from './components/TweetList';
+import HomeTimeline from './components/HomeTimeline';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import UserTweets from './components/UserTweets';
@@ -18,7 +18,7 @@ const init = () => {
     let location = document.getElementsByClassName("interfaceInsert") && document.getElementsByClassName("interfaceInsert")[0];
 
     /* Render home timeline */
-    let homeTimeline = e(TweetList);
+    let homeTimeline = e(HomeTimeline);
 
     /* Render user timeline */
     let userTimeline = e(UserTweets);
