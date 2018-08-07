@@ -1,4 +1,3 @@
-import configure from '../setupTests';
 import {shallow} from 'enzyme';
 import {MessageDate, MessageLink, Message} from '../js/components/Message';
 
@@ -99,7 +98,6 @@ describe('Message Test No Input', () => {
 describe('Message Test Valid Input', () => {
     it('Should create a nested div and "a" with children', () => {
         let jsonObj = JSON.parse(json(date, user, id, message));
-        console.log(jsonObj);
         const wrapper = shallow(Message(jsonObj));
         expect(wrapper.children().exists()).toEqual(true);
         expect(wrapper.childAt(0).hasClass('date')).toEqual(true);

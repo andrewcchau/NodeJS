@@ -1,4 +1,3 @@
-import configure from '../setupTests';
 import {shallow} from 'enzyme';
 import React from 'react';
 import {Pending, Error, Button, TweetList} from '../js/components/TweetList';
@@ -95,10 +94,9 @@ describe('TweetList Test No Input', () => {
     });
 });
 
-
 describe('TweetList Test Valid Inputs and Button Press', () => {
     it('Should have proper children components after button press', () => {
-        const wrapper = shallow(e(TweetList, { callBack: callBackFunc }));
+        const wrapper = shallow(e(TweetList, {test: true, testFunc: callBackFunc}));
         expect(wrapper.find('div').length).toEqual(3);
         wrapper.find('button').simulate('click');
         expect(wrapper.find('div').length).toEqual(9);

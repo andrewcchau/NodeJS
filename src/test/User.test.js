@@ -1,4 +1,3 @@
-import configure from '../setupTests';
 import {shallow} from 'enzyme';
 import {Image, Handle, Name, User} from '../js/components/User';
 

@@ -1,9 +1,14 @@
 import User from '../components/User';
 import Message from '../components/Message';
 import React from 'react';
+import _ from 'lodash';
 import Request from '../services/httpCall';
 
 const e = React.createElement;
+const statusEnum = {
+    PENDING: "Pending",
+    ERROR: "Error"
+}
 
 class Status extends React.Component {
     render() {
@@ -29,45 +34,55 @@ class TweetList extends React.Component {
         super(props);
         this.state = {
             tweets: null,
-            status: Pending()
+            status: statusEnum.PENDING
         }
         this.update = this.update.bind(this);
-        if(this.props.callBack){
-            this.props.callBack(this.update);
-        }
+        this.pending = this.pending.bind(this);
+        Request(this.update);
+    }
+
+    pending(callback) {
+        this.setState({
+            status: statusEnum.PENDING
+        });
+        callback();
     }
 
     update(jsonList) {
         if(jsonList) {
-            if(jsonList === "Pending") {
-                this.setState({
-                    tweets: null,
-                    status: Pending()
-                });
-            } else {
-                this.setState({
-                    tweets: jsonList
-                });
-            }
+            this.setState({
+                tweets: jsonList
+            });
         } else {
             this.setState({
                 tweets: null,
-                status: Error()
+                status: statusEnum.ERROR
             });
         }
     }
 
     render() {
-        let append;
+        let component;
         if(this.state.tweets) {
-            append = this.state.tweets.map(i => e('div', { className: "item" , key: i.id }, User(i.user), Message(i)));
-        } else if(this.state.status) {
-            append = this.state.status;
+            component = _.map(this.state.tweets, (i) => {
+                return e('div', { className: "item" , key: i.id}, User(i.user), Message(i));
+            });
+        } else if(_.isEqual(this.state.status, statusEnum.PENDING)) {
+            component = Pending();
         } else {
-            append = Error();
+            component = Error();
         }
 
-        return e('div', {},  e('div', { className: "buttonContainer" }, Button(() => this.props.callBack(this.update), "Get Timeline")), e('div', { className: "data" }, append));
+        /* Used solely for purpose of testing, as mocking service endpoint is difficult */
+        if(this.props.test && this.props.testFunc) {
+            return e('div', {},
+                    e('div', { className: "buttonContainer" }, Button(() => this.pending(() => this.props.testFunc(this.update)), "Get Timeline")),
+                    e('div', { className: "data" }, component));
+        }
+
+        return e('div', {},
+                e('div', { className: "buttonContainer" }, Button(() => this.pending(() => Request(this.update)), "Get Timeline")),
+                e('div', { className: "data" }, component));
     }
 }
 
