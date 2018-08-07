@@ -172,11 +172,7 @@ body {
 
     			.twitterName {
     				@include boldFontSize(20px);
-    			}
-
-    			.twitterHandle {
-    				font: italic normal 15px $font;
-    				margin-bottom: 5px;
+    				@include shiftDown(5px);
     			}
     		}
 
