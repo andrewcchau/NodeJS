@@ -16,8 +16,8 @@ const Pending = () => {
     return e(Status, { message: 'Pending . . .' });
 }
 
-const Error = () => {
-    return e(Status, { className: 'errorMessage', message: 'Something went wrong. Please come back later!' });
+const Error = (errorText) => {
+    return e(Status, { className: 'errorMessage', message: errorText });
 }
 
 const Button = (buttonClass, onclick, buttonMessage) => {

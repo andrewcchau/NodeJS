@@ -48,13 +48,17 @@ class UserTweets extends React.Component {
     render() {
         let component;
         if(this.state.tweets) {
-            component = _.map(this.state.tweets, (i) => {
-                return e('div', { className: "item" , key: i.id}, UserVerbose(i.user.profileImageURL, i.user.name), Message(i));
-            });
+            if(_.isEmpty(this.state.tweets)) {
+                component = Error('No tweets are available, post a tweet!');
+            } else {
+                component = _.map(this.state.tweets, (i) => {
+                    return e('div', { className: "item" , key: i.id}, UserVerbose(i.user.profileImageURL, i.user.name), Message(i));
+                });
+            }
         } else if(_.isEqual(this.state.status, statusEnum.PENDING)) {
             component = Pending();
         } else {
-            component = Error();
+            component = Error('Something went wrong. Please come back later!');
         }
 
         /* Used solely for purpose of testing, as mocking service endpoint is difficult */

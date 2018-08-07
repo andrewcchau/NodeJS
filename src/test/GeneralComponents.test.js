@@ -23,7 +23,7 @@ describe('Pending Test', () => {
 /* Test Error Component */
 describe('Error Test', () => {
     it('Should create a div with an error message', () => {
-        const wrapper = shallow(Error());
+        const wrapper = shallow(Error('Something went wrong. Please come back later!'));
         expect(wrapper.find('div').length).toEqual(1);
         expect(wrapper.hasClass('errorMessage')).toEqual(true);
         expect(wrapper.text()).toEqual('Something went wrong. Please come back later!');

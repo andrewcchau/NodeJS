@@ -67,7 +67,7 @@ class TweetList extends React.Component {
         } else if(_.isEqual(this.state.status, statusEnum.PENDING)) {
             component = Pending();
         } else {
-            component = Error();
+            component = Error('Something went wrong. Please come back later!');
         }
 
         /* Used solely for purpose of testing, as mocking service endpoint is difficult */
