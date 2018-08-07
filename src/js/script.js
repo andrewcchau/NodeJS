@@ -2,6 +2,7 @@ import TweetList from './components/TweetList';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import UserTweets from './components/UserTweets';
+import {RequestUser} from './services/httpCall';
 
 const e = React.createElement;
 

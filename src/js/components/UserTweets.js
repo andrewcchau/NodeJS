@@ -2,7 +2,7 @@ import {UserVerbose} from '../components/User';
 import Message from '../components/Message';
 import React from 'react';
 import _ from 'lodash';
-import {RequestUser} from '../services/httpCall';
+import {RequestUserTimeline} from '../services/httpCall';
 import {Header, Pending, Error, Button} from './GeneralComponents';
 
 const BUTTON_MESSAGE = "Get User Timeline";
@@ -22,7 +22,7 @@ class UserTweets extends React.Component {
         }
         this.update = this.update.bind(this);
         this.pending = this.pending.bind(this);
-        RequestUser(this.update);
+        RequestUserTimeline(this.update);
     }
 
     pending(callback) {
@@ -60,16 +60,14 @@ class UserTweets extends React.Component {
         /* Used solely for purpose of testing, as mocking service endpoint is difficult */
         if(this.props.test && this.props.testFunc) {
             return e('div', {},
-                    e('div', { className: "buttonContainer" },
-                        Header('User Timeline'),
-                        Button(BUTTON_CLASS, () => this.pending(() => this.props.testFunc(this.update)), BUTTON_MESSAGE)),
+                    e('header', {}, Header('User Timeline')),
+                    e('div', { className: "buttonContainer" }, Button(BUTTON_CLASS, () => this.pending(() => this.props.testFunc(this.update)), BUTTON_MESSAGE)),
                     e('div', { className: "data" }, component));
         }
 
         return e('div', {},
-                e('div', { className: "buttonContainer" },
-                    Header('User Timeline'),
-                    Button(BUTTON_CLASS, () => this.pending(() => RequestUser(this.update)), BUTTON_MESSAGE)),
+                e('header', {}, Header('User Timeline')),
+                e('div', { className: "buttonContainer" }, Button(BUTTON_CLASS, () => this.pending(() => RequestUserTimeline(this.update)), BUTTON_MESSAGE)),
                 e('div', { className: "dataUser" }, component));
     }
 }

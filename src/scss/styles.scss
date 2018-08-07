@@ -17,10 +17,13 @@ $user-blue: #1da1f2;
 	font-size: $pix;
 }
 
-.timelineWrapper {
-    display: grid;
-    grid-template-columns: 55% auto;
+header {
+    h1 {
+        text-align: center;
+        @include shiftDown(15px);
+    }
 }
+
 
 body {
 	font-family: $font;
@@ -34,6 +37,11 @@ body {
 
 .insert {
     text-align: center;
+}
+
+.timelineWrapper {
+    display: grid;
+    grid-template-columns: 55% auto;
 }
 
 .buttonContainer {
