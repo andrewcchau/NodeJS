@@ -89,8 +89,8 @@ describe('User Test Valid Input', () => {
         const wrapper = shallow(User(jsonObj));
         expect(wrapper.childAt(0).props().src).toEqual(img);
         expect(wrapper.childAt(1).children().exists()).toEqual(true);
-        expect(wrapper.childAt(1).text()).toEqual(handle);
+        expect(wrapper.childAt(1).text()).toEqual(name);
         expect(wrapper.childAt(2).children().exists()).toEqual(true);
-        expect(wrapper.childAt(2).text()).toEqual(name);
+        expect(wrapper.childAt(2).text()).toEqual(handle);
     });
 });

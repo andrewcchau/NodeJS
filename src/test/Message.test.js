@@ -76,7 +76,7 @@ describe('MessageLink Test User, ID, and Message Input', () => {
 /* Test Message Component */
 const json = (createdAt, username, id, message) => {
     return '{"createdAt":"' + createdAt +
-            '", "user":{"name":"' + username + '"}' +
+            '", "user":{"twitterHandle":"' + username + '"}' +
             ', "id":"' + id +
             '", "twitterMessage":"' + message + '"}';
 }

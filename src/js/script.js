@@ -1,6 +1,7 @@
 import TweetList from './components/TweetList';
 import React from 'react';
 import ReactDOM from 'react-dom';
+import UserTweets from './components/UserTweets';
 
 const e = React.createElement;
 
@@ -15,12 +16,17 @@ const init = () => {
     /* Location to Render */
     let location = document.getElementsByClassName("interfaceInsert") && document.getElementsByClassName("interfaceInsert")[0];
 
-    /* Render timeline */
-    let timeline = e(TweetList);
+    /* Render home timeline */
+    let homeTimeline = e(TweetList);
+
+    /* Render user timeline */
+    let userTimeline = e(UserTweets);
+
+    let timelineWrapper = e('div', {className: "timelineWrapper"}, homeTimeline, userTimeline);
 
     /* Render Everything */
     ReactDOM.render(
-        [title, timeline],
+        [title, timelineWrapper],
         location
     );
 }

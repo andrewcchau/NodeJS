@@ -1,19 +1,19 @@
+import {UserVerbose} from '../components/User';
+import Message from '../components/Message';
 import React from 'react';
 import _ from 'lodash';
-import User from '../components/User';
-import Message from '../components/Message';
-import Request from '../services/httpCall';
+import {RequestUser} from '../services/httpCall';
 import {Header, Pending, Error, Button} from './GeneralComponents';
 
-const BUTTON_MESSAGE = "Get Home Timeline";
-const BUTTON_CLASS = "timelineButton";
+const BUTTON_MESSAGE = "Get User Timeline";
+const BUTTON_CLASS = "userButton";
 const e = React.createElement;
 const statusEnum = {
     PENDING: "Pending",
     ERROR: "Error"
 }
 
-class TweetList extends React.Component {
+class UserTweets extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -22,7 +22,7 @@ class TweetList extends React.Component {
         }
         this.update = this.update.bind(this);
         this.pending = this.pending.bind(this);
-        Request(this.update);
+        RequestUser(this.update);
     }
 
     pending(callback) {
@@ -49,7 +49,7 @@ class TweetList extends React.Component {
         let component;
         if(this.state.tweets) {
             component = _.map(this.state.tweets, (i) => {
-                return e('div', { className: "item" , key: i.id}, User(i.user), Message(i));
+                return e('div', { className: "item" , key: i.id}, UserVerbose(i.user.profileImageURL, i.user.name), Message(i));
             });
         } else if(_.isEqual(this.state.status, statusEnum.PENDING)) {
             component = Pending();
@@ -61,17 +61,17 @@ class TweetList extends React.Component {
         if(this.props.test && this.props.testFunc) {
             return e('div', {},
                     e('div', { className: "buttonContainer" },
-                        Header('Home Timeline'),
+                        Header('User Timeline'),
                         Button(BUTTON_CLASS, () => this.pending(() => this.props.testFunc(this.update)), BUTTON_MESSAGE)),
-                    e('div', { className: "dataHome" }, component));
+                    e('div', { className: "data" }, component));
         }
 
         return e('div', {},
                 e('div', { className: "buttonContainer" },
-                    Header('Home Timeline'),
-                    Button(BUTTON_CLASS, () => this.pending(() => Request(this.update)), BUTTON_MESSAGE)),
-                e('div', { className: "dataHome" }, component));
+                    Header('User Timeline'),
+                    Button(BUTTON_CLASS, () => this.pending(() => RequestUser(this.update)), BUTTON_MESSAGE)),
+                e('div', { className: "dataUser" }, component));
     }
 }
 
-export default TweetList;
+export default UserTweets;

@@ -3,7 +3,9 @@ $blue: #008CBA;
 $tan: #e9e9e9;
 $light-blue: #e8f5fd;
 $border-color: #C0C0C0;
-$item-width: 90%;
+$item-width: 95%;
+$user-white: #f5f8fa;
+$user-blue: #1da1f2;
 
 @mixin shiftDown($pix) {
 	position: relative;
@@ -13,6 +15,11 @@ $item-width: 90%;
 @mixin boldFontSize($pix) {
 	font-weight: bold;
 	font-size: $pix;
+}
+
+.timelineWrapper {
+    display: grid;
+    grid-template-columns: 55% auto;
 }
 
 body {
@@ -49,10 +56,26 @@ body {
 		background-color: $blue;
 		color: white;
 	}
+
+	.userButton {
+        background-color: white;
+        border-radius: 12px;
+        border: 1px solid;
+        font-size: 15px;
+        -webkit-transition-duration: 0.4s;
+        transition-duration: 0.4s;
+        justify-content: center;
+        padding: 5px 10px;
+    }
+
+    .userButton:hover {
+        background-color: $blue;
+        color: white;
+    }
 }
 
 
-.data {
+.dataHome {
 	text-align: center;
 	border: 1px solid black;
 	width: $item-width;
@@ -74,11 +97,11 @@ body {
 		.user {
 			margin-bottom: 5px;
 
-			.twitterHandle {
+			.twitterName {
 				@include boldFontSize(20px);
 			}
 
-			.twitterName {
+			.twitterHandle {
 				font: italic normal 15px $font;
 				margin-bottom: 5px;
 			}
@@ -112,6 +135,69 @@ body {
 }
 
 
-.data:empty {
+.dataHome:empty {
 	display: none;
+}
+
+.dataUser {
+    text-align: center;
+    	border: 1px solid black;
+    	width: $item-width;
+    	margin: auto;
+    	font-size: 25px;
+
+    	.errorMessage {
+    		color: red;
+    	}
+
+    	.item {
+    		background-color: $user-blue;
+    		align-items: center;
+    		border-bottom: 1px solid $border-color;
+    		display: grid;
+    		grid-template-columns: 25% auto;
+    		padding-top: 2px;
+
+    		.user {
+    			margin-bottom: 5px;
+
+    			.twitterName {
+    				@include boldFontSize(20px);
+    			}
+
+    			.twitterHandle {
+    				font: italic normal 15px $font;
+    				margin-bottom: 5px;
+    			}
+    		}
+
+    		.message {
+    			text-align: left;
+
+    			.date {
+    				font-style: italic;
+    				font-size: 13px;
+    				@include shiftDown(5px);
+    			}
+
+    			.messageText {
+    				font-size: 17px;
+    			}
+    		}
+
+    		img {
+    			border-radius: 50%;
+    			margin-top: 10px;
+    			width: 60px;
+    			height: 60px;
+    		}
+    	}
+
+    	.item:nth-child(even) {
+    		background-color: $user-white;
+    	}
+}
+
+.dataUser:empty {
+    display: none;
 }
