@@ -71,9 +71,8 @@ describe('Button Test Valid Inputs + Simulate Click', () => {
 describe('Header Test No Input', () => {
     it('Should create a header element with empty h1', () => {
         const wrapper = shallow(Header());
-        expect(wrapper.find('header').length).toEqual(1);
         expect(wrapper.find('h1').length).toEqual(1);
-        expect(wrapper.childAt(0).children().exists()).toEqual(false);
+        expect(wrapper.children().exists()).toEqual(false);
     });
 });
 
@@ -81,6 +80,6 @@ describe('Header Test Valid Input', () => {
     it('Should create a header element with filled in h1', () => {
         const headerMessage = "Test Header";
         const wrapper = shallow(Header(headerMessage));
-        expect(wrapper.childAt(0).text()).toEqual(headerMessage);
+        expect(wrapper.text()).toEqual(headerMessage);
     });
 });

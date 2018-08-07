@@ -32,9 +32,10 @@ describe('TweetList Test No Input', () => {
     it('Should have children components but nothing else', () => {
         const wrapper = shallow(e(TweetList));
         expect(wrapper.find('div').length).toEqual(3);
-        expect(wrapper.childAt(0).hasClass('buttonContainer')).toEqual(true);
-        expect(wrapper.childAt(1).hasClass('dataHome')).toEqual(true);
-        expect(wrapper.childAt(1).children().length).toEqual(1);
+        expect(wrapper.childAt(0).childAt(0).text()).toEqual("Home Timeline");
+        expect(wrapper.childAt(1).hasClass('buttonContainer')).toEqual(true);
+        expect(wrapper.childAt(2).hasClass('dataHome')).toEqual(true);
+        expect(wrapper.childAt(2).children().length).toEqual(1);
     });
 });
 
@@ -45,7 +46,7 @@ describe('TweetList Test Valid Inputs and Button Press', () => {
         wrapper.find('button').simulate('click');
         expect(wrapper.find('div').length).toEqual(9);
 
-        let itemElem = wrapper.childAt(1).childAt(0);
+        let itemElem = wrapper.childAt(2).childAt(0);
         expect(itemElem.children().length).toEqual(2);
         expect(itemElem.hasClass('item')).toEqual(true);
         expect(itemElem.childAt(0).hasClass('user')).toEqual(true);

@@ -3,8 +3,7 @@ import React from 'react';
 const e = React.createElement;
 
 const Header = (headerTitle) => {
-    return e('header', {},
-            e('h1', {}, headerTitle));
+    return e('h1', {}, headerTitle);
 }
 
 class Status extends React.Component {
