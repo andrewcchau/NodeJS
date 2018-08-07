@@ -65,13 +65,13 @@ class UserTweets extends React.Component {
         if(this.props.test && this.props.testFunc) {
             return e('div', {},
                     e('header', {}, Header('User Timeline')),
-                    e('div', { className: "buttonContainer" }, Button(BUTTON_CLASS, () => this.pending(() => this.props.testFunc(this.update)), BUTTON_MESSAGE)),
+                    e('div', { className: "buttonContainer2" }, Button(BUTTON_CLASS, () => this.pending(() => this.props.testFunc(this.update)), BUTTON_MESSAGE)),
                     e('div', { className: "data" }, component));
         }
 
         return e('div', {},
                 e('header', {}, Header('User Timeline')),
-                e('div', { className: "buttonContainer" }, Button(BUTTON_CLASS, () => this.pending(() => RequestUserTimeline(this.update)), BUTTON_MESSAGE)),
+                e('div', { className: "buttonContainer2" }, Button(BUTTON_CLASS, () => this.pending(() => RequestUserTimeline(this.update)), BUTTON_MESSAGE)),
                 e('div', { className: "dataUser" }, component));
     }
 }

@@ -74,13 +74,13 @@ class TweetList extends React.Component {
         if(this.props.test && this.props.testFunc) {
             return e('div', {},
                     e('header', {}, Header('Home Timeline')),
-                    e('div', { className: "buttonContainer" }, Button(BUTTON_CLASS, () => this.pending(() => this.props.testFunc(this.update)), BUTTON_MESSAGE)),
+                    e('div', { className: "buttonContainer1" }, Button(BUTTON_CLASS, () => this.pending(() => this.props.testFunc(this.update)), BUTTON_MESSAGE)),
                     e('div', { className: "dataHome" }, component));
         }
 
         return e('div', {},
                 e('header', {}, Header('Home Timeline')),
-                e('div', { className: "buttonContainer" },
+                e('div', { className: "buttonContainer1" },
                     Button(BUTTON_CLASS, () => {
                         RequestUser(this.excludeUser);
                         this.pending(() => Request(this.update));

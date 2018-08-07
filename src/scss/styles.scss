@@ -43,9 +43,9 @@ body {
     display: grid;
     grid-template-columns: 55% auto;
 
-    .buttonContainer {
-        text-align: right;
-        margin-right: (100% - $item-width) / 2;
+    .buttonContainer1 {
+        text-align: left;
+        margin-left: (100% - $item-width) / 2;
         margin-bottom: 10px;
 
         .timelineButton {
@@ -63,6 +63,12 @@ body {
             background-color: $blue;
             color: white;
         }
+    }
+
+    .buttonContainer2 {
+        text-align: right;
+        margin-right: (100% - $item-width) / 2;
+        margin-bottom: 10px;
 
         .userButton {
             background-color: white;
