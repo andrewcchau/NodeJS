@@ -25,14 +25,6 @@ describe('MessageDate Test Normal Input', () => {
     });
 });
 
-/* ON HOLD - ERROR DATA*/
-//describe('MessageDate Test Incorrect Input', () => {
-//    it('Should fail the Date constructor', () => {
-//        let error = new RangeError('Invalid time value')
-//        expect(MessageDate('False Date')).toThrow(error);
-//    });
-//});
-
 
 /* Test MessageLink Component */
 describe('MessageLink Test No Input', () => {
@@ -74,9 +66,9 @@ describe('MessageLink Test User, ID, and Message Input', () => {
 
 
 /* Test Message Component */
-const json = (createdAt, username, id, message) => {
+const json = (createdAt, handle, id, message) => {
     return '{"createdAt":"' + createdAt +
-            '", "user":{"twitterHandle":"' + username + '"}' +
+            '", "user":{"twitterHandle":"' + handle + '"}' +
             ', "id":"' + id +
             '", "twitterMessage":"' + message + '"}';
 }

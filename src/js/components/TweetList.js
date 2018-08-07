@@ -83,7 +83,8 @@ class TweetList extends React.Component {
                 e('div', { className: "buttonContainer" },
                     Button(BUTTON_CLASS, () => {
                         RequestUser(this.excludeUser);
-                        this.pending(() => Request(this.update));},
+                        this.pending(() => Request(this.update));
+                    },
                     BUTTON_MESSAGE)),
                 e('div', { className: "dataHome" }, component));
     }

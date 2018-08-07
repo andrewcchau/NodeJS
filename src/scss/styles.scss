@@ -42,167 +42,168 @@ body {
 .timelineWrapper {
     display: grid;
     grid-template-columns: 55% auto;
-}
 
-.buttonContainer {
-	text-align: right;
-	margin-right: (100% - $item-width) / 2;
-	margin-bottom: 10px;
+    .buttonContainer {
+        text-align: right;
+        margin-right: (100% - $item-width) / 2;
+        margin-bottom: 10px;
 
-	.timelineButton {
-		background-color: white;
-		border-radius: 12px;
-		border: 1px solid;
-		font-size: 15px;
-		-webkit-transition-duration: 0.4s;
-		transition-duration: 0.4s;
-		justify-content: center;
-		padding: 5px 10px;
-	}
+        .timelineButton {
+            background-color: white;
+            border-radius: 12px;
+            border: 1px solid;
+            font-size: 15px;
+            -webkit-transition-duration: 0.4s;
+            transition-duration: 0.4s;
+            justify-content: center;
+            padding: 5px 10px;
+        }
 
-	.timelineButton:hover {
-		background-color: $blue;
-		color: white;
-	}
+        .timelineButton:hover {
+            background-color: $blue;
+            color: white;
+        }
 
-	.userButton {
-        background-color: white;
-        border-radius: 12px;
-        border: 1px solid;
-        font-size: 15px;
-        -webkit-transition-duration: 0.4s;
-        transition-duration: 0.4s;
-        justify-content: center;
-        padding: 5px 10px;
+        .userButton {
+            background-color: white;
+            border-radius: 12px;
+            border: 1px solid;
+            font-size: 15px;
+            -webkit-transition-duration: 0.4s;
+            transition-duration: 0.4s;
+            justify-content: center;
+            padding: 5px 10px;
+        }
+
+        .userButton:hover {
+            background-color: $blue;
+            color: white;
+        }
     }
 
-    .userButton:hover {
-        background-color: $blue;
-        color: white;
+
+    .dataHome {
+        text-align: center;
+        border: 1px solid black;
+        width: $item-width;
+        margin: auto;
+        font-size: 25px;
+
+        .errorMessage {
+            color: red;
+        }
+
+        .item {
+            background-color: $light-blue;
+            align-items: center;
+            border-bottom: 1px solid $border-color;
+            display: grid;
+            grid-template-columns: 15% auto;
+            padding-top: 2px;
+
+            .user {
+                margin-bottom: 5px;
+
+                .twitterName {
+                    @include boldFontSize(20px);
+                }
+
+                .twitterHandle {
+                    font: italic normal 15px $font;
+                    margin-bottom: 5px;
+                }
+            }
+
+            .message {
+                text-align: left;
+
+                .date {
+                    font-style: italic;
+                    font-size: 13px;
+                    @include shiftDown(5px);
+                }
+
+                .messageText {
+                    font-size: 17px;
+                }
+            }
+
+            img {
+                border-radius: 50%;
+                margin-top: 10px;
+                width: 60px;
+                height: 60px;
+            }
+        }
+
+        .item:nth-child(even) {
+            background-color: $tan;
+        }
     }
-}
 
 
-.dataHome {
-	text-align: center;
-	border: 1px solid black;
-	width: $item-width;
-	margin: auto;
-	font-size: 25px;
+    .dataHome:empty {
+        display: none;
+    }
 
-	.errorMessage {
-		color: red;
-	}
+    .dataUser {
+        text-align: center;
+            border: 1px solid black;
+            width: $item-width;
+            margin: auto;
+            font-size: 25px;
 
-	.item {
-		background-color: $light-blue;
-		align-items: center;
-		border-bottom: 1px solid $border-color;
-		display: grid;
-		grid-template-columns: 15% auto;
-		padding-top: 2px;
+            .errorMessage {
+                color: red;
+            }
 
-		.user {
-			margin-bottom: 5px;
+            .item {
+                background-color: $user-blue;
+                align-items: center;
+                border-bottom: 1px solid $border-color;
+                display: grid;
+                grid-template-columns: 25% auto;
+                padding-top: 15px;
+                padding-bottom: 16px;
 
-			.twitterName {
-				@include boldFontSize(20px);
-			}
+                .user {
+                    margin-bottom: 5px;
 
-			.twitterHandle {
-				font: italic normal 15px $font;
-				margin-bottom: 5px;
-			}
-		}
+                    .twitterName {
+                        @include boldFontSize(20px);
+                        @include shiftDown(5px);
+                    }
+                }
 
-		.message {
-			text-align: left;
+                .message {
+                    text-align: left;
 
-			.date {
-				font-style: italic;
-				font-size: 13px;
-				@include shiftDown(5px);
-			}
+                    .date {
+                        font-style: italic;
+                        font-size: 13px;
+                        @include shiftDown(5px);
+                    }
 
-			.messageText {
-				font-size: 17px;
-			}
-		}
+                    .messageText {
+                        font-size: 17px;
+                    }
+                }
 
-		img {
-			border-radius: 50%;
-			margin-top: 10px;
-			width: 60px;
-			height: 60px;
-		}
-	}
+                img {
+                    border-radius: 50%;
+                    margin-top: 10px;
+                    width: 60px;
+                    height: 60px;
+                }
+            }
 
-	.item:nth-child(even) {
-		background-color: $tan;
-	}
-}
+            .item:nth-child(even) {
+                background-color: $user-white;
+            }
+    }
 
+    .dataUser:empty {
+        display: none;
+    }
 
-.dataHome:empty {
-	display: none;
-}
-
-.dataUser {
-    text-align: center;
-    	border: 1px solid black;
-    	width: $item-width;
-    	margin: auto;
-    	font-size: 25px;
-
-    	.errorMessage {
-    		color: red;
-    	}
-
-    	.item {
-    		background-color: $user-blue;
-    		align-items: center;
-    		border-bottom: 1px solid $border-color;
-    		display: grid;
-    		grid-template-columns: 25% auto;
-    		padding-top: 15px;
-    		padding-bottom: 16px;
-
-    		.user {
-    			margin-bottom: 5px;
-
-    			.twitterName {
-    				@include boldFontSize(20px);
-    				@include shiftDown(5px);
-    			}
-    		}
-
-    		.message {
-    			text-align: left;
-
-    			.date {
-    				font-style: italic;
-    				font-size: 13px;
-    				@include shiftDown(5px);
-    			}
-
-    			.messageText {
-    				font-size: 17px;
-    			}
-    		}
-
-    		img {
-    			border-radius: 50%;
-    			margin-top: 10px;
-    			width: 60px;
-    			height: 60px;
-    		}
-    	}
-
-    	.item:nth-child(even) {
-    		background-color: $user-white;
-    	}
-}
-
-.dataUser:empty {
-    display: none;
 }
