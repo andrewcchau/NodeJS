@@ -48,7 +48,7 @@ body {
         margin-left: (100% - $item-width) / 2;
         margin-bottom: 10px;
 
-        .timelineButton {
+        .homeTimelineButton {
             background-color: white;
             border-radius: 12px;
             border: 1px solid;
@@ -59,7 +59,7 @@ body {
             padding: 5px 10px;
         }
 
-        .timelineButton:hover {
+        .homeTimelineButton:hover {
             background-color: $blue;
             color: white;
         }
@@ -70,7 +70,7 @@ body {
         margin-right: (100% - $item-width) / 2;
         margin-bottom: 10px;
 
-        .userButton {
+        .userTimelineButton {
             background-color: white;
             border-radius: 12px;
             border: 1px solid;
@@ -81,7 +81,7 @@ body {
             padding: 5px 10px;
         }
 
-        .userButton:hover {
+        .userTimelineButton:hover {
             background-color: $blue;
             color: white;
         }

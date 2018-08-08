@@ -1,5 +1,8 @@
 import {shallow} from 'enzyme';
 import {Image, Handle, Name, User} from '../js/components/User';
+import React from 'react';
+
+const e = React.createElement;
 
 let img = "https://http.cat/404",
     handle = "TestHandle",

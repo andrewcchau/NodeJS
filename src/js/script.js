@@ -1,7 +1,6 @@
-import HomeTimeline from './components/HomeTimeline';
+import Timeline from './components/Timeline';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import UserTweets from './components/UserTweets';
 import {RequestUser} from './services/httpCall';
 
 const e = React.createElement;
@@ -18,10 +17,10 @@ const init = () => {
     let location = document.getElementsByClassName("interfaceInsert") && document.getElementsByClassName("interfaceInsert")[0];
 
     /* Render home timeline */
-    let homeTimeline = e(HomeTimeline);
+    let homeTimeline = e(Timeline);
 
     /* Render user timeline */
-    let userTimeline = e(UserTweets);
+    let userTimeline = e(Timeline, {displayUserTimeline: true});
 
     let timelineWrapper = e('div', {className: "timelineWrapper"}, homeTimeline, userTimeline);
 
