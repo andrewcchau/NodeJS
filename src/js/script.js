@@ -9,6 +9,7 @@ const init = () => {
     let location = document.getElementsByClassName("interfaceInsert") && document.getElementsByClassName("interfaceInsert")[0];
 
     let uiContainer = e(UI, {
+                        title: "Lab for Andrew",
                         homeHeader: 'Home Timeline',
                         homeButtonContainerClass: 'homeTLButtonContainer',
                         homeButtonClass: 'homeTimelineButton',
