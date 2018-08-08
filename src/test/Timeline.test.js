@@ -1,6 +1,7 @@
-import {shallow} from 'enzyme';
+import {shallow, mount} from 'enzyme';
 import React from 'react';
 import Timeline from '../js/components/Timeline';
+import Tweets from '../js/components/Tweets';
 
 const e = React.createElement;
 
@@ -31,7 +32,11 @@ let jsonObj = JSON.parse(json(message, handle, name, img, date, id));
 
 describe('Home Timeline Test No Input', () => {
     it('Should have children components but nothing else', () => {
-        const wrapper = shallow(e(Timeline));
+        const wrapper = shallow(e(Timeline, {header: 'Home Timeline',
+                                             buttonContainerClass: 'buttonContainer1',
+                                             buttonClass: 'homeTimelineButton',
+                                             buttonMessage: 'Get Home Timeline',
+                                             dataClass: 'dataHome'}));
         expect(wrapper.find('div').length).toEqual(3);
         expect(wrapper.childAt(0).childAt(0).text()).toEqual("Home Timeline");
         expect(wrapper.childAt(1).hasClass('buttonContainer1')).toEqual(true);
@@ -40,27 +45,28 @@ describe('Home Timeline Test No Input', () => {
     });
 });
 
-describe('Home Timeline Test Valid Inputs and Button Press', () => {
+describe('Home Timeline Button Press Test', () => {
     it('Should have proper children components after button press', () => {
-        const wrapper = shallow(e(Timeline, {test: true, testFunc: callBackFunc}));
-        expect(wrapper.find('div').length).toEqual(3);
+        const wrapper = mount(e(Timeline, {requestFunc: callBackFunc,
+                                                header: 'Home Timeline',
+                                                buttonContainerClass: 'buttonContainer1',
+                                                buttonClass: 'homeTimelineButton',
+                                                buttonMessage: 'Get Home Timeline',
+                                                dataClass: 'dataHome'}));
+        expect(wrapper.find('div').length).toEqual(4);
         wrapper.find('button').simulate('click');
-        expect(wrapper.find('div').length).toEqual(6);
-
-        let itemElem = wrapper.childAt(2).childAt(0);
-        expect(itemElem.children().length).toEqual(2);
-        expect(itemElem.hasClass('item')).toEqual(true);
-        expect(itemElem.childAt(1).hasClass('message')).toEqual(true);
-
-        let messageElem = itemElem.childAt(1);
-        expect(messageElem.childAt(0).text()).toEqual('Dec 17');
-        expect(messageElem.childAt(1).text()).toEqual(message);
+        expect(wrapper.find('div').length).toEqual(9);
     });
 });
 
 describe('User Timeline Test No Input', () => {
     it('Should have children components but nothing else', () => {
-        const wrapper = shallow(e(Timeline, {displayUserTimeline: true}));
+        const wrapper = shallow(e(Timeline, { displayUserTimeline: true,
+                                                header: 'User Timeline',
+                                                buttonContainerClass: 'buttonContainer2',
+                                                buttonClass: 'userTimelineButton',
+                                                buttonMessage: 'Get User Timeline',
+                                                dataClass: 'dataUser'}));
         expect(wrapper.find('div').length).toEqual(3);
         expect(wrapper.childAt(0).childAt(0).text()).toEqual("User Timeline");
         expect(wrapper.childAt(1).hasClass('buttonContainer2')).toEqual(true);
@@ -69,20 +75,17 @@ describe('User Timeline Test No Input', () => {
     });
 });
 
-describe('User Timeline Test Valid Inputs and Button Press', () => {
+describe('User Timeline Button Press Test', () => {
     it('Should have proper children components after button press', () => {
-        const wrapper = shallow(e(Timeline, {displayUserTimeline: true, test: true, testFunc: callBackFunc}));
-        expect(wrapper.find('div').length).toEqual(3);
+        const wrapper = mount(e(Timeline, { displayUserTimeline: true,
+                                                requestFunc: callBackFunc,
+                                                header: 'User Timeline',
+                                                buttonContainerClass: 'buttonContainer2',
+                                                buttonClass: 'userTimelineButton',
+                                                buttonMessage: 'Get User Timeline',
+                                                dataClass: 'dataUser'}));
+        expect(wrapper.find('div').length).toEqual(4);
         wrapper.find('button').simulate('click');
-        expect(wrapper.find('div').length).toEqual(6);
-
-        let itemElem = wrapper.childAt(2).childAt(0);
-        expect(itemElem.children().length).toEqual(2);
-        expect(itemElem.hasClass('item')).toEqual(true);
-        expect(itemElem.childAt(1).hasClass('message')).toEqual(true);
-
-        let messageElem = itemElem.childAt(1);
-        expect(messageElem.childAt(0).text()).toEqual('Dec 17');
-        expect(messageElem.childAt(1).text()).toEqual(message);
+        expect(wrapper.find('div').length).toEqual(8);
     });
 });

@@ -29,7 +29,7 @@ const init = () => {
     /* Render user timeline */
     let userTimeline = e(Timeline, {
                             displayUserTimeline: true,
-                            header: 'Home Timeline',
+                            header: 'User Timeline',
                             buttonContainerClass: 'buttonContainer2',
                             buttonClass: 'userTimelineButton',
                             buttonMessage: 'Get User Timeline',
