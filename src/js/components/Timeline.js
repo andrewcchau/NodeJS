@@ -28,17 +28,17 @@ class Timeline extends React.Component {
         }
     }
 
-    pending(callback) {
+    pending() {
         this.setState({
             status: statusEnum.PENDING
         });
-        callback();
     }
 
     update(jsonList) {
         if(jsonList) {
             this.setState({
-                tweets: jsonList
+                tweets: jsonList,
+                status: statusEnum.PENDING
             });
         } else {
             this.setState({
@@ -54,7 +54,8 @@ class Timeline extends React.Component {
             buttonClass,
             buttonMessage,
             dataClass,
-            component;
+            component,
+            requestFunc;
 
         /* Set Necessary Variables */
         if(this.props.displayUserTimeline) {
@@ -63,19 +64,19 @@ class Timeline extends React.Component {
             buttonClass = 'userTimelineButton';
             buttonMessage = 'Get User Timeline';
             dataClass = 'dataUser';
+            requestFunc = RequestUserTimeline;
         } else {
             header = 'Home Timeline';
             buttonContainerClass = 'buttonContainer1';
             buttonClass = 'homeTimelineButton';
             buttonMessage = 'Get Home Timeline';
             dataClass = 'dataHome';
+            requestFunc = Request
         }
 
         /* Set Component to Append */
-        if(this.state.tweets) {
-            if(this.props.displayUserTimeline && _.isEmpty(this.state.tweets)) {
-                component = Error('No tweets are available, post a tweet!');
-            } else if (this.props.displayUserTimeline) {
+        if(this.state.tweets && !_.isEmpty(this.state.tweets)) {
+            if (this.props.displayUserTimeline) {
                 component = _.map(this.state.tweets, (i) => {
                     return e('div', { className: "item" , key: i.id}, e(User, {user: i.user, excludeHandle: true}), Message(i));
                 });
@@ -86,6 +87,8 @@ class Timeline extends React.Component {
             }
         } else if(_.isEqual(this.state.status, statusEnum.PENDING)) {
             component = Pending();
+        } else if(this.props.displayUserTimeline && this.state.tweets && _.isEmpty(this.state.tweets)) {
+            component = Error('No tweets are available, post a tweet!');
         } else {
             component = Error('Something went wrong. Please come back later!');
         }
@@ -103,11 +106,8 @@ class Timeline extends React.Component {
                 e('header', {}, Header(header)),
                 e('div', { className: buttonContainerClass },
                     Button(buttonClass, () => {
-                        if(this.props.displayUserTimeline) {
-                            this.pending(() => RequestUserTimeline(this.update));
-                        } else {
-                            this.pending(() => Request(this.update));
-                        }
+                        this.pending();
+                        requestFunc(this.update);
                     },
                     buttonMessage)),
                 e('div', { className: dataClass }, component));
