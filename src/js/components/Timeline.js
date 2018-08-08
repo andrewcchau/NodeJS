@@ -51,11 +51,11 @@ class Timeline extends React.Component {
         if(this.state.tweets && !_.isEmpty(this.state.tweets)) {
             if (this.props.displayUserTimeline) {
                 component = _.map(this.state.tweets, (i) => {
-                    return e(Tweets, { json: i, excludeHandle: true });
+                    return e(Tweets, { json: i, excludeHandle: true, key: i.id });
                 });
             } else {
                 component = _.map(this.state.tweets, (i) => {
-                    return e(Tweets, { json: i });
+                    return e(Tweets, { json: i, key: i.id });
                 });
             }
         } else if(_.isEqual(this.state.status, statusEnum.PENDING)) {

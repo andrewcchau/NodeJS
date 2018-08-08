@@ -7,7 +7,7 @@ const e = React.createElement;
 
 class Tweets extends React.Component {
     render() {
-        return e('div', { className: "item", key: this.props.json.id },
+        return e('div', { className: "item" },
                 e(User, {user: this.props.json.user , excludeHandle: this.props.excludeHandle}),
                 Message(this.props.json));
     }
