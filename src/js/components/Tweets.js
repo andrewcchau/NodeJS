@@ -5,7 +5,7 @@ import Message from './Message';
 
 const e = React.createElement;
 
-class Tweet extends React.Component {
+class Tweets extends React.Component {
     render() {
         if(this.props.tweets) {
             return _.map(this.props.tweets, (jsonObj) =>
@@ -19,4 +19,4 @@ class Tweet extends React.Component {
     }
 }
 
-export default Tweet;
+export default Tweets;

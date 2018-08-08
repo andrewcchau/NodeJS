@@ -2,7 +2,7 @@ import React from 'react';
 import _ from 'lodash';
 import {Request, RequestUserTimeline} from '../services/httpCall';
 import {Header, Pending, Error, Button} from './GeneralComponents';
-import Tweet from './Tweet';
+import Tweets from './Tweets';
 
 const e = React.createElement;
 const statusEnum = {
@@ -50,9 +50,9 @@ class Timeline extends React.Component {
         /* Set Component to Append */
         if(this.state.tweets && !_.isEmpty(this.state.tweets)) {
             if(this.props.displayUserTimeline) {
-                component = e(Tweet, { tweets: this.state.tweets, excludeHandle: true });
+                component = e(Tweets, { tweets: this.state.tweets, excludeHandle: true });
             } else {
-                component = e(Tweet, { tweets: this.state.tweets });
+                component = e(Tweets, { tweets: this.state.tweets });
             }
         } else if(_.isEqual(this.state.status, statusEnum.PENDING)) {
             component = Pending();
