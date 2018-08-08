@@ -19,7 +19,7 @@ const init = () => {
     /* Render home timeline */
     let homeTimeline = e(Timeline, {
                             header: 'Home Timeline',
-                            buttonContainerClass: 'buttonContainer1',
+                            buttonContainerClass: 'homeTLButtonContainer',
                             buttonClass: 'homeTimelineButton',
                             buttonMessage: 'Get Home Timeline',
                             dataClass: 'dataHome',
@@ -30,7 +30,7 @@ const init = () => {
     let userTimeline = e(Timeline, {
                             displayUserTimeline: true,
                             header: 'User Timeline',
-                            buttonContainerClass: 'buttonContainer2',
+                            buttonContainerClass: 'userTLButtonContainer',
                             buttonClass: 'userTimelineButton',
                             buttonMessage: 'Get User Timeline',
                             dataClass: 'dataUser',

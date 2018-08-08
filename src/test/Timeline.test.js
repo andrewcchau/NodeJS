@@ -1,7 +1,7 @@
 import {shallow, mount} from 'enzyme';
 import React from 'react';
 import Timeline from '../js/components/Timeline';
-import Tweets from '../js/components/Tweets';
+import Tweet from '../js/components/Tweet';
 
 const e = React.createElement;
 

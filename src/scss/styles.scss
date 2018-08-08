@@ -24,7 +24,6 @@ header {
     }
 }
 
-
 body {
 	font-family: $font;
 }
@@ -43,52 +42,36 @@ body {
     display: grid;
     grid-template-columns: 55% auto;
 
-    .buttonContainer1 {
+    .homeTLButtonContainer {
         text-align: left;
         margin-left: (100% - $item-width) / 2;
         margin-bottom: 10px;
-
-        .homeTimelineButton {
-            background-color: white;
-            border-radius: 12px;
-            border: 1px solid;
-            font-size: 15px;
-            -webkit-transition-duration: 0.4s;
-            transition-duration: 0.4s;
-            justify-content: center;
-            padding: 5px 10px;
-        }
-
-        .homeTimelineButton:hover {
-            background-color: $blue;
-            color: white;
-        }
     }
 
-    .buttonContainer2 {
+    .userTLButtonContainer {
         text-align: right;
         margin-right: (100% - $item-width) / 2;
         margin-bottom: 10px;
+    }
 
-        .userTimelineButton {
-            background-color: white;
-            border-radius: 12px;
-            border: 1px solid;
-            font-size: 15px;
-            -webkit-transition-duration: 0.4s;
-            transition-duration: 0.4s;
-            justify-content: center;
-            padding: 5px 10px;
-        }
+    .userTimelineButton, .homeTimelineButton {
+        background-color: white;
+        border-radius: 12px;
+        border: 1px solid;
+        font-size: 15px;
+        -webkit-transition-duration: 0.4s;
+        transition-duration: 0.4s;
+        justify-content: center;
+        padding: 5px 10px;
+    }
 
-        .userTimelineButton:hover {
-            background-color: $blue;
-            color: white;
-        }
+    .userTimelineButton:hover, .homeTimelineButton:hover {
+        background-color: $blue;
+        color: white;
     }
 
 
-    .dataHome {
+    .dataHome, .dataUser {
         text-align: center;
         border: 1px solid black;
         width: $item-width;
@@ -147,69 +130,27 @@ body {
         }
     }
 
-
-    .dataHome:empty {
+    .dataHome:empty, .dataUser:empty {
         display: none;
     }
 
     .dataUser {
-        text-align: center;
-            border: 1px solid black;
-            width: $item-width;
-            margin: auto;
-            font-size: 25px;
+        .item {
+            background-color: $user-blue;
+            grid-template-columns: 25% auto;
+            padding-top: 11px;
+            padding-bottom: 15px;
 
-            .errorMessage {
-                color: red;
-            }
-
-            .item {
-                background-color: $user-blue;
-                align-items: center;
-                border-bottom: 1px solid $border-color;
-                display: grid;
-                grid-template-columns: 25% auto;
-                padding-top: 11px;
-                padding-bottom: 15px;
-
-                .user {
-                    margin-bottom: 5px;
-
-                    .twitterName {
-                        @include boldFontSize(20px);
-                        @include shiftDown(5px);
-                    }
-                }
-
-                .message {
-                    text-align: left;
-
-                    .date {
-                        font-style: italic;
-                        font-size: 13px;
-                        @include shiftDown(5px);
-                    }
-
-                    .messageText {
-                        font-size: 17px;
-                    }
-                }
-
-                img {
-                    border-radius: 50%;
-                    margin-top: 10px;
-                    width: 60px;
-                    height: 60px;
+            .user {
+                .twitterName {
+                    @include boldFontSize(20px);
+                    @include shiftDown(5px);
                 }
             }
+        }
 
-            .item:nth-child(even) {
-                background-color: $user-white;
-            }
+        .item:nth-child(even) {
+            background-color: $user-white;
+        }
     }
-
-    .dataUser:empty {
-        display: none;
-    }
-
 }
