@@ -1,6 +1,5 @@
 import React from 'react';
 import _ from 'lodash';
-import {Request, RequestUserTimeline} from '../services/httpCall';
 import {Header, Pending, Error, Button} from './GeneralComponents';
 import Tweets from './Tweets';
 

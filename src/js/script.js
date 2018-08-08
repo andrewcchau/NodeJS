@@ -1,47 +1,29 @@
-import Timeline from './components/Timeline';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {Request, RequestUserTimeline} from './services/httpCall';
+import UI from './components/UI';
 
 const e = React.createElement;
 
-const Title = (title) => {
-    return e('div', { className: "title" }, title);
-}
-
 const init = () => {
-    /* Render Title */
-    let title = Title("Lab for Andrew");
-
     /* Location to Render */
     let location = document.getElementsByClassName("interfaceInsert") && document.getElementsByClassName("interfaceInsert")[0];
 
-    /* Render home timeline */
-    let homeTimeline = e(Timeline, {
-                            header: 'Home Timeline',
-                            buttonContainerClass: 'homeTLButtonContainer',
-                            buttonClass: 'homeTimelineButton',
-                            buttonMessage: 'Get Home Timeline',
-                            dataClass: 'dataHome',
-                            requestFunc: Request
-                        });
-
-    /* Render user timeline */
-    let userTimeline = e(Timeline, {
-                            displayUserTimeline: true,
-                            header: 'User Timeline',
-                            buttonContainerClass: 'userTLButtonContainer',
-                            buttonClass: 'userTimelineButton',
-                            buttonMessage: 'Get User Timeline',
-                            dataClass: 'dataUser',
-                            requestFunc: RequestUserTimeline
-                        });
-
-    let timelineWrapper = e('div', {className: "timelineWrapper"}, homeTimeline, userTimeline);
+    let uiContainer = e(UI, {
+                        homeHeader: 'Home Timeline',
+                        homeButtonContainerClass: 'homeTLButtonContainer',
+                        homeButtonClass: 'homeTimelineButton',
+                        homeButtonMessage: 'Get Home Timeline',
+                        homeDataClass: 'dataHome',
+                        userHeader: 'User Timeline',
+                        userButtonContainerClass: 'userTLButtonContainer',
+                        userButtonClass: 'userTimelineButton',
+                        userButtonMessage: 'Get User Timeline',
+                        userDataClass: 'dataUser',
+                    });
 
     /* Render Everything */
     ReactDOM.render(
-        [title, timelineWrapper],
+        uiContainer,
         location
     );
 }

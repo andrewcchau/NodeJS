@@ -3,7 +3,7 @@ $blue: #008CBA;
 $tan: #e9e9e9;
 $light-blue: #e8f5fd;
 $border-color: #C0C0C0;
-$item-width: 95%;
+$item-width: 98%;
 $user-white: #f5f8fa;
 $user-blue: #1da1f2;
 
@@ -20,7 +20,7 @@ $user-blue: #1da1f2;
 header {
     h1 {
         text-align: center;
-        @include shiftDown(15px);
+        @include shiftDown(8px);
     }
 }
 
@@ -69,7 +69,6 @@ body {
         background-color: $blue;
         color: white;
     }
-
 
     .dataHome, .dataUser {
         text-align: center;
@@ -130,11 +129,17 @@ body {
         }
     }
 
+    .dataHome {
+        margin-right: 5px;
+    }
+
     .dataHome:empty, .dataUser:empty {
         display: none;
     }
 
     .dataUser {
+        margin-left: 5px;
+
         .item {
             background-color: $user-blue;
             grid-template-columns: 25% auto;
