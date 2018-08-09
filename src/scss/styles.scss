@@ -20,7 +20,6 @@ $user-blue: #1da1f2;
 header {
     h1 {
         text-align: center;
-        @include shiftDown(8px);
     }
 }
 
