@@ -19,7 +19,6 @@ class Timeline extends React.Component {
         }
         this.update = this.update.bind(this);
         this.pending = this.pending.bind(this);
-        this.updateFilter = this.updateFilter.bind(this);
         if(this.props.requestFunc){
             this.props.requestFunc(this.update);
         }
@@ -31,23 +30,9 @@ class Timeline extends React.Component {
         });
     }
 
-    update(jsonList) {
+    update(jsonList, filtering) {
         if(jsonList) {
-            this.setState({
-                tweets: jsonList,
-                status: statusEnum.PENDING
-            });
-        } else {
-            this.setState({
-                tweets: null,
-                status: statusEnum.ERROR
-            });
-        }
-    }
-
-    updateFilter(jsonList) {
-        if(jsonList) {
-            if(_.isEmpty(jsonList)) {
+            if(filtering && _.isEmpty(jsonList)) {
                 this.setState({
                     tweets: null,
                     status: statusEnum.NO_MATCH
@@ -95,13 +80,13 @@ class Timeline extends React.Component {
                     }, this.props.buttonMessage),
                     (this.props.displayUserTimeline ? null : Button(this.props.filterButtonClass, () => {
                         this.pending();
-                        this.props.filterFunc(this.updateFilter);
+                        this.props.filterFunc(this.update);
                     }, this.props.filterButtonMessage)),
                     (this.props.displayUserTimeline ? null : TextBox("textInput", 30, "Enter Keyword", (event) => {
                         ButtonEnable("textInput", this.props.filterButtonClass);
                         if(event.keyCode == 13) {
                             this.pending();
-                            this.props.filterFunc(this.updateFilter);
+                            this.props.filterFunc(this.update);
                         }
                     }))
                     ),
