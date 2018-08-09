@@ -7,11 +7,6 @@ $item-width: 95%;
 $user-white: #f5f8fa;
 $user-blue: #1da1f2;
 
-@mixin shiftDown($pix) {
-	position: relative;
-	top: $pix;
-}
-
 @mixin boldFontSize($pix) {
 	font-weight: bold;
 	font-size: $pix;
@@ -20,6 +15,7 @@ $user-blue: #1da1f2;
 header {
     h1 {
         text-align: center;
+        margin-top: 5px;
     }
 }
 
@@ -29,8 +25,8 @@ body {
 
 .title {
 	text-align: center;
+	margin-top: 20px;
 	@include boldFontSize(40px);
-	@include shiftDown(10px);
 }
 
 .insert {
@@ -107,7 +103,8 @@ body {
                 .date {
                     font-style: italic;
                     font-size: 13px;
-                    @include shiftDown(5px);
+                    margin-top: 5px;
+                    height: 10px;
                 }
 
                 .messageText {
@@ -147,9 +144,13 @@ body {
 
             .user {
                 .twitterName {
+                    margin-top: 5px;
                     @include boldFontSize(20px);
-                    @include shiftDown(5px);
                 }
+            }
+
+            img {
+                margin-top: 4px;
             }
         }
 
