@@ -1,5 +1,8 @@
 import {shallow} from 'enzyme';
 import {Image, Handle, Name, User} from '../js/components/User';
+import React from 'react';
+
+const e = React.createElement;
 
 let img = "https://http.cat/404",
     handle = "TestHandle",
@@ -70,7 +73,7 @@ const json = (img, handle, name) => {
 
 describe('User Test No Input', () => {
     it('Should create a nested div and img with no grandchildren', () => {
-        const wrapper = shallow(User());
+        const wrapper = shallow(e(User));
         expect(wrapper.children().exists()).toEqual(true);
         expect(wrapper.find('div').exists()).toEqual(true);
         expect(wrapper.find('div').length).toEqual(3);
@@ -86,11 +89,11 @@ describe('User Test No Input', () => {
 describe('User Test Valid Input', () => {
     it('Should create a nested div and img with appropriate grandchildren', () => {
         let jsonObj = JSON.parse(json(img, handle, name));
-        const wrapper = shallow(User(jsonObj));
+        const wrapper = shallow(e(User, {user: jsonObj}));
         expect(wrapper.childAt(0).props().src).toEqual(img);
         expect(wrapper.childAt(1).children().exists()).toEqual(true);
-        expect(wrapper.childAt(1).text()).toEqual(handle);
+        expect(wrapper.childAt(1).text()).toEqual(name);
         expect(wrapper.childAt(2).children().exists()).toEqual(true);
-        expect(wrapper.childAt(2).text()).toEqual(name);
+        expect(wrapper.childAt(2).text()).toEqual(handle);
     });
 });

@@ -29,7 +29,7 @@ const Message = (jsonObj) => {
     if(jsonObj) {
         return e('div', { className: "message" },
             MessageDate(jsonObj.createdAt),
-            MessageLink(jsonObj.user.name, jsonObj.id, jsonObj.twitterMessage));
+            MessageLink(jsonObj.user.twitterHandle, jsonObj.id, jsonObj.twitterMessage));
     } else {
         return e('div', { className: "message" },
             MessageDate(), MessageLink());
