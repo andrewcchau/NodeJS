@@ -2,7 +2,7 @@ import React from 'react';
 import _ from 'lodash';
 import {Header, Mismatch, Pending, Error, Button, TextBox} from './GeneralComponents';
 import Tweets from './Tweets';
-import {ButtonEnable} from '../scripts';
+import {ButtonEnable, EnterKeyPress} from '../scripts';
 
 const e = React.createElement;
 const statusEnum = {
@@ -10,6 +10,8 @@ const statusEnum = {
     ERROR: "Error",
     NO_MATCH: "No Match"
 }
+
+const noop = () => {}
 
 class Timeline extends React.Component {
     constructor(props) {
@@ -77,18 +79,18 @@ class Timeline extends React.Component {
                 e('div', { className: this.props.TLUIContainerClass },
                     Button(this.props.buttonClass, () => {
                         this.pending();
-                        this.props.requestFunc(this.update);
+                        (this.props.requestFunc ? this.props.requestFunc(this.update) : noop );
                     }, this.props.buttonMessage),
                     (this.props.displayUserTimeline ? null : Button(this.props.filterButtonClass, () => {
                         this.pending();
-                        this.props.filterFunc(this.update);
+                        (this.props.filterFunc ? this.props.filterFunc(this.update) : noop);
                     }, this.props.filterButtonMessage)),
-                    (this.props.displayUserTimeline ? null : TextBox("textInput", 30, "Enter Keyword", (event) => {
-                        ButtonEnable("textInput", this.props.filterButtonClass);
-                        if(event.keyCode == 13) {
+                    (this.props.displayUserTimeline ? null : TextBox(this.props.textBoxClass, 30, "Enter Keyword", (event) => {
+                        ButtonEnable(this.props.textBoxClass, this.props.filterButtonClass);
+                        EnterKeyPress(event, () => {
                             this.pending();
-                            this.props.filterFunc(this.update);
-                        }
+                            (this.props.filterFunc ? this.props.filterFunc(this.update) : noop);
+                        }, this.props.textBoxClass);
                     }))
                     ),
                 e('div', { className: this.props.dataClass }, component));

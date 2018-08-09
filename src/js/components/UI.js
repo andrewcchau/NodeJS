@@ -19,7 +19,8 @@ class UI extends React.Component {
                                requestFunc: Request,
                                filterButtonClass: "filterButton",
                                filterButtonMessage: "Filter",
-                               filterFunc: RequestFilterTimeline
+                               filterFunc: RequestFilterTimeline,
+                               textBoxClass: "textInput"
                            });
 
         let userTimeline = e(Timeline, {

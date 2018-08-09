@@ -33,7 +33,7 @@ let jsonObj = JSON.parse(json(message, handle, name, img, date, id));
 describe('Home Timeline Test No Input', () => {
     it('Should have children components but nothing else', () => {
         const wrapper = shallow(e(Timeline, {header: 'Home Timeline',
-                                             buttonContainerClass: 'buttonContainer1',
+                                             TLUIContainerClass: 'buttonContainer1',
                                              buttonClass: 'homeTimelineButton',
                                              buttonMessage: 'Get Home Timeline',
                                              dataClass: 'dataHome'}));
@@ -47,14 +47,14 @@ describe('Home Timeline Test No Input', () => {
 
 describe('Home Timeline Button Press Test', () => {
     it('Should have proper children components after button press', () => {
-        const wrapper = mount(e(Timeline, {requestFunc: callBackFunc,
+        const wrapper = mount(e(Timeline, {   requestFunc: callBackFunc,
                                                 header: 'Home Timeline',
-                                                buttonContainerClass: 'buttonContainer1',
+                                                TLUIContainerClass: 'buttonContainer1',
                                                 buttonClass: 'homeTimelineButton',
                                                 buttonMessage: 'Get Home Timeline',
                                                 dataClass: 'dataHome'}));
         expect(wrapper.find('div').length).toEqual(4);
-        wrapper.find('button').simulate('click');
+        wrapper.childAt(0).childAt(1).childAt(0).find('button').simulate('click');
         expect(wrapper.find('div').length).toEqual(9);
     });
 });
@@ -63,7 +63,7 @@ describe('User Timeline Test No Input', () => {
     it('Should have children components but nothing else', () => {
         const wrapper = shallow(e(Timeline, { displayUserTimeline: true,
                                                 header: 'User Timeline',
-                                                buttonContainerClass: 'buttonContainer2',
+                                                TLUIContainerClass: 'buttonContainer2',
                                                 buttonClass: 'userTimelineButton',
                                                 buttonMessage: 'Get User Timeline',
                                                 dataClass: 'dataUser'}));
@@ -80,7 +80,7 @@ describe('User Timeline Button Press Test', () => {
         const wrapper = mount(e(Timeline, { displayUserTimeline: true,
                                                 requestFunc: callBackFunc,
                                                 header: 'User Timeline',
-                                                buttonContainerClass: 'buttonContainer2',
+                                                TLUIContainerClass: 'buttonContainer2',
                                                 buttonClass: 'userTimelineButton',
                                                 buttonMessage: 'Get User Timeline',
                                                 dataClass: 'dataUser'}));

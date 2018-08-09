@@ -15,11 +15,13 @@ const RequestUserTimeline = (callback) => {
 const RequestFilterTimeline = (callback) => {
     let form = document.getElementsByClassName("textInput") && document.getElementsByClassName("textInput")[0];
     let keyword = form.value;
-    return fetch('http://localhost:8080/api/1.0/twitter/tweet/filter?keyword=' +
-                    (keyword ? keyword : ""))
-            .then(res => res.json())
-            .then(data => callback(data, true))
-            .catch(() => callback(null));
+    if(keyword) {
+        return fetch('http://localhost:8080/api/1.0/twitter/tweet/filter?keyword=' +
+                        (keyword ? keyword : ""))
+                .then(res => res.json())
+                .then(data => callback(data, true))
+                .catch(() => callback(null));
+    }
 }
 
 export default Request;

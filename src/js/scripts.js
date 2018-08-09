@@ -8,4 +8,11 @@ const ButtonEnable = (textBoxClass, buttonClass) => {
     }
 }
 
-export {ButtonEnable};
+const EnterKeyPress = (event, callback, textBoxClass) => {
+    let textBox = document.getElementsByClassName(textBoxClass) && document.getElementsByClassName(textBoxClass)[0];
+    if(event.keyCode == 13 && textBox.value) {
+        callback();
+    }
+}
+
+export {ButtonEnable, EnterKeyPress};
