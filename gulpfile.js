@@ -44,7 +44,7 @@ const bundle = (b) => {
 gulp.task('js', () => {
     return browserify({
         debug: true,
-        entries: ['./src/js/script.js'],
+        entries: ['./src/js/main.js'],
         paths: ['./src/js', './node_modules'],
         cache: {},
         packageCache: {}

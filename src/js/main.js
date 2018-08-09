@@ -16,7 +16,7 @@ const init = () => {
         location
     );
 
-    /* Disable the filter button as work around*/
+    /* Disable the filter button as work around */
     let button = document.getElementsByClassName("filterButton") && document.getElementsByClassName("filterButton")[0];
     button.disabled = true;
 }

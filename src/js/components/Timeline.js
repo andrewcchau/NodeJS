@@ -1,7 +1,8 @@
 import React from 'react';
 import _ from 'lodash';
-import {Header, Mismatch, Pending, Error, Button, TextBox, ButtonEnable} from './GeneralComponents';
+import {Header, Mismatch, Pending, Error, Button, TextBox} from './GeneralComponents';
 import Tweets from './Tweets';
+import {ButtonEnable} from '../scripts';
 
 const e = React.createElement;
 const statusEnum = {
