@@ -24,4 +24,8 @@ const Button = (buttonClass, onclick, buttonMessage) => {
     return e('button', { className: buttonClass, onClick: onclick }, buttonMessage);
 }
 
-export {Header, Pending, Error, Button};
+const TextBox = (textBoxClass, size) => {
+    return e('input', {className: textBoxClass, size: size});
+}
+
+export {Header, Pending, Error, Button, TextBox};

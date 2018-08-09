@@ -1,6 +1,6 @@
 import Timeline from './Timeline';
 import React from 'react';
-import {Request, RequestUserTimeline} from '../services/httpCall';
+import {Request, RequestUserTimeline, RequestFilterTimeline} from '../services/httpCall';
 
 const e = React.createElement;
 
@@ -12,17 +12,20 @@ class UI extends React.Component {
     render() {
         let homeTimeline = e(Timeline, {
                                header: 'Home Timeline',
-                               buttonContainerClass: 'homeTLButtonContainer',
+                               TLUIContainerClass: 'homeTLUIContainer',
                                buttonClass: 'homeTimelineButton',
                                buttonMessage: 'Get Home Timeline',
                                dataClass: 'dataHome',
-                               requestFunc: Request
+                               requestFunc: Request,
+                               filterButtonClass: "filterButton",
+                               filterButtonMessage: "Filter",
+                               filterFunc: RequestFilterTimeline
                            });
 
         let userTimeline = e(Timeline, {
                                displayUserTimeline: true,
                                header: 'User Timeline',
-                               buttonContainerClass: 'userTLButtonContainer',
+                               TLUIContainerClass: 'userTLUIContainer',
                                buttonClass: 'userTimelineButton',
                                buttonMessage: 'Get User Timeline',
                                dataClass: 'dataUser',

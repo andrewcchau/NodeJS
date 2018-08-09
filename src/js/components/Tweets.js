@@ -9,9 +9,9 @@ class Tweets extends React.Component {
     render() {
         if(this.props.tweets) {
             return _.map(this.props.tweets, (jsonObj) =>
-                e('div', { className: "item", key: jsonObj.id },
+                (jsonObj ? e('div', { className: "item", key: jsonObj.id },
                     e(User, {user: jsonObj.user , excludeHandle: this.props.excludeHandle}),
-                    Message(jsonObj))
+                    Message(jsonObj)) : null)
             );
         } else {
             return e('div', { className: "item" }, e(User), Message());
