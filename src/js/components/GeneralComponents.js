@@ -12,6 +12,10 @@ class Status extends React.Component {
     }
 }
 
+const Mismatch = (message) => {
+    return e(Status, { className: 'errorMessage', message: message });
+}
+
 const Pending = () => {
     return e(Status, { message: 'Pending . . .' });
 }
@@ -24,8 +28,18 @@ const Button = (buttonClass, onclick, buttonMessage) => {
     return e('button', { className: buttonClass, onClick: onclick }, buttonMessage);
 }
 
-const TextBox = (textBoxClass, size) => {
-    return e('input', {className: textBoxClass, size: size});
+const TextBox = (textBoxClass, size, holderText, keyUpFunction) => {
+    return e('input', {className: textBoxClass, size: size, placeholder: holderText, onKeyUp: keyUpFunction});
 }
 
-export {Header, Pending, Error, Button, TextBox};
+const ButtonEnable = (textBoxClass, buttonClass) => {
+    let form = document.getElementsByClassName(textBoxClass) && document.getElementsByClassName(textBoxClass)[0];
+    let button = document.getElementsByClassName(buttonClass) && document.getElementsByClassName(buttonClass)[0];
+    if(form.value) {
+        button.disabled = false;
+    } else {
+        button.disabled = true;
+    }
+}
+
+export {Header, Mismatch, Pending, Error, Button, TextBox, ButtonEnable};

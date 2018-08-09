@@ -43,11 +43,16 @@ body {
         margin-bottom: 10px;
 
         .textInput {
-            margin-left: 100px;
+            border: 1px solid;
+            border-radius: 5px;
+            padding: 8px 4px;
+            float: right;
+            margin-right: 5px;
         }
 
         .filterButton {
-            margin-left: 5px;
+            margin-right: 1.5%;
+            float: right;
         }
     }
 
@@ -79,6 +84,7 @@ body {
         width: $item-width;
         margin: auto;
         font-size: 25px;
+        clear: right;
 
         .errorMessage {
             color: red;

@@ -15,6 +15,10 @@ const init = () => {
         uiContainer,
         location
     );
+
+    /* Disable the filter button as work around*/
+    let button = document.getElementsByClassName("filterButton") && document.getElementsByClassName("filterButton")[0];
+    button.disabled = true;
 }
 
 window.onload = () => {

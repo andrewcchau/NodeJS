@@ -8,21 +8,17 @@ const Request = (callback) => {
 const RequestUserTimeline = (callback) => {
     return fetch('http://localhost:8080/api/1.0/twitter/usertimeline')
             .then(res => res.json())
-            .then(data => {
-                console.log(data);
-                callback(data);
-            })
+            .then(data => callback(data))
             .catch(() => callback(null));
 }
 
-const RequestFilterTimeline = (callback, keyword) => {
+const RequestFilterTimeline = (callback) => {
+    let form = document.getElementsByClassName("textInput") && document.getElementsByClassName("textInput")[0];
+    let keyword = form.value;
     return fetch('http://localhost:8080/api/1.0/twitter/tweet/filter?keyword=' +
                     (keyword ? keyword : ""))
             .then(res => res.json())
-            .then(data => {
-                console.log(data);
-                callback(data);
-            })
+            .then(data => callback(data))
             .catch(() => callback(null));
 }
 
