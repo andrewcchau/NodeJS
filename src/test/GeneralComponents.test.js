@@ -1,6 +1,6 @@
-import {shallow} from 'enzyme';
+import {shallow, mount} from 'enzyme';
 import React from 'react';
-import {Pending, Error, Button, Header} from '../js/components/GeneralComponents';
+import {Pending, Error, Button, Header, TextBox} from '../js/components/GeneralComponents';
 
 const e = React.createElement;
 
@@ -32,14 +32,17 @@ describe('Error Test', () => {
 
 
 /* Test Button Component */
-let counter = 0;
+let counter = 0, buttonProp;
 const dummyFunction = () => {
     counter++;
 }
 
 describe('Button Test No Input', () => {
     it('Should create a button with no message', () => {
-        const wrapper = shallow(Button('timelineButton'));
+        buttonProp = {
+            buttonClass: 'timelineButton'
+        }
+        const wrapper = shallow(Button(buttonProp));
         expect(wrapper.find('button').length).toEqual(1);
         expect(wrapper.hasClass('timelineButton')).toEqual(true);
         expect(wrapper.props().onClick).toEqual(undefined);
@@ -49,8 +52,11 @@ describe('Button Test No Input', () => {
 
 describe('Button Test Message Only', () => {
     it('Should create a button with a message', () => {
-        const wrapper = shallow(Button(null, null, message));
-        expect(wrapper.props().onClick).toEqual(null);
+        buttonProp = {
+            buttonMessage: message
+        }
+        const wrapper = shallow(Button(buttonProp));
+        expect(wrapper.props().onClick).toEqual(undefined);
         expect(wrapper.children().exists()).toEqual(true);
         expect(wrapper.text()).toEqual(message);
     });
@@ -58,7 +64,11 @@ describe('Button Test Message Only', () => {
 
 describe('Button Test Valid Inputs + Simulate Click', () => {
     it('Should create a button with a message and callback function', () => {
-        const wrapper = shallow(Button(null, () => dummyFunction(), message));
+        buttonProp = {
+            buttonMessage: message,
+            onclick: () => dummyFunction()
+        }
+        const wrapper = shallow(Button(buttonProp));
         expect(wrapper.children().exists()).toEqual(true);
         expect(wrapper.text()).toEqual(message);
         wrapper.find('button').simulate('click');
@@ -81,5 +91,30 @@ describe('Header Test Valid Input', () => {
         const headerMessage = "Test Header";
         const wrapper = shallow(Header(headerMessage));
         expect(wrapper.text()).toEqual(headerMessage);
+    });
+});
+
+
+/* Test Text Box Component */
+let boxProp;
+
+describe('Text Box Test No Input', () => {
+    it('Should create a default text box', () => {
+        const wrapper = shallow(TextBox());
+        expect(wrapper.find('input').length).toEqual(1);
+        expect(wrapper.children().exists()).toEqual(false);
+    });
+});
+
+describe('Text Box Test Some Input', () => {
+    it('Should create a 30px wide text box', () => {
+        boxProp = {
+            boxClass: "testClass",
+            size: 30
+        }
+        const wrapper = shallow(TextBox(boxProp));
+        expect(wrapper.find('input').length).toEqual(1);
+        expect(wrapper.hasClass("testClass")).toEqual(true);
+        expect(wrapper.props().size).toEqual(30);
     });
 });

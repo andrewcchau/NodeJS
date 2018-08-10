@@ -37,19 +37,32 @@ body {
     display: grid;
     grid-template-columns: 55% auto;
 
-    .homeTLButtonContainer {
+    .homeTLUIContainer {
         text-align: left;
         margin-left: (100% - $item-width + 2) / 2;
         margin-bottom: 10px;
+
+        .textInput {
+            border: 1px solid;
+            border-radius: 5px;
+            padding: 8px 4px;
+            float: right;
+            margin-right: 5px;
+        }
+
+        .filterButton {
+            margin-right: 1.5%;
+            float: right;
+        }
     }
 
-    .userTLButtonContainer {
+    .userTLUIContainer {
         text-align: right;
         margin-right: (100% - $item-width) / 2;
         margin-bottom: 10px;
     }
 
-    .userTimelineButton, .homeTimelineButton {
+    .userTimelineButton, .homeTimelineButton, .filterButton {
         background-color: white;
         border-radius: 12px;
         border: 1px solid;
@@ -71,6 +84,7 @@ body {
         width: $item-width;
         margin: auto;
         font-size: 25px;
+        clear: right;
 
         .errorMessage {
             color: red;

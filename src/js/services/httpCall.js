@@ -12,5 +12,15 @@ const RequestUserTimeline = (callback) => {
             .catch(() => callback(null));
 }
 
+const RequestFilterTimeline = (keyword, callback) => {
+    if(keyword) {
+        return fetch('http://localhost:8080/api/1.0/twitter/tweet/filter?keyword=' +
+                        (keyword ? keyword : ""))
+                .then(res => res.json())
+                .then(data => callback(data, true))
+                .catch(() => callback(null));
+    }
+}
+
 export default Request;
-export {Request, RequestUserTimeline};
+export {Request, RequestUserTimeline, RequestFilterTimeline};

@@ -12,6 +12,10 @@ class Status extends React.Component {
     }
 }
 
+const Mismatch = (message) => {
+    return e(Status, { className: 'errorMessage', message: message });
+}
+
 const Pending = () => {
     return e(Status, { message: 'Pending . . .' });
 }
@@ -20,8 +24,34 @@ const Error = (errorText) => {
     return e(Status, { className: 'errorMessage', message: errorText });
 }
 
-const Button = (buttonClass, onclick, buttonMessage) => {
-    return e('button', { className: buttonClass, onClick: onclick }, buttonMessage);
+const Button = (properties) => {
+    if(properties) {
+        return e('button', { className: properties.buttonClass,
+                             onClick: properties.onclick,
+                             key: properties.key,
+                             disabled: properties.disable },
+                         properties.buttonMessage);
+    } else {
+        return e('button');
+    }
 }
 
-export {Header, Pending, Error, Button};
+const TextBox = (properties, keyUpFunction) => {
+    if(properties) {
+        return e('input', { className: properties.boxClass,
+                            size: properties.size,
+                            placeholder: properties.holderText,
+                            key: properties.key,
+                            onKeyUp: keyUpFunction });
+    } else {
+        return e('input');
+    }
+}
+
+const statusEnum = {
+    PENDING: "Pending",
+    ERROR: "Error",
+    NO_MATCH: "No Match"
+}
+
+export {Header, Mismatch, Pending, Error, Button, TextBox, statusEnum};

@@ -1,6 +1,6 @@
-import Timeline from './Timeline';
 import React from 'react';
-import {Request, RequestUserTimeline} from '../services/httpCall';
+import HomeTimeline from './HomeTimeline';
+import UserTimeline from './UserTimeline';
 
 const e = React.createElement;
 
@@ -10,24 +10,9 @@ const Title = (title) => {
 
 class UI extends React.Component {
     render() {
-        let homeTimeline = e(Timeline, {
-                               header: 'Home Timeline',
-                               buttonContainerClass: 'homeTLButtonContainer',
-                               buttonClass: 'homeTimelineButton',
-                               buttonMessage: 'Get Home Timeline',
-                               dataClass: 'dataHome',
-                               requestFunc: Request
-                           });
+        let homeTimeline = e(HomeTimeline);
 
-        let userTimeline = e(Timeline, {
-                               displayUserTimeline: true,
-                               header: 'User Timeline',
-                               buttonContainerClass: 'userTLButtonContainer',
-                               buttonClass: 'userTimelineButton',
-                               buttonMessage: 'Get User Timeline',
-                               dataClass: 'dataUser',
-                               requestFunc: RequestUserTimeline
-                           });
+        let userTimeline = e(UserTimeline);
 
         return e('div', {},
                 Title("Lab for Andrew"),
