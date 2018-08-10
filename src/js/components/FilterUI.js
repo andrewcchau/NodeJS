@@ -3,6 +3,7 @@ import {RequestFilterTimeline} from '../services/httpCall';
 import {Button, TextBox, Pending} from './GeneralComponents';
 
 const e = React.createElement;
+let textBox;
 
 class FilterUI extends React.Component {
     constructor(props) {
@@ -12,25 +13,24 @@ class FilterUI extends React.Component {
         }
     }
 
-    toggleButton() {
-        let textBox = document.getElementsByClassName(this.props.textBoxClass)
-                    && document.getElementsByClassName(this.props.textBoxClass)[0];
+    componentDidMount() {
+        textBox = document.getElementsByClassName(this.props.textBoxClass)
+                  && document.getElementsByClassName(this.props.textBoxClass)[0];
+    }
+
+    /* Toggles the button and executes event handler */
+    EnterKeyPress(event, callback) {
         if(textBox && textBox.value){
             this.setState({
                 buttonDisabled: false
-            })
+            });
+            if(event.keyCode == 13) {
+                callback();
+            }
         } else {
             this.setState({
                 buttonDisabled: true
             });
-        }
-    }
-
-    EnterKeyPress(event, callback) {
-        let textBox = document.getElementsByClassName(this.props.textBoxClass)
-                            && document.getElementsByClassName(this.props.textBoxClass)[0];
-        if(event.keyCode == 13 && textBox && textBox.value) {
-            callback();
         }
     }
 
@@ -56,7 +56,6 @@ class FilterUI extends React.Component {
         let components = [
             Button(filterButtonProperties),
             TextBox(textBoxProperties, (event) => {
-                this.toggleButton();
                 this.EnterKeyPress(event, () => {
                     Pending();
                     RequestFilterTimeline(this.props.update);
