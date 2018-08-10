@@ -3,16 +3,18 @@ import _ from 'lodash';
 import Tweets from './Tweets';
 import TimelineUI from './TimelineUI';
 import {Request, RequestFilterTimeline} from '../services/httpCall';
-import {Header, Mismatch, Pending, Error, statusEnum} from './GeneralComponents';
+import {Header, Mismatch, Pending, Error, statusEnum, Button, TextBox} from './GeneralComponents';
+import FilterUI from './FilterUI';
 
 const e = React.createElement;
+const textBoxClass = "textInput";
 
 class HomeTimeline extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             tweets: null,
-            status: statusEnum.PENDING
+            status: statusEnum.PENDING,
         }
         this.update = this.update.bind(this);
         Request(this.update);
@@ -41,6 +43,7 @@ class HomeTimeline extends React.Component {
 
     render() {
         let component;
+        let extraComponent = e(FilterUI, {update: this.update, textBoxClass: 'textInput'});
 
         if(this.state.tweets && !_.isEmpty(this.state.tweets)) {
             component = e(Tweets, { tweets: this.state.tweets });
@@ -59,11 +62,8 @@ class HomeTimeline extends React.Component {
                                 filterFunc: RequestFilterTimeline,
                                 buttonClass: 'homeTimelineButton',
                                 buttonMessage: 'Get Home Timeline',
-                                filterButtonClass: 'filterButton',
-                                filterButtonMessage: 'Filter',
-                                buttonDisabled: true,
-                                textBoxClass: "textInput",
-                                updateCallback: this.update
+                                updateCallback: this.update,
+                                extraComponents: extraComponent
                                 }),
                 e('div', { className: "dataHome" }, component));
     }

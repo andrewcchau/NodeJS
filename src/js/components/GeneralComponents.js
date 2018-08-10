@@ -28,6 +28,7 @@ const Button = (properties) => {
     if(properties) {
         return e('button', { className: properties.buttonClass,
                              onClick: properties.onclick,
+                             key: properties.key,
                              disabled: properties.disable },
                          properties.buttonMessage);
     } else {
@@ -40,6 +41,7 @@ const TextBox = (properties, keyUpFunction) => {
         return e('input', { className: properties.boxClass,
                             size: properties.size,
                             placeholder: properties.holderText,
+                            key: properties.key,
                             onKeyUp: keyUpFunction });
     } else {
         return e('input');

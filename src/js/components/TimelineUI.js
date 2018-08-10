@@ -51,36 +51,38 @@ class TimelineUI extends React.Component {
             }
         }
 
-        let textBoxProperties = {
-            boxClass: this.props.textBoxClass,
-            size: 30,
-            holderText: "Enter Keyword",
-        }
+//        let textBoxProperties = {
+//            boxClass: this.props.textBoxClass,
+//            size: 30,
+//            holderText: "Enter Keyword"
+//        }
 
         /* Only create if we're not displaying user timeline */
-        let filterButtonProperties;
-        if(!this.props.displayUserTimeline){
-            filterButtonProperties = {
-                buttonClass: this.props.filterButtonClass,
-                buttonMessage: this.props.filterButtonMessage,
-                disable: (this.state.buttonDisabled ? true : false),
-                onclick: () => {
-                    Pending();
-                    (this.props.filterFunc ? this.props.filterFunc(this.props.updateCallback) : noop);
-                }
-            }
-        }
+//        let filterButtonProperties;
+//        if(!this.props.displayUserTimeline){
+//            filterButtonProperties = {
+//                buttonClass: this.props.filterButtonClass,
+//                buttonMessage: this.props.filterButtonMessage,
+//                disable: (this.state.buttonDisabled ? true : false),
+//                onclick: () => {
+//                    Pending();
+//                    (this.props.filterFunc ? this.props.filterFunc(this.props.updateCallback) : noop);
+//                }
+//            }
+//        }
 
         return e('div', { className: this.props.className },
                 Button(buttonProperties),
-                (this.props.displayUserTimeline ? null : Button(filterButtonProperties)),
-                (this.props.displayUserTimeline ? null : TextBox(textBoxProperties, (event) => {
-                    this.toggleButton();
-                    this.EnterKeyPress(event, () => {
-                        Pending();
-                        (this.props.filterFunc ? this.props.filterFunc(this.props.updateCallback) : noop)
-                    });
-                })));
+                this.props.extraComponents
+//                (this.props.displayUserTimeline ? null : Button(filterButtonProperties)),
+//                (this.props.displayUserTimeline ? null : TextBox(textBoxProperties, (event) => {
+//                    this.toggleButton();
+//                    this.EnterKeyPress(event, () => {
+//                        Pending();
+//                        (this.props.filterFunc ? this.props.filterFunc(this.props.updateCallback) : noop)
+//                    });
+//                }))
+                );
     }
 }
 
