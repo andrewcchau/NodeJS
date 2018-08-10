@@ -1,4 +1,4 @@
-import {shallow} from 'enzyme';
+import {shallow, mount} from 'enzyme';
 import React from 'react';
 import {Pending, Error, Button, Header, TextBox} from '../js/components/GeneralComponents';
 
