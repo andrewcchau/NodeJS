@@ -12,9 +12,7 @@ const RequestUserTimeline = (callback) => {
             .catch(() => callback(null));
 }
 
-const RequestFilterTimeline = (callback) => {
-    let form = document.getElementsByClassName("textInput") && document.getElementsByClassName("textInput")[0];
-    let keyword = form.value;
+const RequestFilterTimeline = (keyword, callback) => {
     if(keyword) {
         return fetch('http://localhost:8080/api/1.0/twitter/tweet/filter?keyword=' +
                         (keyword ? keyword : ""))

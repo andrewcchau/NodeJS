@@ -49,7 +49,7 @@ class FilterUI extends React.Component {
             disable: (this.state.buttonDisabled ? true : false),
             onclick: () => {
                 Pending();
-                RequestFilterTimeline(this.props.update);
+                RequestFilterTimeline(textBox.value, this.props.update);
             }
         }
 
@@ -58,7 +58,7 @@ class FilterUI extends React.Component {
             TextBox(textBoxProperties, (event) => {
                 this.EnterKeyPress(event, () => {
                     Pending();
-                    RequestFilterTimeline(this.props.update);
+                    RequestFilterTimeline(textBox.value, this.props.update);
                 });
             })]
 
