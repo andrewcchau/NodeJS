@@ -17,7 +17,7 @@ class TimelineUI extends React.Component {
     toggleButton() {
         let textBox = document.getElementsByClassName(this.props.textBoxClass)
                     && document.getElementsByClassName(this.props.textBoxClass)[0];
-        if(textBox.value){
+        if(textBox && textBox.value){
             this.setState({
                 buttonDisabled: false
             })
@@ -31,7 +31,7 @@ class TimelineUI extends React.Component {
     EnterKeyPress(event, callback) {
         let textBox = document.getElementsByClassName(this.props.textBoxClass)
                             && document.getElementsByClassName(this.props.textBoxClass)[0];
-        if(event.keyCode == 13 && textBox.value) {
+        if(event.keyCode == 13 && textBox && textBox.value) {
             callback();
         }
     }

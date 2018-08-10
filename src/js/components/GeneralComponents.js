@@ -32,29 +32,4 @@ const TextBox = (textBoxClass, size, holderText, keyUpFunction) => {
     return e('input', {className: textBoxClass, size: size, placeholder: holderText, onKeyUp: keyUpFunction});
 }
 
-//class TimelineUI extends React.Component {
-//    toggleButton() {
-//
-//    }
-//
-//    render() {
-//        return e('div', { className: this.props.className },
-//                Button(this.props.buttonClass, () => {
-//                    this.props.pendingFunc();
-//                    (this.props.requestFunc ? this.props.requestFunc(this.update) : noop );
-//                }, this.props.buttonMessage),
-//                (this.props.displayUserTimeline ? null : Button(this.props.filterButtonClass, () => {
-//                    this.pendingFunc();
-//                    (this.props.filterFunc ? this.props.filterFunc(this.update) : noop);
-//                }, this.props.filterButtonMessage)),
-//                (this.props.displayUserTimeline ? null : TextBox(this.props.textBoxClass, 30, "Enter Keyword", (event) => {
-//                    ButtonEnable(this.props.textBoxClass, this.props.filterButtonClass);
-//                    EnterKeyPress(event, () => {
-//                        this.pendingFunc();
-//                        (this.props.filterFunc ? this.props.filterFunc(this.update) : noop);
-//                    }, this.props.textBoxClass);
-//                }))
-//    }
-//}
-
 export {Header, Mismatch, Pending, Error, Button, TextBox};

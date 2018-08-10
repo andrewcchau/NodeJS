@@ -1,6 +1,6 @@
 import React from 'react';
 import _ from 'lodash';
-import {Header, Mismatch, Pending, Error, Button, TextBox} from './GeneralComponents';
+import {Header, Mismatch, Pending, Error} from './GeneralComponents';
 import Tweets from './Tweets';
 import TimelineUI from './TimelineUI';
 
