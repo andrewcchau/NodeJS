@@ -55,25 +55,11 @@ class HomeTimeline extends React.Component {
             component = Error('Something went wrong. Please come back later!');
         }
 
-        if(this.props.test) {
-            return e('div', {},
-                    e('header', {}, Header("Home Timeline")),
-                    e(TimelineUI, { className: 'homeTLUIContainer',
-                                    requestFunc: this.props.requestFunc,
-                                    filterFunc: this.props.filterFunc,
-                                    buttonClass: 'homeTimelineButton',
-                                    buttonMessage: 'Get Home Timeline',
-                                    updateCallback: this.update,
-                                    extraComponents: extraComponent
-                                    }),
-                    e('div', { className: "dataHome" }, component));
-        }
-
         return e('div', {},
                 e('header', {}, Header("Home Timeline")),
                 e(TimelineUI, { className: 'homeTLUIContainer',
-                                requestFunc: Request,
-                                filterFunc: RequestFilterTimeline,
+                                requestFunc: (this.props.test ? this.props.requestFunc : Request),
+                                filterFunc: (this.props.test ? this.props.filterFunc : RequestFilterTimeline),
                                 buttonClass: 'homeTimelineButton',
                                 buttonMessage: 'Get Home Timeline',
                                 updateCallback: this.update,

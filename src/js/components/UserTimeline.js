@@ -45,23 +45,11 @@ class UserTimeline extends React.Component {
             component = Error("Something went wrong. Please come back later!");
         }
 
-        if(this.props.test) {
-            return e('div', {},
-                    e('header', {}, Header("User Timeline")),
-                    e(TimelineUI, { className: "userTLUIContainer",
-                                    requestFunc: this.props.requestFunc,
-                                    buttonClass: 'userTimelineButton',
-                                    buttonMessage: 'Get User Timeline',
-                                    displayUserTimeline: true,
-                                    updateCallback: this.update
-                                    }),
-                    e('div', { className: "dataUser" }, component));
-        }
 
         return e('div', {},
                 e('header', {}, Header("User Timeline")),
                 e(TimelineUI, { className: "userTLUIContainer",
-                                requestFunc: RequestUserTimeline,
+                                requestFunc: (this.props.test ? this.props.requestFunc : RequestUserTimeline),
                                 buttonClass: 'userTimelineButton',
                                 buttonMessage: 'Get User Timeline',
                                 displayUserTimeline: true,
