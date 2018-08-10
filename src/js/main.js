@@ -6,7 +6,8 @@ const e = React.createElement;
 
 const init = () => {
     /* Location to Render */
-    let location = document.getElementsByClassName("interfaceInsert") && document.getElementsByClassName("interfaceInsert")[0];
+    let interfaceInsert = document.getElementsByClassName("interfaceInsert");
+    let location = interfaceInsert && interfaceInsert[0];
 
     let uiContainer = e(UI);
 
