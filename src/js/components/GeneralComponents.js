@@ -24,12 +24,32 @@ const Error = (errorText) => {
     return e(Status, { className: 'errorMessage', message: errorText });
 }
 
-const Button = (buttonClass, onclick, buttonMessage, disable) => {
-    return e('button', { className: buttonClass, onClick: onclick, disabled: (disable ? true : false) }, buttonMessage);
+const Button = (properties) => {
+    if(properties) {
+        return e('button', { className: properties.buttonClass,
+                             onClick: properties.onclick,
+                             disabled: properties.disable },
+                         properties.buttonMessage);
+    } else {
+        return e('button');
+    }
 }
 
-const TextBox = (textBoxClass, size, holderText, keyUpFunction) => {
-    return e('input', {className: textBoxClass, size: size, placeholder: holderText, onKeyUp: keyUpFunction});
+const TextBox = (properties, keyUpFunction) => {
+    if(properties) {
+        return e('input', { className: properties.boxClass,
+                            size: properties.size,
+                            placeholder: properties.holderText,
+                            onKeyUp: keyUpFunction });
+    } else {
+        return e('input');
+    }
 }
 
-export {Header, Mismatch, Pending, Error, Button, TextBox};
+const statusEnum = {
+    PENDING: "Pending",
+    ERROR: "Error",
+    NO_MATCH: "No Match"
+}
+
+export {Header, Mismatch, Pending, Error, Button, TextBox, statusEnum};

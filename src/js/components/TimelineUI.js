@@ -1,5 +1,6 @@
 import React from 'react';
 import {Button, TextBox} from './GeneralComponents';
+import {Pending} from './GeneralComponents';
 
 const e = React.createElement;
 const noop = () => {}
@@ -10,6 +11,10 @@ class TimelineUI extends React.Component {
         if(this.props.buttonDisabled) {
             this.state = {
                 buttonDisabled: true
+            }
+        } else {
+            this.state = {
+                buttonDisabled: false
             }
         }
     }
@@ -37,20 +42,43 @@ class TimelineUI extends React.Component {
     }
 
     render() {
-        return e('div', { className: this.props.className },
-                Button(this.props.buttonClass, () => {
-                    this.props.pendingFunc();
-                    (this.props.requestFunc ? this.props.requestFunc(this.props.updateCallback) : noop );
-                }, this.props.buttonMessage),
-                (this.props.displayUserTimeline ? null : Button(this.props.filterButtonClass, () => {
-                    this.props.pendingFunc();
+        let buttonProperties = {
+            buttonClass: this.props.buttonClass,
+            buttonMessage: this.props.buttonMessage,
+            onclick: () => {
+                Pending();
+                (this.props.requestFunc ? this.props.requestFunc(this.props.updateCallback) : noop);
+            }
+        }
+
+        let textBoxProperties = {
+            boxClass: this.props.textBoxClass,
+            size: 30,
+            holderText: "Enter Keyword",
+        }
+
+        /* Only create if we're not displaying user timeline */
+        let filterButtonProperties;
+        if(!this.props.displayUserTimeline){
+            filterButtonProperties = {
+                buttonClass: this.props.filterButtonClass,
+                buttonMessage: this.props.filterButtonMessage,
+                disable: (this.state.buttonDisabled ? true : false),
+                onclick: () => {
+                    Pending();
                     (this.props.filterFunc ? this.props.filterFunc(this.props.updateCallback) : noop);
-                }, this.props.filterButtonMessage, this.state.buttonDisabled)),
-                (this.props.displayUserTimeline ? null : TextBox(this.props.textBoxClass, 30, "Enter Keyword", (event) => {
+                }
+            }
+        }
+
+        return e('div', { className: this.props.className },
+                Button(buttonProperties),
+                (this.props.displayUserTimeline ? null : Button(filterButtonProperties)),
+                (this.props.displayUserTimeline ? null : TextBox(textBoxProperties, (event) => {
                     this.toggleButton();
                     this.EnterKeyPress(event, () => {
-                        this.props.pendingFunc();
-                        (this.props.filterFunc ? this.props.filterFunc(this.props.updateCallback) : noop);
+                        Pending();
+                        (this.props.filterFunc ? this.props.filterFunc(this.props.updateCallback) : noop)
                     });
                 })));
     }
