@@ -14,8 +14,8 @@ class FilterUI extends React.Component {
     }
 
     componentDidMount() {
-        textBox = document.getElementsByClassName(this.props.textBoxClass)
-                  && document.getElementsByClassName(this.props.textBoxClass)[0];
+        let textBoxClass = document.getElementsByClassName(this.props.textBoxClass);
+        textBox = textBoxClass && textBoxClass[0];
     }
 
     /* Toggles the button and executes event handler */
