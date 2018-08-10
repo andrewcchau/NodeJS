@@ -37,7 +37,7 @@ describe('Home Timeline Test No Input', () => {
                                              buttonClass: 'homeTimelineButton',
                                              buttonMessage: 'Get Home Timeline',
                                              dataClass: 'dataHome'}));
-        expect(wrapper.find('div').length).toEqual(3);
+        expect(wrapper.find('div').length).toEqual(2);
         expect(wrapper.childAt(0).childAt(0).text()).toEqual("Home Timeline");
         expect(wrapper.childAt(1).hasClass('buttonContainer1')).toEqual(true);
         expect(wrapper.childAt(2).hasClass('dataHome')).toEqual(true);
@@ -54,7 +54,7 @@ describe('Home Timeline Button Press Test', () => {
                                                 buttonMessage: 'Get Home Timeline',
                                                 dataClass: 'dataHome'}));
         expect(wrapper.find('div').length).toEqual(4);
-        wrapper.childAt(0).childAt(1).childAt(0).find('button').simulate('click');
+        wrapper.childAt(0).childAt(1).childAt(0).childAt(0).find('button').simulate('click');
         expect(wrapper.find('div').length).toEqual(9);
     });
 });
@@ -67,7 +67,7 @@ describe('User Timeline Test No Input', () => {
                                                 buttonClass: 'userTimelineButton',
                                                 buttonMessage: 'Get User Timeline',
                                                 dataClass: 'dataUser'}));
-        expect(wrapper.find('div').length).toEqual(3);
+        expect(wrapper.find('div').length).toEqual(2);
         expect(wrapper.childAt(0).childAt(0).text()).toEqual("User Timeline");
         expect(wrapper.childAt(1).hasClass('buttonContainer2')).toEqual(true);
         expect(wrapper.childAt(2).hasClass('dataUser')).toEqual(true);

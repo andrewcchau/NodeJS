@@ -2,7 +2,7 @@ import React from 'react';
 import _ from 'lodash';
 import {Header, Mismatch, Pending, Error, Button, TextBox} from './GeneralComponents';
 import Tweets from './Tweets';
-import {ButtonEnable, EnterKeyPress} from '../scripts';
+import TimelineUI from './TimelineUI';
 
 const e = React.createElement;
 const statusEnum = {
@@ -10,8 +10,6 @@ const statusEnum = {
     ERROR: "Error",
     NO_MATCH: "No Match"
 }
-
-const noop = () => {}
 
 class Timeline extends React.Component {
     constructor(props) {
@@ -76,23 +74,19 @@ class Timeline extends React.Component {
 
         return e('div', {},
                 e('header', {}, Header(this.props.header)),
-                e('div', { className: this.props.TLUIContainerClass },
-                    Button(this.props.buttonClass, () => {
-                        this.pending();
-                        (this.props.requestFunc ? this.props.requestFunc(this.update) : noop );
-                    }, this.props.buttonMessage),
-                    (this.props.displayUserTimeline ? null : Button(this.props.filterButtonClass, () => {
-                        this.pending();
-                        (this.props.filterFunc ? this.props.filterFunc(this.update) : noop);
-                    }, this.props.filterButtonMessage)),
-                    (this.props.displayUserTimeline ? null : TextBox(this.props.textBoxClass, 30, "Enter Keyword", (event) => {
-                        ButtonEnable(this.props.textBoxClass, this.props.filterButtonClass);
-                        EnterKeyPress(event, () => {
-                            this.pending();
-                            (this.props.filterFunc ? this.props.filterFunc(this.update) : noop);
-                        }, this.props.textBoxClass);
-                    }))
-                    ),
+                e(TimelineUI, { className: this.props.TLUIContainerClass,
+                                displayUserTimeline: this.props.displayUserTimeline,
+                                pendingFunc: Pending,
+                                requestFunc: this.props.requestFunc,
+                                filterFunc: this.props.filterFunc,
+                                buttonClass: this.props.buttonClass,
+                                buttonMessage: this.props.buttonMessage,
+                                filterButtonClass: this.props.filterButtonClass,
+                                filterButtonMessage: this.props.filterButtonMessage,
+                                updateCallback: this.update,
+                                textBoxClass: this.props.textBoxClass,
+                                buttonDisabled: (this.props.displayUserTimeline ? false : true)
+                            }),
                 e('div', { className: this.props.dataClass }, component));
     }
 }

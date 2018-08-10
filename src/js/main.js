@@ -17,8 +17,8 @@ const init = () => {
     );
 
     /* Disable the filter button as work around */
-    let button = document.getElementsByClassName("filterButton") && document.getElementsByClassName("filterButton")[0];
-    button.disabled = true;
+//    let button = document.getElementsByClassName("filterButton") && document.getElementsByClassName("filterButton")[0];
+//    button.disabled = true;
 }
 
 window.onload = () => {
