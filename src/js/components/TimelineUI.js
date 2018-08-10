@@ -1,5 +1,5 @@
 import React from 'react';
-import {Button, TextBox} from './GeneralComponents';
+import {Button} from './GeneralComponents';
 import {Pending} from './GeneralComponents';
 
 const e = React.createElement;

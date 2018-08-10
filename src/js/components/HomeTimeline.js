@@ -2,12 +2,11 @@ import React from 'react';
 import _ from 'lodash';
 import Tweets from './Tweets';
 import TimelineUI from './TimelineUI';
-import {Request, RequestFilterTimeline} from '../services/httpCall';
-import {Header, Mismatch, Pending, Error, statusEnum, Button, TextBox} from './GeneralComponents';
 import FilterUI from './FilterUI';
+import {Request, RequestFilterTimeline} from '../services/httpCall';
+import {Header, Mismatch, Pending, Error, statusEnum} from './GeneralComponents';
 
 const e = React.createElement;
-const textBoxClass = "textInput";
 
 class HomeTimeline extends React.Component {
     constructor(props) {
