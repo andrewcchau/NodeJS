@@ -33,9 +33,6 @@ body {
     text-align: center;
 }
 
-.timelineWrapper {
-    display: grid;
-    grid-template-columns: 55% auto;
 
     .homeTLUIContainer {
         text-align: left;
@@ -172,4 +169,3 @@ body {
             background-color: $user-white;
         }
     }
-}

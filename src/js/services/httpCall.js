@@ -22,5 +22,20 @@ const RequestFilterTimeline = (keyword, callback) => {
     }
 }
 
+const PostToTwitter = (content, callback) => {
+    if(content) {
+        return fetch('http://localhost:8080/api/1.0/twitter/tweet', {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded"
+            },
+            body: "message:" + content
+        })
+        .then(res => res.json())
+        .then(data => callback(data))
+        .catch(() => callback(null))
+    }
+}
+
 export default Request;
-export {Request, RequestUserTimeline, RequestFilterTimeline};
+export {Request, RequestUserTimeline, RequestFilterTimeline, PostToTwitter};

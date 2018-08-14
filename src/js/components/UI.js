@@ -1,4 +1,5 @@
 import React from 'react';
+import TabContainer from './Tabs';
 import HomeTimeline from './HomeTimeline';
 import UserTimeline from './UserTimeline';
 
@@ -10,13 +11,12 @@ const Title = (title) => {
 
 class UI extends React.Component {
     render() {
-        let homeTimeline = e(HomeTimeline);
-
-        let userTimeline = e(UserTimeline);
+        let homeTimeline = e(HomeTimeline, {key: "Home Timeline"});
+        let userTimeline = e(UserTimeline, {key: "User Timeline"});
 
         return e('div', {},
                 Title("Lab for Andrew"),
-                e('div', {className: "timelineWrapper"}, homeTimeline, userTimeline));
+                e(TabContainer, {children: [homeTimeline, userTimeline]}));
     }
 }
 
