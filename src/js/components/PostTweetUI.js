@@ -7,13 +7,18 @@ const e = React.createElement;
 
 let textBox;
 
+const SpanWrapper = (elements) => {
+    return e('span', {className: "postButtonWrapper"}, elements);
+}
+
 class PostTweetUI extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             buttonDisabled: true,
             postMsgLength: 0,
-            returnMessage: null
+            returnMessage: null,
+            retAppend: null
         }
         this.updateReturnMessage = this.updateReturnMessage.bind(this);
         this.updateUI = this.updateUI.bind(this);
@@ -26,15 +31,16 @@ class PostTweetUI extends React.Component {
 
     updateReturnMessage(message) {
         if(message) {
-            let ret;
+            let success;
             if(_.startsWith(message, "Oops")) {
-                ret = "Post Failed!";
+                success = false;
             } else {
-                ret = "Post Success!";
+                success = true;
             }
 
             this.setState({
-                returnMessage: ret
+                returnMessage: (success ? "Post Success!" : "Post Failed!"),
+                retAppend: (success ? " success" : " error")
             });
         }
     }
@@ -81,11 +87,12 @@ class PostTweetUI extends React.Component {
             }
         }
 
-        return e('div', {className: "UIContent"},
+        return e('div', {className: "UIContent PostTweet"},
                 TextBox(textBoxProperties),
-                Button(buttonProperties),
-                e('div', {className: "charCounter"}, "Char Count: " + this.state.postMsgLength),
-                e('div', {className: "returnMessage"}, this.state.returnMessage));
+                SpanWrapper([e('div', {className: "charCounter", key: "charCounter"}, "Char Count: " + this.state.postMsgLength),
+                            e('div', {className: "returnMessage" + this.state.retAppend, key: "returnMessage"}, this.state.returnMessage),
+                            Button(buttonProperties)])
+                );
     }
 }
 
