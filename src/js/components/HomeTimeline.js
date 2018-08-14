@@ -42,7 +42,7 @@ class HomeTimeline extends React.Component {
 
     render() {
         let component;
-        let extraComponent = e(FilterUI, {update: this.update, textBoxClass: 'textInput'});
+        let extraComponent = e(FilterUI, {update: this.update, textStripClass: 'textInput'});
 
         if(this.state.tweets && !_.isEmpty(this.state.tweets)) {
             component = e(Tweets, { tweets: this.state.tweets });
@@ -54,7 +54,7 @@ class HomeTimeline extends React.Component {
             component = Error('Something went wrong. Please come back later!');
         }
 
-        return e('div', {},
+        return e('div', {className: "UIContent"},
                 e('header', {}, Header("Home Timeline")),
                 e(TimelineUI, { className: 'homeTLUIContainer',
                                 requestFunc: (this.props.test ? this.props.requestFunc : Request),

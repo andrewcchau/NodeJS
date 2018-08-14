@@ -61,26 +61,27 @@ class PostTweetUI extends React.Component {
 
     render() {
         let textBoxProperties = {
-            boxClass: 'postTextBox',
-            size: 50,
+            className: 'postTextBox',
+            rows: 6,
+            cols: 50,
             placeholder: "Enter Tweet",
             key: "postTextBox",
-            keyUpFunction: (event) => this.updateUI(event),
-            keyPressFunction: (event) => this.checkCharCount(event),
+            onKeyUp: (event) => this.updateUI(event),
+            onKeyPress: (event) => this.checkCharCount(event),
             maxLength: 280
         }
 
         let buttonProperties = {
             className: "postButton",
             key: "postButton",
-            disable: this.state.buttonDisabled,
-            buttonMessage: "Post Tweet",
-            onclick: () => {
+            disabled: this.state.buttonDisabled,
+            message: "Post Tweet",
+            onClick: () => {
                 PostToTwitter(textBox.value, this.updateReturnMessage);
             }
         }
 
-        return e('div', {},
+        return e('div', {className: "UIContent"},
                 e('header', {}, Header('Post Tweet')),
                 TextBox(textBoxProperties),
                 Button(buttonProperties),

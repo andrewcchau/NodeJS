@@ -46,7 +46,7 @@ class UserTimeline extends React.Component {
         }
 
 
-        return e('div', {},
+        return e('div', {className: "UIContent"},
                 e('header', {}, Header("User Timeline")),
                 e(TimelineUI, { className: "userTLUIContainer",
                                 requestFunc: (this.props.test ? this.props.requestFunc : RequestUserTimeline),

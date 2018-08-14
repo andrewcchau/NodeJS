@@ -33,10 +33,20 @@ body {
     text-align: center;
 }
 
+.tabContainer {
+    text-align: center;
 
+    .tab {
+        padding: 10px 20px;
+        @include boldFontSize(15px);
+    }
+}
+
+.UIContent {
     .homeTLUIContainer {
         text-align: left;
-        margin-left: (100% - $item-width + 2) / 2;
+        margin-left: (100% - $item-width) / 2;
+        margin-right: (100% - $item-width) / 2;
         margin-bottom: 10px;
 
         .textInput {
@@ -48,7 +58,6 @@ body {
         }
 
         .filterButton {
-            margin-right: 1.5%;
             float: right;
         }
     }
@@ -56,10 +65,11 @@ body {
     .userTLUIContainer {
         text-align: right;
         margin-right: (100% - $item-width) / 2;
+        margin-left: (100% - $item-width) / 2;
         margin-bottom: 10px;
     }
 
-    .userTimelineButton, .homeTimelineButton, .filterButton {
+    .userTimelineButton, .homeTimelineButton, .filterButton, .postButton {
         background-color: white;
         border-radius: 12px;
         border: 1px solid;
@@ -84,7 +94,8 @@ body {
         text-align: center;
         border: 1px solid black;
         width: $item-width;
-        margin: auto;
+        margin-right: (100% - $item-width) / 2;
+        margin-left: (100% - $item-width) / 2;
         font-size: 25px;
         clear: right;
 
@@ -150,8 +161,6 @@ body {
     }
 
     .dataUser {
-        margin-left: 15px;
-
         .item {
             background-color: $user-blue;
             grid-template-columns: 25% auto;
@@ -174,3 +183,4 @@ body {
             background-color: $user-white;
         }
     }
+}

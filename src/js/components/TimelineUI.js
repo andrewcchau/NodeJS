@@ -21,9 +21,9 @@ class TimelineUI extends React.Component {
 
     render() {
         let buttonProperties = {
-            buttonClass: this.props.buttonClass,
-            buttonMessage: this.props.buttonMessage,
-            onclick: () => {
+            className: this.props.buttonClass,
+            message: this.props.buttonMessage,
+            onClick: () => {
                 Pending();
                 (this.props.requestFunc ? this.props.requestFunc(this.props.updateCallback) : noop);
             }

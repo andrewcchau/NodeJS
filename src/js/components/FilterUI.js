@@ -1,9 +1,9 @@
 import React from 'react';
 import {RequestFilterTimeline} from '../services/httpCall';
-import {Button, TextBox, Pending} from './GeneralComponents';
+import {Button, TextStrip, Pending} from './GeneralComponents';
 
 const e = React.createElement;
-let textBox, button;
+let textStrip, button;
 
 class FilterUI extends React.Component {
     constructor(props) {
@@ -14,15 +14,15 @@ class FilterUI extends React.Component {
     }
 
     componentDidMount() {
-        let textBoxClass = document.getElementsByClassName(this.props.textBoxClass);
-        textBox = textBoxClass && textBoxClass[0];
+        let textStripClass = document.getElementsByClassName(this.props.textStripClass);
+        textStrip = textStripClass && textStripClass[0];
         let buttonClass = document.getElementsByClassName('filterButton');
         button = buttonClass && buttonClass[0];
     }
 
     /* Toggles the button and executes event handler */
     EnterKeyPress(event, callback) {
-        if(textBox && textBox.value){
+        if(textStrip && textStrip.value){
             this.setState({
                 buttonDisabled: false
             });
@@ -39,33 +39,33 @@ class FilterUI extends React.Component {
     }
 
     render() {
-        let textBoxProperties = {
-            boxClass: this.props.textBoxClass,
+        let textStripProperties = {
+            className: this.props.textStripClass,
             size: 30,
-            holderText: "Enter Keyword",
-            key: this.props.textBoxClass,
-            keyUpFunction: (event) => {
+            placeholder: "Enter Keyword",
+            key: this.props.textStripClass,
+            onKeyUp: (event) => {
                this.EnterKeyPress(event, () => {
                    Pending();
-                   RequestFilterTimeline(textBox.value, this.props.update);
+                   RequestFilterTimeline(textStrip.value, this.props.update);
                });
            }
         }
 
         let filterButtonProperties = {
-            buttonClass: 'filterButton',
-            buttonMessage: 'Filter',
+            className: 'filterButton',
+            message: 'Filter',
             key: 'filterButton',
-            disable: (this.state.buttonDisabled ? true : false),
-            onclick: () => {
+            disabled: (this.state.buttonDisabled ? true : false),
+            onClick: () => {
                 Pending();
-                RequestFilterTimeline(textBox.value, this.props.update);
+                RequestFilterTimeline(textStrip.value, this.props.update);
             }
         }
 
         let components = [
             Button(filterButtonProperties),
-            TextBox(textBoxProperties)]
+            TextStrip(textStripProperties)]
 
         return components;
     }
