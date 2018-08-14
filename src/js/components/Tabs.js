@@ -7,6 +7,7 @@ const Tab = (callback, tabName) => {
     return e('button', {className: "tab", onClick: callback, key: tabName + " Tab"}, tabName);
 }
 
+let tab;
 
 class TabContainer extends React.Component {
     constructor(props) {
@@ -22,11 +23,15 @@ class TabContainer extends React.Component {
         }
     }
 
+    componentDidMount() {
+        tab = document.getElementsByClassName("tab");
+        tab[0].className += " active";
+    }
+
     openTab(event, tabName) {
-        let i, tab;
+        let i;
 
         /* Change tab appearance */
-        tab = document.getElementsByClassName("tab");
         for(i = 0; i < tab.length; i++) {
             tab[i].className = tab[i].className.replace(" active", "");
         }

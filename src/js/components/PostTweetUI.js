@@ -1,7 +1,7 @@
 import React from 'react';
 import _ from 'lodash';
 import {PostToTwitter} from '../services/httpCall';
-import {Header, Button, TextBox} from './GeneralComponents';
+import {Button, TextBox} from './GeneralComponents';
 
 const e = React.createElement;
 
@@ -82,7 +82,6 @@ class PostTweetUI extends React.Component {
         }
 
         return e('div', {className: "UIContent"},
-                e('header', {}, Header('Post Tweet')),
                 TextBox(textBoxProperties),
                 Button(buttonProperties),
                 e('div', {className: "charCounter"}, "Char Count: " + this.state.postMsgLength),

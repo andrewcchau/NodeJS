@@ -2,8 +2,9 @@ $font: 'Lato';
 $blue: #008CBA;
 $tan: #e9e9e9;
 $light-blue: #e8f5fd;
+$timber: #E2D7D4;
 $border-color: #C0C0C0;
-$item-width: 95%;
+$item-width: 90%;
 $user-white: #f5f8fa;
 $user-blue: #1da1f2;
 
@@ -35,10 +36,24 @@ body {
 
 .tabContainer {
     text-align: center;
+    margin-top: 10px;
 
     .tab {
         padding: 10px 20px;
+        width: 33.3%;
         @include boldFontSize(15px);
+        background-color: $timber;
+        border: 1px solid;
+    }
+
+    .tab.active {
+        background-color: white;
+        border-bottom: 0;
+    }
+
+    .postTextBox {
+        margin-top: 10px;
+        font-size: 20px;
     }
 }
 
@@ -74,18 +89,12 @@ body {
         border-radius: 12px;
         border: 1px solid;
         font-size: 15px;
-        -webkit-transition-duration: 0.4s;
         transition-duration: 0.4s;
         justify-content: center;
         padding: 5px 10px;
     }
 
-    .userTimelineButton:hover, .homeTimelineButton:hover {
-        background-color: $blue;
-        color: white;
-    }
-
-    .filterButton.active:hover {
+    .userTimelineButton:hover, .homeTimelineButton:hover, .filterButton.active:hover {
         background-color: $blue;
         color: white;
     }
@@ -152,10 +161,6 @@ body {
         }
     }
 
-    .dataHome {
-        margin-right: 15px;
-    }
-
     .dataHome:empty, .dataUser:empty {
         display: none;
     }
@@ -163,7 +168,7 @@ body {
     .dataUser {
         .item {
             background-color: $user-blue;
-            grid-template-columns: 25% auto;
+            grid-template-columns: 17% auto;
             padding-top: 11px;
             padding-bottom: 15px;
 

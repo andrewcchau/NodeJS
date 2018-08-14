@@ -4,7 +4,7 @@ import Tweets from './Tweets';
 import TimelineUI from './TimelineUI';
 import FilterUI from './FilterUI';
 import {Request, RequestFilterTimeline} from '../services/httpCall';
-import {Header, Mismatch, Pending, Error, statusEnum} from './GeneralComponents';
+import {Mismatch, Pending, Error, statusEnum} from './GeneralComponents';
 
 const e = React.createElement;
 
@@ -55,7 +55,6 @@ class HomeTimeline extends React.Component {
         }
 
         return e('div', {className: "UIContent"},
-                e('header', {}, Header("Home Timeline")),
                 e(TimelineUI, { className: 'homeTLUIContainer',
                                 requestFunc: (this.props.test ? this.props.requestFunc : Request),
                                 filterFunc: (this.props.test ? this.props.filterFunc : RequestFilterTimeline),
