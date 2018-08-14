@@ -11,8 +11,14 @@ const Tab = (callback, tabName) => {
 class TabContainer extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            content: null
+        if(this.props.children) {
+            this.state = {
+                content: this.props.children[0]
+            };
+        } else {
+            this.state = {
+                content: null
+            }
         }
     }
 

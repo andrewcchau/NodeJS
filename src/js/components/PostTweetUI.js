@@ -1,4 +1,5 @@
 import React from 'react';
+import _ from 'lodash';
 import {PostToTwitter} from '../services/httpCall';
 import {Header, Button, TextBox} from './GeneralComponents';
 
@@ -11,13 +12,37 @@ class PostTweetUI extends React.Component {
         super(props);
         this.state = {
             buttonDisabled: true,
-            postMsgLength: 0
+            postMsgLength: 0,
+            returnMessage: null
         }
+        this.updateReturnMessage = this.updateReturnMessage.bind(this);
+        this.updateUI = this.updateUI.bind(this);
     }
 
     componentDidMount() {
         let tbClass = document.getElementsByClassName("postTextBox");
         textBox = tbClass && tbClass[0];
+    }
+
+    updateReturnMessage(message) {
+        if(message) {
+            let ret;
+            if(_.startsWith(message, "Oops")) {
+                ret = "Post Failed!";
+            } else {
+                ret = "Post Success!";
+            }
+
+            this.setState({
+                returnMessage: ret
+            });
+        }
+    }
+
+    checkCharCount(event) {
+        if(textBox && textBox.value.length >= 280) {
+            return false;
+        }
     }
 
     updateUI(event) {
@@ -40,6 +65,9 @@ class PostTweetUI extends React.Component {
             size: 50,
             placeholder: "Enter Tweet",
             key: "postTextBox",
+            keyUpFunction: (event) => this.updateUI(event),
+            keyPressFunction: (event) => this.checkCharCount(event),
+            maxLength: 280
         }
 
         let buttonProperties = {
@@ -48,15 +76,16 @@ class PostTweetUI extends React.Component {
             disable: this.state.buttonDisabled,
             buttonMessage: "Post Tweet",
             onclick: () => {
-                PostToTwitter(textBox.value);
+                PostToTwitter(textBox.value, this.updateReturnMessage);
             }
         }
 
         return e('div', {},
-                e('header', {}, Header('Post Tweet'),
-                TextBox(textBoxProperties, (event) => this.updateUI(event)),
+                e('header', {}, Header('Post Tweet')),
+                TextBox(textBoxProperties),
                 Button(buttonProperties),
-                e('div', {className: "charCounter"}, "Char Count: " + this.state.postMsgLength)));
+                e('div', {className: "charCounter"}, "Char Count: " + this.state.postMsgLength),
+                e('div', {className: "returnMessage"}, this.state.returnMessage));
     }
 }
 

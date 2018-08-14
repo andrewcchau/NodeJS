@@ -75,6 +75,11 @@ body {
         color: white;
     }
 
+    .filterButton.active:hover {
+        background-color: $blue;
+        color: white;
+    }
+
     .dataHome, .dataUser {
         text-align: center;
         border: 1px solid black;

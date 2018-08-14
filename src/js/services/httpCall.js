@@ -27,14 +27,15 @@ const PostToTwitter = (content, callback) => {
         let payload = new URLSearchParams();
         return fetch('http://localhost:8080/api/1.0/twitter/tweet', {
             method: 'POST',
+            mode: "cors",
             headers: {
                 "Content-Type": "application/x-www-form-urlencoded"
             },
             body: encodeURIComponent("message") + "=" + encodeURIComponent(content)
         })
-        .then(res => res.json())
-        .then(data => callback(data))
-        .catch(() => callback(null))
+        .then(res => res.text(), rej => rej.text())
+        .then(data => callback(data), rej => callback(rej))
+        .catch(() => callback(null));
     }
 }
 

@@ -36,13 +36,15 @@ const Button = (properties) => {
     }
 }
 
-const TextBox = (properties, keyUpFunction) => {
+const TextBox = (properties) => {
     if(properties) {
         return e('input', { className: properties.boxClass,
                             size: properties.size,
                             placeholder: properties.holderText,
                             key: properties.key,
-                            onKeyUp: keyUpFunction });
+                            onKeyUp: properties.keyUpFunction,
+                            onKeyPress: properties.keyPressFunction,
+                            maxLength: properties.maxLength});
     } else {
         return e('input');
     }
