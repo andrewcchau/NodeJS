@@ -89,7 +89,7 @@ class PostTweetUI extends React.Component {
 
         return e('div', {className: "UIContent PostTweet"},
                 TextBox(textBoxProperties),
-                SpanWrapper([e('div', {className: "charCounter", key: "charCounter"}, "Char Count: " + this.state.postMsgLength),
+                SpanWrapper([e('div', {className: "charCounter", key: "charCounter"}, "Character Count: " + this.state.postMsgLength),
                             e('div', {className: "returnMessage" + this.state.retAppend, key: "returnMessage"}, this.state.returnMessage),
                             Button(buttonProperties)])
                 );
