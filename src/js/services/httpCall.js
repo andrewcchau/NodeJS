@@ -24,12 +24,13 @@ const RequestFilterTimeline = (keyword, callback) => {
 
 const PostToTwitter = (content, callback) => {
     if(content) {
+        let payload = new URLSearchParams();
         return fetch('http://localhost:8080/api/1.0/twitter/tweet', {
             method: 'POST',
             headers: {
                 "Content-Type": "application/x-www-form-urlencoded"
             },
-            body: "message:" + content
+            body: encodeURIComponent("message") + "=" + encodeURIComponent(content)
         })
         .then(res => res.json())
         .then(data => callback(data))
