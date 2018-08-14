@@ -63,6 +63,10 @@ class PostTweetUI extends React.Component {
                 postMsgLength: 0
             });
         }
+
+        this.setState({
+            returnMessage: null
+        })
     }
 
     render() {
