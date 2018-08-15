@@ -46,6 +46,10 @@ body {
         border: 1px solid;
     }
 
+    .tab:hover {
+        background-color: $tan;
+    }
+
     .tab.active {
         background-color: white;
         border-bottom: 0;
