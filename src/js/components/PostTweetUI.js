@@ -65,7 +65,8 @@ class PostTweetUI extends React.Component {
         }
 
         this.setState({
-            returnMessage: null
+            returnMessage: null,
+            retAppend: ""
         })
     }
 
