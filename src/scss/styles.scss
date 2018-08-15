@@ -1,7 +1,7 @@
 $font: 'Lato';
 $blue: #008CBA;
 $tan: #e9e9e9;
-$dark-tan: #adadad;
+$light-timber: #f9eeea;
 $light-blue: #e8f5fd;
 $timber: #E2D7D4;
 $border-color: #C0C0C0;
@@ -53,7 +53,7 @@ textarea {
     }
 
     .tab:hover {
-        background-color: $dark-tan;
+        background-color: $light-timber;
     }
 
     .tab.active {
@@ -192,6 +192,11 @@ textarea {
                 background-color: $user-white;
             }
         }
+    }
+
+    .UIContent.PostTweet {
+        position: relative;
+        display: inline-block;
 
         .postButtonWrapper {
             margin-top: 5px;
@@ -220,11 +225,5 @@ textarea {
         .returnMessage.error {
             color: red;
         }
-
-    }
-
-    .UIContent.PostTweet {
-        position: relative;
-        display: inline-block;
     }
 }

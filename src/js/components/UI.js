@@ -12,13 +12,13 @@ const Title = (title) => {
 
 class UI extends React.Component {
     render() {
-        let homeTimeline = e(HomeTimeline, {key: "Home Timeline"});
-        let userTimeline = e(UserTimeline, {key: "User Timeline"});
-        let postUI = e(PostTweetUI, {key: "Post Tweet"})
+//        let homeTimeline = e(HomeTimeline, {key: "Home Timeline"});
+//        let userTimeline = e(UserTimeline, {key: "User Timeline"});
+//        let postUI = e(PostTweetUI, {key: "Post Tweet"})
 
         return e('div', {},
                 Title("Lab for Andrew"),
-                e(TabContainer, {children: [homeTimeline, userTimeline, postUI]}));
+                e(TabContainer));
     }
 }
 

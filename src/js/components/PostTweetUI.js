@@ -7,15 +7,10 @@ const e = React.createElement;
 
 let textBox;
 
-const DivWrapper = (elements) => {
-    return e('div', {className: "postButtonWrapper"}, elements);
-}
-
 class PostTweetUI extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            buttonDisabled: true,
             postMsgLength: 0,
             returnMessage: null,
             retAppend: ""
@@ -59,12 +54,10 @@ class PostTweetUI extends React.Component {
     updateUI(event) {
         if(textBox && textBox.value) {
             this.setState({
-                buttonDisabled: false,
                 postMsgLength: textBox.value.length
             });
         } else {
             this.setState({
-                buttonDisabled: true,
                 postMsgLength: 0
             });
         }
@@ -90,7 +83,7 @@ class PostTweetUI extends React.Component {
         let buttonProperties = {
             className: "postButton",
             key: "postButton",
-            disabled: this.state.buttonDisabled,
+            disabled: (this.state.postMsgLength > 0 ? false : true),
             message: "Post Tweet",
             onClick: () => {
                 PostToTwitter(textBox.value, this.updateReturnMessage);
@@ -100,8 +93,8 @@ class PostTweetUI extends React.Component {
         return e('div', {className: "UIContent PostTweet"},
                 TextArea(textBoxProperties),
                 e('span', {className: "charCounter"}, this.state.postMsgLength),
-                DivWrapper([e('div', {className: "returnMessage" + this.state.retAppend, key: "returnMessage"}, this.state.returnMessage),
-                            Button(buttonProperties)])
+                e('div',{className: "postButtonWrapper"}, ([e('div', {className: "returnMessage" + this.state.retAppend, key: "returnMessage"}, this.state.returnMessage),
+                            Button(buttonProperties)]))
                 );
     }
 }
