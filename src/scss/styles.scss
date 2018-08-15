@@ -8,6 +8,7 @@ $border-color: #C0C0C0;
 $item-width: 90%;
 $user-white: #f5f8fa;
 $user-blue: #1da1f2;
+$teal: #38b8c4;
 
 @mixin boldFontSize($pix) {
 	font-weight: bold;
@@ -199,9 +200,10 @@ textarea {
         }
 
         .charCounter {
-          position: relative;
-          display: inline;
-          float: left;
+          color: $teal;
+          position: absolute;
+          bottom: 45px;
+          right: 20px;
         }
 
         .returnMessage {
