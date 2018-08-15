@@ -42,7 +42,7 @@ class HomeTimeline extends React.Component {
 
     render() {
         let component;
-        let extraComponent = e(FilterUI, {update: this.update, textStripClass: 'textInput'});
+        let extraComponent = e(FilterUI, {update: this.update});
 
         if(this.state.tweets && !_.isEmpty(this.state.tweets)) {
             component = e(Tweets, { tweets: this.state.tweets });

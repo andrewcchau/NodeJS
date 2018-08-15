@@ -3,7 +3,7 @@ import {RequestFilterTimeline} from '../services/httpCall';
 import {Button, TextBox, Pending} from './GeneralComponents';
 
 const e = React.createElement;
-let textStrip, button;
+let textBox, button;
 
 class FilterUI extends React.Component {
     constructor(props) {
@@ -14,15 +14,15 @@ class FilterUI extends React.Component {
     }
 
     componentDidMount() {
-        let textStripClass = document.getElementsByClassName(this.props.textStripClass);
-        textStrip = textStripClass && textStripClass[0];
+        let textBoxClass = document.getElementsByClassName("textInput");
+        textBox = textBoxClass && textBoxClass[0];
         let buttonClass = document.getElementsByClassName('filterButton');
         button = buttonClass && buttonClass[0];
     }
 
     /* Toggles the button and executes event handler */
     EnterKeyPress(event, callback) {
-        if(textStrip && textStrip.value){
+        if(textBox && textBox.value){
             this.setState({
                 buttonDisabled: false
             });
@@ -39,15 +39,15 @@ class FilterUI extends React.Component {
     }
 
     render() {
-        let textStripProperties = {
-            className: this.props.textStripClass,
+        let textBoxProperties = {
+            className: "textInput",
             size: 30,
             placeholder: "Enter Keyword",
-            key: this.props.textStripClass,
+            key: "textInput",
             onKeyUp: (event) => {
                this.EnterKeyPress(event, () => {
                    Pending();
-                   RequestFilterTimeline(textStrip.value, this.props.update);
+                   RequestFilterTimeline(textBox.value, this.props.update);
                });
            }
         }
@@ -59,13 +59,13 @@ class FilterUI extends React.Component {
             disabled: (this.state.buttonDisabled ? true : false),
             onClick: () => {
                 Pending();
-                RequestFilterTimeline(textStrip.value, this.props.update);
+                RequestFilterTimeline(textBox.value, this.props.update);
             }
         }
 
         let components = [
             Button(filterButtonProperties),
-            TextBox(textStripProperties)]
+            TextBox(textBoxProperties)]
 
         return components;
     }
