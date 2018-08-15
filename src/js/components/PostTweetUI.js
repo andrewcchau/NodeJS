@@ -7,8 +7,8 @@ const e = React.createElement;
 
 let textBox;
 
-const SpanWrapper = (elements) => {
-    return e('span', {className: "postButtonWrapper"}, elements);
+const DivWrapper = (elements) => {
+    return e('div', {className: "postButtonWrapper"}, elements);
 }
 
 class PostTweetUI extends React.Component {
@@ -93,7 +93,7 @@ class PostTweetUI extends React.Component {
 
         return e('div', {className: "UIContent PostTweet"},
                 TextArea(textBoxProperties),
-                SpanWrapper([e('div', {className: "charCounter", key: "charCounter"}, "Character Count: " + this.state.postMsgLength),
+                DivWrapper([e('div', {className: "charCounter", key: "charCounter"}, "Character Count: " + this.state.postMsgLength),
                             e('div', {className: "returnMessage" + this.state.retAppend, key: "returnMessage"}, this.state.returnMessage),
                             Button(buttonProperties)])
                 );

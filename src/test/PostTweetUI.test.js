@@ -10,8 +10,7 @@ describe('Post Tweet UI Test Render Everything', () => {
         const wrapper = shallow(e(PostTweetUI));
         expect(wrapper.hasClass('UIContent PostTweet')).toEqual(true);
         expect(wrapper.children().exists()).toEqual(true);
-        expect(wrapper.find('div').length).toEqual(3);
-        expect(wrapper.find('span').length).toEqual(1);
+        expect(wrapper.find('div').length).toEqual(4);
         expect(wrapper.find('button').length).toEqual(1);
 
         /* TextArea */
