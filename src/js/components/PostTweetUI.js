@@ -42,6 +42,11 @@ class PostTweetUI extends React.Component {
                 returnMessage: (success ? "Post Success!" : "Post Failed!"),
                 retAppend: (success ? " success" : " error")
             });
+        } else {
+            this.setState({
+                returnMessage: "Post Failed!",
+                retAppend: " error"
+            })
         }
     }
 
