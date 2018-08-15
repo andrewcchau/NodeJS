@@ -32,8 +32,7 @@ const PostToTwitter = (content, callback) => {
             },
             body: encodeURIComponent("message") + "=" + encodeURIComponent(content)
         })
-        .then(res => res.text(), rej => callback(rej.message))
-        .then(data => callback(data), rej => callback(rej))
+        .then(res => callback(res.status), rej => callback(rej.status))
         .catch(() => callback(null));
     }
 }
