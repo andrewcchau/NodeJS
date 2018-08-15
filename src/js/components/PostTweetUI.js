@@ -18,7 +18,7 @@ class PostTweetUI extends React.Component {
             buttonDisabled: true,
             postMsgLength: 0,
             returnMessage: null,
-            retAppend: null
+            retAppend: ""
         }
         this.updateReturnMessage = this.updateReturnMessage.bind(this);
         this.updateUI = this.updateUI.bind(this);
