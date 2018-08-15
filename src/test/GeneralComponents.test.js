@@ -40,7 +40,7 @@ const dummyFunction = () => {
 describe('Button Test No Input', () => {
     it('Should create a button with no message', () => {
         buttonProp = {
-            buttonClass: 'timelineButton'
+            className: 'timelineButton'
         }
         const wrapper = shallow(Button(buttonProp));
         expect(wrapper.find('button').length).toEqual(1);
@@ -53,7 +53,7 @@ describe('Button Test No Input', () => {
 describe('Button Test Message Only', () => {
     it('Should create a button with a message', () => {
         buttonProp = {
-            buttonMessage: message
+            message: message
         }
         const wrapper = shallow(Button(buttonProp));
         expect(wrapper.props().onClick).toEqual(undefined);
@@ -65,8 +65,8 @@ describe('Button Test Message Only', () => {
 describe('Button Test Valid Inputs + Simulate Click', () => {
     it('Should create a button with a message and callback function', () => {
         buttonProp = {
-            buttonMessage: message,
-            onclick: () => dummyFunction()
+            message: message,
+            onClick: () => dummyFunction()
         }
         const wrapper = shallow(Button(buttonProp));
         expect(wrapper.children().exists()).toEqual(true);
@@ -109,7 +109,7 @@ describe('Text Box Test No Input', () => {
 describe('Text Box Test Some Input', () => {
     it('Should create a 30px wide text box', () => {
         boxProp = {
-            boxClass: "testClass",
+            className: "testClass",
             size: 30
         }
         const wrapper = shallow(TextBox(boxProp));

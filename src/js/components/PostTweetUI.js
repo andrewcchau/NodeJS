@@ -1,7 +1,7 @@
 import React from 'react';
 import _ from 'lodash';
 import {PostToTwitter} from '../services/httpCall';
-import {Button, TextBox} from './GeneralComponents';
+import {Button, TextArea} from './GeneralComponents';
 
 const e = React.createElement;
 
@@ -25,7 +25,7 @@ class PostTweetUI extends React.Component {
     }
 
     componentDidMount() {
-        let tbClass = document.getElementsByClassName("postTextBox");
+        let tbClass = document.getElementsByClassName("postTextArea");
         textBox = tbClass && tbClass[0];
     }
 
@@ -71,11 +71,11 @@ class PostTweetUI extends React.Component {
 
     render() {
         let textBoxProperties = {
-            className: 'postTextBox',
+            className: 'postTextArea',
             rows: 6,
             cols: 50,
             placeholder: "Enter Tweet",
-            key: "postTextBox",
+            key: "postTextArea",
             onKeyUp: (event) => this.updateUI(event),
             onKeyPress: (event) => this.checkCharCount(event),
             maxLength: 280
@@ -92,7 +92,7 @@ class PostTweetUI extends React.Component {
         }
 
         return e('div', {className: "UIContent PostTweet"},
-                TextBox(textBoxProperties),
+                TextArea(textBoxProperties),
                 SpanWrapper([e('div', {className: "charCounter", key: "charCounter"}, "Character Count: " + this.state.postMsgLength),
                             e('div', {className: "returnMessage" + this.state.retAppend, key: "returnMessage"}, this.state.returnMessage),
                             Button(buttonProperties)])

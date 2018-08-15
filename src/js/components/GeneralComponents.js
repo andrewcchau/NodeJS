@@ -36,7 +36,7 @@ const Button = (properties) => {
     }
 }
 
-const TextStrip = (properties) => {
+const TextBox = (properties) => {
     if(properties) {
         return e('input', { className: properties.className,
                             size: properties.size,
@@ -50,7 +50,7 @@ const TextStrip = (properties) => {
     }
 }
 
-const TextBox = (properties) => {
+const TextArea = (properties) => {
     if(properties) {
         return e('textarea', { className: properties.className,
                             rows: properties.rows,
@@ -71,4 +71,4 @@ const statusEnum = {
     NO_MATCH: "No Match"
 }
 
-export {Header, Mismatch, Pending, Error, Button, TextBox, TextStrip, statusEnum};
+export {Header, Mismatch, Pending, Error, Button, TextBox, TextArea, statusEnum};

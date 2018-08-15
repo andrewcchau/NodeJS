@@ -1,6 +1,6 @@
 import React from 'react';
 import {RequestFilterTimeline} from '../services/httpCall';
-import {Button, TextStrip, Pending} from './GeneralComponents';
+import {Button, TextBox, Pending} from './GeneralComponents';
 
 const e = React.createElement;
 let textStrip, button;
@@ -65,7 +65,7 @@ class FilterUI extends React.Component {
 
         let components = [
             Button(filterButtonProperties),
-            TextStrip(textStripProperties)]
+            TextBox(textStripProperties)]
 
         return components;
     }
