@@ -1,6 +1,7 @@
 $font: 'Lato';
 $blue: #008CBA;
 $tan: #e9e9e9;
+$dark-tan: #adadad;
 $light-blue: #e8f5fd;
 $timber: #E2D7D4;
 $border-color: #C0C0C0;
@@ -22,6 +23,10 @@ header {
 
 body {
 	font-family: $font;
+}
+
+textarea {
+    resize: none;
 }
 
 .title {
@@ -47,179 +52,177 @@ body {
     }
 
     .tab:hover {
-        background-color: $tan;
+        background-color: $dark-tan;
     }
 
     .tab.active {
         background-color: white;
-        border-bottom: 0;
     }
 
     .postTextArea {
-        margin-top: 15px;
+        margin-top: 35px;
         font-size: 20px;
     }
-}
 
-.UIContent {
-    .homeTLUIContainer {
-        text-align: left;
-        margin: 15px ((100% - $item-width) / 2) 10px ((100% - $item-width) / 2);
+    .UIContent {
+        .homeTLUIContainer {
+            text-align: left;
+            margin: 15px ((100% - $item-width) / 2) 10px ((100% - $item-width) / 2);
 
-        .textInput {
+            .textInput {
+                border: 1px solid;
+                border-radius: 5px;
+                padding: 8px 4px;
+                float: right;
+                margin-right: 5px;
+            }
+
+            .filterButton {
+                float: right;
+            }
+        }
+
+        .userTLUIContainer {
+            text-align: right;
+            margin: 15px ((100% - $item-width) / 2) 10px ((100% - $item-width) / 2);
+        }
+
+        .userTimelineButton, .homeTimelineButton, .filterButton, .postButton {
+            background-color: white;
+            border-radius: 12px;
             border: 1px solid;
-            border-radius: 5px;
-            padding: 8px 4px;
-            float: right;
-            margin-right: 5px;
+            font-size: 15px;
+            transition-duration: 0.4s;
+            justify-content: center;
+            padding: 5px 10px;
         }
 
-        .filterButton {
-            float: right;
+        .userTimelineButton:hover, .homeTimelineButton:hover, .filterButton.active:hover {
+            background-color: $blue;
+            color: white;
         }
-    }
 
-    .userTLUIContainer {
-        text-align: right;
-        margin: 15px ((100% - $item-width) / 2) 10px ((100% - $item-width) / 2);
-    }
+        .dataHome, .dataUser {
+            text-align: center;
+            border: 1px solid black;
+            width: $item-width;
+            margin-right: (100% - $item-width) / 2;
+            margin-left: (100% - $item-width) / 2;
+            font-size: 25px;
+            clear: right;
 
-    .userTimelineButton, .homeTimelineButton, .filterButton, .postButton {
-        background-color: white;
-        border-radius: 12px;
-        border: 1px solid;
-        font-size: 15px;
-        transition-duration: 0.4s;
-        justify-content: center;
-        padding: 5px 10px;
-    }
+            .errorMessage {
+                color: red;
+            }
 
-    .userTimelineButton:hover, .homeTimelineButton:hover, .filterButton.active:hover {
-        background-color: $blue;
-        color: white;
-    }
+            .item {
+                background-color: $light-blue;
+                align-items: center;
+                border-bottom: 1px solid $border-color;
+                display: grid;
+                grid-template-columns: 17% auto;
+                padding-top: 2px;
 
-    .dataHome, .dataUser {
-        text-align: center;
-        border: 1px solid black;
-        width: $item-width;
-        margin-right: (100% - $item-width) / 2;
-        margin-left: (100% - $item-width) / 2;
-        font-size: 25px;
-        clear: right;
+                .user {
+                    margin-bottom: 5px;
 
-        .errorMessage {
+                    .twitterName {
+                        @include boldFontSize(20px);
+                    }
+
+                    .twitterHandle {
+                        font: italic normal 15px $font;
+                        margin-bottom: 5px;
+                    }
+                }
+
+                .message {
+                    text-align: left;
+
+                    .date {
+                        font-style: italic;
+                        font-size: 13px;
+                        margin-top: 5px;
+                        height: 10px;
+                    }
+
+                    .messageText {
+                        font-size: 17px;
+                    }
+                }
+
+                img {
+                    border-radius: 50%;
+                    margin-top: 10px;
+                    width: 60px;
+                    height: 60px;
+                }
+            }
+
+            .item:nth-child(even) {
+                background-color: $tan;
+            }
+        }
+
+        .dataHome:empty, .dataUser:empty {
+            display: none;
+        }
+
+        .dataUser {
+            .item {
+                background-color: $user-blue;
+                grid-template-columns: 17% auto;
+                padding-top: 11px;
+                padding-bottom: 15px;
+
+                .user {
+                    .twitterName {
+                        margin-top: 5px;
+                        @include boldFontSize(20px);
+                    }
+                }
+
+                img {
+                    margin-top: 4px;
+                }
+            }
+
+            .item:nth-child(even) {
+                background-color: $user-white;
+            }
+        }
+
+        .postButtonWrapper {
+            margin-top: 5px;
+            text-align: right;
+            clear: left;
+        }
+
+        .charCounter {
+          position: relative;
+          display: inline;
+          float: left;
+        }
+
+        .returnMessage {
+            position: relative;
+            display: inline;
+            clear: left;
+            margin-right: 10px;
+        }
+
+        .returnMessage.success {
+            color: green;
+        }
+
+        .returnMessage.error {
             color: red;
         }
 
-        .item {
-            background-color: $light-blue;
-            align-items: center;
-            border-bottom: 1px solid $border-color;
-            display: grid;
-            grid-template-columns: 17% auto;
-            padding-top: 2px;
-
-            .user {
-                margin-bottom: 5px;
-
-                .twitterName {
-                    @include boldFontSize(20px);
-                }
-
-                .twitterHandle {
-                    font: italic normal 15px $font;
-                    margin-bottom: 5px;
-                }
-            }
-
-            .message {
-                text-align: left;
-
-                .date {
-                    font-style: italic;
-                    font-size: 13px;
-                    margin-top: 5px;
-                    height: 10px;
-                }
-
-                .messageText {
-                    font-size: 17px;
-                }
-            }
-
-            img {
-                border-radius: 50%;
-                margin-top: 10px;
-                width: 60px;
-                height: 60px;
-            }
-        }
-
-        .item:nth-child(even) {
-            background-color: $tan;
-        }
     }
 
-    .dataHome:empty, .dataUser:empty {
-        display: none;
-    }
-
-    .dataUser {
-        .item {
-            background-color: $user-blue;
-            grid-template-columns: 17% auto;
-            padding-top: 11px;
-            padding-bottom: 15px;
-
-            .user {
-                .twitterName {
-                    margin-top: 5px;
-                    @include boldFontSize(20px);
-                }
-            }
-
-            img {
-                margin-top: 4px;
-            }
-        }
-
-        .item:nth-child(even) {
-            background-color: $user-white;
-        }
-    }
-
-    .postButtonWrapper {
-        text-align: right;
-        clear: left;
-    }
-
-    .charCounter {
-      position: relative;
-      display: inline;
-      float: left;
-    }
-
-    .returnMessage {
+    .UIContent.PostTweet {
         position: relative;
-        display: inline;
-        clear: left;
-        margin-right: 10px;
+        display: inline-block;
     }
-
-    .returnMessage.success {
-        color: green;
-    }
-
-    .returnMessage.error {
-        color: red;
-    }
-
-}
-
-
-
-.UIContent.PostTweet {
-    position: relative;
-    display: inline-block;
 }
