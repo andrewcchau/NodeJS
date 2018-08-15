@@ -24,8 +24,12 @@ class TabContainer extends React.Component {
     }
 
     componentDidMount() {
-        tab = document.getElementsByClassName("tab");
-        tab[0].className += " active";
+        if(this.props.children) {
+            tab = document.getElementsByClassName("tab");
+            if(tab && tab[0]) {
+                tab[0].className += " active";
+            }
+        }
     }
 
     openTab(event, tabName) {
@@ -47,10 +51,14 @@ class TabContainer extends React.Component {
     }
 
     render() {
-        return e('div', {className: "tabContainer"},
-                _.map(this.props.children, (content) =>
-                    Tab((event) => this.openTab(event, content.key), content.key)),
-                this.state.content);
+        if(this.props.children) {
+            return e('div', {className: "tabContainer"},
+                    _.map(this.props.children, (content) =>
+                        Tab((event) => this.openTab(event, content.key), content.key)),
+                    this.state.content);
+        } else {
+            return e('div', {className: "tabContainer"});
+        }
     }
 }
 
