@@ -32,7 +32,7 @@ class PostTweetUI extends React.Component {
     updateReturnMessage(message) {
         if(message) {
             let success;
-            if(_.startsWith(message, "Oops")) {
+            if(_.startsWith(message, "Oops") || _.startsWith(message,"Fail")) {
                 success = false;
             } else {
                 success = true;

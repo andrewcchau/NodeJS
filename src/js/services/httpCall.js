@@ -24,7 +24,6 @@ const RequestFilterTimeline = (keyword, callback) => {
 
 const PostToTwitter = (content, callback) => {
     if(content) {
-        let payload = new URLSearchParams();
         return fetch('http://localhost:8080/api/1.0/twitter/tweet', {
             method: 'POST',
             mode: "cors",
@@ -33,7 +32,7 @@ const PostToTwitter = (content, callback) => {
             },
             body: encodeURIComponent("message") + "=" + encodeURIComponent(content)
         })
-        .then(res => res.text(), rej => rej.text())
+        .then(res => res.text(), rej => callback(rej.message))
         .then(data => callback(data), rej => callback(rej))
         .catch(() => callback(null));
     }
