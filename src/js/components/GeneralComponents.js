@@ -13,7 +13,7 @@ class Status extends React.Component {
 }
 
 const Mismatch = (message) => {
-    return e(Status, { className: 'errorMessage', message: message });
+    return e(Status, { className: 'resultNoneMessage', message: message });
 }
 
 const Pending = () => {
