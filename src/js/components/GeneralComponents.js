@@ -13,7 +13,7 @@ class Status extends React.Component {
 }
 
 const Mismatch = (message) => {
-    return e(Status, { className: 'errorMessage', message: message });
+    return e(Status, { className: 'resultNoneMessage', message: message });
 }
 
 const Pending = () => {
@@ -26,25 +26,42 @@ const Error = (errorText) => {
 
 const Button = (properties) => {
     if(properties) {
-        return e('button', { className: properties.buttonClass,
-                             onClick: properties.onclick,
+        return e('button', { className: properties.className,
+                             onClick: properties.onClick,
                              key: properties.key,
-                             disabled: properties.disable },
-                         properties.buttonMessage);
+                             disabled: properties.disabled },
+                         properties.message);
     } else {
         return e('button');
     }
 }
 
-const TextBox = (properties, keyUpFunction) => {
+const TextBox = (properties) => {
     if(properties) {
-        return e('input', { className: properties.boxClass,
+        return e('input', { className: properties.className,
                             size: properties.size,
-                            placeholder: properties.holderText,
+                            placeholder: properties.placeholder,
                             key: properties.key,
-                            onKeyUp: keyUpFunction });
+                            onKeyUp: properties.onKeyUp,
+                            onKeyPress: properties.onKeyPress,
+                            maxLength: properties.maxLength});
     } else {
         return e('input');
+    }
+}
+
+const TextArea = (properties) => {
+    if(properties) {
+        return e('textarea', { className: properties.className,
+                            rows: properties.rows,
+                            cols: properties.cols,
+                            placeholder: properties.placeholder,
+                            key: properties.key,
+                            onKeyUp: properties.onKeyUp,
+                            onKeyPress: properties.onKeyPress,
+                            maxLength: properties.maxLength});
+    } else {
+        return e('textarea');
     }
 }
 
@@ -54,4 +71,4 @@ const statusEnum = {
     NO_MATCH: "No Match"
 }
 
-export {Header, Mismatch, Pending, Error, Button, TextBox, statusEnum};
+export {Header, Mismatch, Pending, Error, Button, TextBox, TextArea, statusEnum};

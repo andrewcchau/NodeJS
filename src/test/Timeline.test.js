@@ -35,10 +35,9 @@ describe('Home Timeline Test No Input', () => {
     it('Should have children components but nothing else', () => {
         const wrapper = shallow(e(HomeTimeline));
         expect(wrapper.find('div').length).toEqual(2);
-        expect(wrapper.childAt(0).childAt(0).text()).toEqual("Home Timeline");
-        expect(wrapper.childAt(1).hasClass('homeTLUIContainer')).toEqual(true);
-        expect(wrapper.childAt(2).hasClass('dataHome')).toEqual(true);
-        expect(wrapper.childAt(2).children().length).toEqual(1);
+        expect(wrapper.childAt(0).hasClass('homeTLUIContainer')).toEqual(true);
+        expect(wrapper.childAt(1).hasClass('dataHome')).toEqual(true);
+        expect(wrapper.childAt(1).children().length).toEqual(1);
     });
 });
 
@@ -46,7 +45,7 @@ describe('Home Timeline Button Press Test', () => {
     it('Should have proper children components after button press', () => {
         const wrapper = mount(e(HomeTimeline, { test: true, requestFunc: callBackFunc}));
         expect(wrapper.find('div').length).toEqual(4);
-        wrapper.childAt(0).childAt(1).childAt(0).childAt(0).find('button').simulate('click');
+        wrapper.childAt(0).childAt(0).childAt(0).childAt(0).find('button').simulate('click');
         expect(wrapper.find('div').length).toEqual(9);
     });
 });
@@ -55,10 +54,9 @@ describe('User Timeline Test No Input', () => {
     it('Should have children components but nothing else', () => {
         const wrapper = shallow(e(UserTimeline));
         expect(wrapper.find('div').length).toEqual(2);
-        expect(wrapper.childAt(0).childAt(0).text()).toEqual("User Timeline");
-        expect(wrapper.childAt(1).hasClass('userTLUIContainer')).toEqual(true);
-        expect(wrapper.childAt(2).hasClass('dataUser')).toEqual(true);
-        expect(wrapper.childAt(2).children().length).toEqual(1);
+        expect(wrapper.childAt(0).hasClass('userTLUIContainer')).toEqual(true);
+        expect(wrapper.childAt(1).hasClass('dataUser')).toEqual(true);
+        expect(wrapper.childAt(1).children().length).toEqual(1);
     });
 });
 

@@ -3,7 +3,7 @@ import _ from 'lodash';
 import Tweets from './Tweets';
 import TimelineUI from './TimelineUI';
 import {RequestUserTimeline} from '../services/httpCall';
-import {Header, Pending, Error, statusEnum} from './GeneralComponents';
+import {Pending, Error, statusEnum} from './GeneralComponents';
 
 const e = React.createElement;
 
@@ -46,8 +46,7 @@ class UserTimeline extends React.Component {
         }
 
 
-        return e('div', {},
-                e('header', {}, Header("User Timeline")),
+        return e('div', {className: "UIContent"},
                 e(TimelineUI, { className: "userTLUIContainer",
                                 requestFunc: (this.props.test ? this.props.requestFunc : RequestUserTimeline),
                                 buttonClass: 'userTimelineButton',

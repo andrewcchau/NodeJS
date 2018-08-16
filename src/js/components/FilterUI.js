@@ -3,7 +3,7 @@ import {RequestFilterTimeline} from '../services/httpCall';
 import {Button, TextBox, Pending} from './GeneralComponents';
 
 const e = React.createElement;
-let textBox;
+let textBox, button;
 
 class FilterUI extends React.Component {
     constructor(props) {
@@ -14,8 +14,10 @@ class FilterUI extends React.Component {
     }
 
     componentDidMount() {
-        let textBoxClass = document.getElementsByClassName(this.props.textBoxClass);
+        let textBoxClass = document.getElementsByClassName("textInput");
         textBox = textBoxClass && textBoxClass[0];
+        let buttonClass = document.getElementsByClassName('filterButton');
+        button = buttonClass && buttonClass[0];
     }
 
     /* Toggles the button and executes event handler */
@@ -24,6 +26,7 @@ class FilterUI extends React.Component {
             this.setState({
                 buttonDisabled: false
             });
+            button.className = "filterButton active";
             if(event.keyCode == 13) {
                 callback();
             }
@@ -31,23 +34,30 @@ class FilterUI extends React.Component {
             this.setState({
                 buttonDisabled: true
             });
+            button.className = 'filterButton';
         }
     }
 
     render() {
         let textBoxProperties = {
-            boxClass: this.props.textBoxClass,
+            className: "textInput",
             size: 30,
-            holderText: "Enter Keyword",
-            key: this.props.textBoxClass
+            placeholder: "Enter Keyword",
+            key: "textInput",
+            onKeyUp: (event) => {
+               this.EnterKeyPress(event, () => {
+                   Pending();
+                   RequestFilterTimeline(textBox.value, this.props.update);
+               });
+           }
         }
 
         let filterButtonProperties = {
-            buttonClass: 'filterButton',
-            buttonMessage: 'Filter',
+            className: 'filterButton',
+            message: 'Filter',
             key: 'filterButton',
-            disable: (this.state.buttonDisabled ? true : false),
-            onclick: () => {
+            disabled: (this.state.buttonDisabled ? true : false),
+            onClick: () => {
                 Pending();
                 RequestFilterTimeline(textBox.value, this.props.update);
             }
@@ -55,12 +65,7 @@ class FilterUI extends React.Component {
 
         let components = [
             Button(filterButtonProperties),
-            TextBox(textBoxProperties, (event) => {
-                this.EnterKeyPress(event, () => {
-                    Pending();
-                    RequestFilterTimeline(textBox.value, this.props.update);
-                });
-            })]
+            TextBox(textBoxProperties)]
 
         return components;
     }
