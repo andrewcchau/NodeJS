@@ -20,34 +20,27 @@ class TabContainer extends React.Component {
         super(props);
         this.state = {
             tabs: ["Home Timeline", "User Timeline", "Post Tweet"],
-            content: e(HomeTimeline),
             currentTab: "Home Timeline"
         };
     }
 
-    /* Change the content to be displayed */
-    openTab(event, tabName) {
-        let content;
+    /* Display content of tab */
+    displayContent(tabName) {
         switch(tabName) {
             case "Home Timeline":
-                content = e(HomeTimeline);
+                return e(HomeTimeline);
                 break;
 
             case "User Timeline":
-                content = e(UserTimeline);
+                return e(UserTimeline);
                 break;
 
             case "Post Tweet":
-                content = e(PostTweetUI);
+                return e(PostTweetUI);
                 break;
 
-            default: content = null;
+            default: return null;
         }
-
-        this.setState({
-            content: content,
-            currentTab: tabName
-        });
     }
 
     render() {
@@ -60,14 +53,18 @@ class TabContainer extends React.Component {
 
                     let tabProp = {
                         className: "tab" + append,
-                        onClick: (event) => this.openTab(event, tabName),
+                        onClick: () => {
+                            this.setState({
+                                currentTab: tabName
+                            });
+                        },
                         key: tabName + " Tab",
                         tabName: tabName
                     }
 
                     return Tab(tabProp);
                 }),
-                this.state.content);
+                this.displayContent(this.state.currentTab));
 
     }
 }
