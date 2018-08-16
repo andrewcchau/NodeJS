@@ -11,7 +11,10 @@ describe('TabContainer 3 Children Test', () => {
         expect(wrapper.hasClass('tabContainer')).toEqual(true);
         expect(wrapper.children().exists()).toEqual(true);
         expect(wrapper.childAt(0).hasClass("tab active")).toEqual(true);
+        expect(wrapper.childAt(0).text()).toEqual("Home Timeline");
         expect(wrapper.childAt(1).hasClass("tab")).toEqual(true);
+        expect(wrapper.childAt(1).text()).toEqual("User Timeline");
         expect(wrapper.childAt(2).hasClass("tab")).toEqual(true);
+        expect(wrapper.childAt(2).text()).toEqual("Post Tweet");
     });
 });
