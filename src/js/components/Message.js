@@ -1,4 +1,5 @@
 import React from 'react';
+import {Button} from './GeneralComponents';
 
 const e = React.createElement;
 
@@ -25,14 +26,45 @@ const MessageLink = (user, id, message) => {
     return e('a', { className: "messageText", href: link, target: "_blank" }, message);
 }
 
-const Message = (jsonObj) => {
-    if(jsonObj) {
-        return e('div', { className: "message" },
-            MessageDate(jsonObj.createdAt),
-            MessageLink(jsonObj.user.twitterHandle, jsonObj.id, jsonObj.twitterMessage));
-    } else {
-        return e('div', { className: "message" },
-            MessageDate(), MessageLink());
+//const Message = (jsonObj) => {
+//    let replyButtonProps = {
+//        className: "replyButton",
+//        key: "replyButton",
+//        message: "Reply"
+//    }
+//
+//    if(jsonObj) {
+//        return e('div', { className: "message" },
+//            MessageDate(jsonObj.createdAt),
+//            MessageLink(jsonObj.user.twitterHandle, jsonObj.id, jsonObj.twitterMessage),
+//            Button(replyButtonProps));
+//    } else {
+//        return e('div', { className: "message" },
+//            MessageDate(), MessageLink());
+//    }
+//}
+
+class Message extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+
+    render() {
+        let replyButtonProps = {
+            className: "replyButton",
+            key: "replyButton",
+            message: "Reply"
+        }
+
+        if(this.props.jsonObj) {
+            return e('div', { className: "message" },
+                MessageDate(this.props.jsonObj.createdAt),
+                MessageLink(this.props.jsonObj.user.twitterHandle, this.props.jsonObj.id, this.props.jsonObj.twitterMessage),
+                Button(replyButtonProps));
+        } else {
+            return e('div', { className: "message" },
+                MessageDate(), MessageLink());
+        }
     }
 }
 

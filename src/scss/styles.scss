@@ -164,6 +164,12 @@ textarea {
             }
         }
 
+        .dataHome {
+            .replyButton {
+                display: block;
+            }
+        }
+
         .dataHome:empty, .dataUser:empty {
             display: none;
         }
