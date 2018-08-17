@@ -5,6 +5,7 @@ import TimelineUI from './TimelineUI';
 import FilterUI from './FilterUI';
 import {Request, RequestFilterTimeline} from '../services/httpCall';
 import {Mismatch, Pending, Error, statusEnum} from './GeneralComponents';
+import Modal from './Modal';
 
 const e = React.createElement;
 
@@ -14,8 +15,11 @@ class HomeTimeline extends React.Component {
         this.state = {
             tweets: null,
             status: statusEnum.PENDING,
+            modalContent: null,
+            modalDisabled: true
         }
         this.update = this.update.bind(this);
+        this.openModal = this.openModal.bind(this);
         Request(this.update);
     }
 
@@ -40,12 +44,19 @@ class HomeTimeline extends React.Component {
         }
     }
 
+    openModal(content){
+        this.setState({
+            modalContent: content,
+            modalDisabled: false
+        });
+    }
+
     render() {
         let component;
         let extraComponent = e(FilterUI, {update: this.update});
 
         if(this.state.tweets && !_.isEmpty(this.state.tweets)) {
-            component = e(Tweets, { tweets: this.state.tweets });
+            component = e(Tweets, { tweets: this.state.tweets, openModal: this.openModal});
         } else if(_.isEqual(this.state.status, statusEnum.NO_MATCH)) {
             component = Mismatch("No tweets match your search query.");
         } else if(_.isEqual(this.state.status, statusEnum.PENDING)) {
@@ -63,7 +74,8 @@ class HomeTimeline extends React.Component {
                                 updateCallback: this.update,
                                 extraComponents: extraComponent
                                 }),
-                e('div', { className: "dataHome" }, component));
+                e('div', { className: "dataHome" }, component),
+                e(Modal, { className: "modal", hidden: this.state.modalDisabled, content: this.state.modalContent }));
     }
 }
 

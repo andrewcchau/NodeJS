@@ -87,7 +87,7 @@ textarea {
             margin: 15px ((100% - $item-width) / 2) 10px ((100% - $item-width) / 2);
         }
 
-        .userTimelineButton, .homeTimelineButton, .filterButton, .postButton {
+        .userTimelineButton, .homeTimelineButton, .filterButton, .postButton, .replyButton {
             background-color: white;
             border-radius: 12px;
             border: 1px solid;
@@ -97,7 +97,7 @@ textarea {
             padding: 5px 10px;
         }
 
-        .userTimelineButton:hover, .homeTimelineButton:hover, .filterButton.active:hover {
+        .userTimelineButton:hover, .homeTimelineButton:hover, .filterButton.active:hover, .replyButton:hover {
             background-color: $blue;
             color: white;
         }
@@ -168,6 +168,14 @@ textarea {
             .replyButton {
                 display: block;
             }
+        }
+
+        .modal {
+            display: block;
+        }
+
+        .modal.hidden {
+            display: none;
         }
 
         .dataHome:empty, .dataUser:empty {

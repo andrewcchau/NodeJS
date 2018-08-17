@@ -26,23 +26,6 @@ const MessageLink = (user, id, message) => {
     return e('a', { className: "messageText", href: link, target: "_blank" }, message);
 }
 
-//const Message = (jsonObj) => {
-//    let replyButtonProps = {
-//        className: "replyButton",
-//        key: "replyButton",
-//        message: "Reply"
-//    }
-//
-//    if(jsonObj) {
-//        return e('div', { className: "message" },
-//            MessageDate(jsonObj.createdAt),
-//            MessageLink(jsonObj.user.twitterHandle, jsonObj.id, jsonObj.twitterMessage),
-//            Button(replyButtonProps));
-//    } else {
-//        return e('div', { className: "message" },
-//            MessageDate(), MessageLink());
-//    }
-//}
 
 class Message extends React.Component {
     constructor(props) {
@@ -53,7 +36,8 @@ class Message extends React.Component {
         let replyButtonProps = {
             className: "replyButton",
             key: "replyButton",
-            message: "Reply"
+            message: "Reply",
+            onClick: () => this.props.openModal(this.props.jsonObj)
         }
 
         if(this.props.jsonObj) {

@@ -45,7 +45,7 @@ class PostTweetUI extends React.Component {
         }
     }
 
-    checkCharCount(event) {
+    checkCharCount() {
         if(textBox && textBox.value.length >= 280) {
             return false;
         }
@@ -76,7 +76,7 @@ class PostTweetUI extends React.Component {
             placeholder: "Enter Tweet",
             key: "postTextArea",
             onKeyUp: (event) => this.updateUI(event),
-            onKeyPress: (event) => this.checkCharCount(event),
+            onKeyPress: () => this.checkCharCount(),
             maxLength: 280
         }
 
