@@ -39,14 +39,14 @@ const PostToTwitter = (content, callback) => {
 
 const ReplyToTweet = (content, callback) => {
     if(content) {
-        return fetch('http://localhost:8080/api/1.0/tweet/reply', {
+        return fetch('http://localhost:8080/api/1.0/twitter/tweet/reply', {
             method: 'POST',
             mode: 'cors',
             headers: {
                 "Content-Type": "application/x-www-form-urlencoded"
             },
             body: encodeURIComponent('statusID') + "=" + encodeURIComponent(content.statusID)
-                    + "," + encodeURIComponent('message') + "=" + encodeURIComponent(content.message)
+                    + "&" + encodeURIComponent('message') + "=" + encodeURIComponent(content.message)
         })
         .then(res => callback(res.status), rej => callback(rej.status))
         .catch(() => callback(null));

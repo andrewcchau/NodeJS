@@ -26,9 +26,9 @@ class Modal extends React.Component {
     }
 
     render() {
-        let post = {
-            statusID: (this.props.content ? this.props.content.id : null),
-            message: (textBox ? textBox.value : null)
+        let username = "";
+        if(this.props.content) {
+            username = this.props.content.user.twitterHandle;
         }
 
         let modalButtonProps = {
@@ -36,6 +36,10 @@ class Modal extends React.Component {
             key: "modalPostButton",
             message: "Submit",
             onClick: () => {
+                let post = {
+                    statusID: (this.props.content ? this.props.content.id : null),
+                    message: (textBox ? textBox.value : null)
+                }
                 ReplyToTweet(post)
             }
         }
@@ -46,6 +50,7 @@ class Modal extends React.Component {
             rows: 5,
             cols: 60,
             placeholder: "Enter Reply",
+            maxLength: 280 - username.length - 2,
             onKeyPress: () => this.checkCharCount()
         }
 

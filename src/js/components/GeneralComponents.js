@@ -58,7 +58,6 @@ const TextArea = (properties) => {
                             placeholder: properties.placeholder,
                             key: properties.key,
                             onKeyUp: properties.onKeyUp,
-                            onKeyPress: properties.onKeyPress,
                             maxLength: properties.maxLength});
     } else {
         return e('textarea');
