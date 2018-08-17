@@ -25,31 +25,10 @@ class Modal extends React.Component {
         }
     }
 
-    displayModal(input) {
-        if(input) {
-            this.setState({
-                disabled: false
-            });
-        } else {
-            this.setState({
-                disabled: true
-            });
-        }
-    }
-
     render() {
-        let classAppend = (this.props.hidden ? " hidden" : "");
-
         let post = {
             statusID: (this.props.content ? this.props.content.id : null),
             message: (textBox ? textBox.value : null)
-        }
-
-        let replyButtonProps = {
-            className: "replyButton",
-            key: "replyButton",
-            message: "Reply",
-            onClick: () => this.displayModal(true)
         }
 
         let modalButtonProps = {
@@ -57,7 +36,7 @@ class Modal extends React.Component {
             key: "modalPostButton",
             message: "Submit",
             onClick: () => {
-//                ReplyToTweet(post)
+                ReplyToTweet(post)
             }
         }
 
@@ -70,9 +49,9 @@ class Modal extends React.Component {
             onKeyPress: () => this.checkCharCount()
         }
 
-        return e('div', {className: this.props.className + classAppend},
+        return e('div', {className: this.props.className},
                     e('div', {className: this.props.className + "Content"}),
-                    e('span', {className: this.props.className + "CloseButton", onClick: () => this.displayModal(false)}, "&times;"),
+                    e('span', {className: this.props.className + "CloseButton", onClick: () => this.props.displayModal(false)}, "x"),
                     TextArea(modalTextAreaProps),
                     Button(modalButtonProps));
     }

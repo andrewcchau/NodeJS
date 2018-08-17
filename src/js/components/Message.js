@@ -37,7 +37,7 @@ class Message extends React.Component {
             className: "replyButton",
             key: "replyButton",
             message: "Reply",
-            onClick: () => this.props.openModal(this.props.jsonObj)
+            onClick: () => this.props.openModal(true, this.props.jsonObj)
         }
 
         if(this.props.jsonObj) {

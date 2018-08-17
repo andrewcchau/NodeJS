@@ -16,10 +16,10 @@ class HomeTimeline extends React.Component {
             tweets: null,
             status: statusEnum.PENDING,
             modalContent: null,
-            modalDisabled: true
+            displayModal: false
         }
         this.update = this.update.bind(this);
-        this.openModal = this.openModal.bind(this);
+        this.displayModal = this.displayModal.bind(this);
         Request(this.update);
     }
 
@@ -44,10 +44,14 @@ class HomeTimeline extends React.Component {
         }
     }
 
-    openModal(content){
+    displayModal(toggle, content){
+        let modalContent;
+        if(content) {
+            modalContent = content;
+        }
         this.setState({
-            modalContent: content,
-            modalDisabled: false
+            modalContent: modalContent,
+            displayModal: toggle
         });
     }
 
@@ -56,7 +60,7 @@ class HomeTimeline extends React.Component {
         let extraComponent = e(FilterUI, {update: this.update});
 
         if(this.state.tweets && !_.isEmpty(this.state.tweets)) {
-            component = e(Tweets, { tweets: this.state.tweets, openModal: this.openModal});
+            component = e(Tweets, { tweets: this.state.tweets, openModal: this.displayModal});
         } else if(_.isEqual(this.state.status, statusEnum.NO_MATCH)) {
             component = Mismatch("No tweets match your search query.");
         } else if(_.isEqual(this.state.status, statusEnum.PENDING)) {
@@ -75,7 +79,7 @@ class HomeTimeline extends React.Component {
                                 extraComponents: extraComponent
                                 }),
                 e('div', { className: "dataHome" }, component),
-                e(Modal, { className: "modal", hidden: this.state.modalDisabled, content: this.state.modalContent }));
+                (this.state.displayModal ? e(Modal, { className: "modal", content: this.state.modalContent , displayModal: this.displayModal}) : null));
     }
 }
 
