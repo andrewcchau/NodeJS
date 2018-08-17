@@ -44,7 +44,7 @@ class Message extends React.Component {
             return e('div', { className: "message" },
                 MessageDate(this.props.jsonObj.createdAt),
                 MessageLink(this.props.jsonObj.user.twitterHandle, this.props.jsonObj.id, this.props.jsonObj.twitterMessage),
-                Button(replyButtonProps));
+                (this.props.openModal ? Button(replyButtonProps) : null));
         } else {
             return e('div', { className: "message" },
                 MessageDate(), MessageLink());

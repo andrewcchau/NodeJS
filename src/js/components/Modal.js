@@ -1,6 +1,8 @@
 import React from 'react';
 import {TextArea, Button} from './GeneralComponents';
 import {ReplyToTweet} from '../services/httpCall';
+import User from './User';
+import Message from './Message';
 
 const e = React.createElement;
 
@@ -26,9 +28,9 @@ class Modal extends React.Component {
     }
 
     render() {
-        let username = "";
+        let username = "", jsonObj = this.props.content;
         if(this.props.content) {
-            username = this.props.content.user.twitterHandle;
+            username = jsonObj.user.twitterHandle;
         }
 
         let modalButtonProps = {
@@ -37,7 +39,7 @@ class Modal extends React.Component {
             message: "Submit",
             onClick: () => {
                 let post = {
-                    statusID: (this.props.content ? this.props.content.id : null),
+                    statusID: (jsonObj ? jsonObj.id : null),
                     message: (textBox ? textBox.value : null)
                 }
                 ReplyToTweet(post)
@@ -54,8 +56,14 @@ class Modal extends React.Component {
             onKeyPress: () => this.checkCharCount()
         }
 
+
+        let originalPost = [
+            e(User, {user: jsonObj.user, key: this.props.className + " User"}),
+            e(Message, {jsonObj: jsonObj, key: this.props.className + " Message"})
+        ]
+
         return e('div', {className: this.props.className},
-                    e('div', {className: this.props.className + "Content"}),
+                    e('div', {className: this.props.className + "Content"}, originalPost),
                     e('span', {className: this.props.className + "CloseButton", onClick: () => this.props.displayModal(false)}, "x"),
                     TextArea(modalTextAreaProps),
                     Button(modalButtonProps));
