@@ -1,5 +1,8 @@
 import {shallow} from 'enzyme';
+import React from 'react';
 import {MessageDate, MessageLink, Message} from '../js/components/Message';
+
+const e = React.createElement;
 
 let user = "Tester",
     id = "12345",
@@ -75,7 +78,7 @@ const json = (createdAt, handle, id, message) => {
 
 describe('Message Test No Input', () => {
     it('Should create a nested div and "a" with no children', () => {
-        const wrapper = shallow(Message());
+        const wrapper = shallow(e(Message));
         expect(wrapper.children().exists()).toEqual(true);
         expect(wrapper.find('div').exists()).toEqual(true);
         expect(wrapper.find('div').length).toEqual(2);
@@ -90,7 +93,7 @@ describe('Message Test No Input', () => {
 describe('Message Test Valid Input', () => {
     it('Should create a nested div and "a" with children', () => {
         let jsonObj = JSON.parse(json(date, user, id, message));
-        const wrapper = shallow(Message(jsonObj));
+        const wrapper = shallow(e(Message, {jsonObj: jsonObj}));
         expect(wrapper.children().exists()).toEqual(true);
         expect(wrapper.childAt(0).hasClass('date')).toEqual(true);
         expect(wrapper.childAt(1).hasClass('messageText')).toEqual(true);
