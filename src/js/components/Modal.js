@@ -26,13 +26,6 @@ class Modal extends React.Component {
         textBox = tbClass && tbClass[0];
     }
 
-    handleClickOutside(event) {
-        if(this.ref && !this.ref.contains(event.target)) {
-            this.props.displayModal(false);
-        }
-
-    }
-
     updateUI() {
         if(textBox && textBox.value) {
             this.setState({
