@@ -60,12 +60,12 @@ class Modal extends React.Component {
             }
 
             this.setState({
-                returnMessage: (success ? "Replied Successfully!" : "Failure to Reply!"),
+                returnMessage: (success ? "Replied Successfully!" : "Failed to Reply!"),
                 retAppend: (success ? " success" : " error")
             })
         } else {
             this.setState({
-                returnMessage: "Failure to Reply!",
+                returnMessage: "Failed to Reply!",
                 retAppend: " error"
             })
         }
