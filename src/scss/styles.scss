@@ -190,21 +190,18 @@ textarea {
 
         .modalWrapper {
             z-index: 1;
-            width: 100%;
             height: 100%;
             position: fixed;
             top: 0;
-            left: 0;
-            background-color: rgba(0,0,0,0.4);
+            right: 0;
 
             .modal {
-                top: 0;
-                right: 0;
                 background-color: $light-grey;
-                height: 350px;
-                width: 900px;
-                margin: 12% auto;
-                border: 1px solid black;
+                height: 100%;
+                width: 980px;
+                border-left: 1px solid black;
+                position: absolute;
+                right: 0;
 
                 .modalCloseButton {
                     float: right;
@@ -222,6 +219,7 @@ textarea {
                 .modalContent {
                     clear: right;
                     border-top: 1px solid $border-color;
+                    height: 150px;
 
                     .date {
                         margin-bottom: 5px;
@@ -231,6 +229,12 @@ textarea {
                 .modalTextArea {
                     margin-top: 12px;
                     font-size: 15px;
+                }
+
+                .modalCharCounter {
+                    position: absolute;
+                    top: 283px;
+                    right: 257px;
                 }
 
                 .modalReplyButtonWrapper {
@@ -252,7 +256,7 @@ textarea {
                     }
 
                     .modalReplyButton {
-                        margin-right: 200px;
+                        margin-right: 240px;
                     }
                 }
             }

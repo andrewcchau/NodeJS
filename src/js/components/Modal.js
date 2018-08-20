@@ -13,27 +13,17 @@ class Modal extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            modalMsgLength: 0,
             returnMessage: null,
             retAppend: ""
         }
 
         this.updateReturnMessage = this.updateReturnMessage.bind(this);
-        this.setRef = this.setRef.bind(this);
-        this.handleClickOutside = this.handleClickOutside.bind(this);
     }
 
     componentDidMount() {
         let tbClass = document.getElementsByClassName("modalTextArea");
         textBox = tbClass && tbClass[0];
-        document.addEventListener('mousedown', this.handleClickOutside);
-    }
-
-    componentWillUnmount() {
-        document.removeEventListener('mousedown', this.handleClickOutside);
-    }
-
-    setRef(node) {
-        this.ref = node;
     }
 
     handleClickOutside(event) {
@@ -44,6 +34,16 @@ class Modal extends React.Component {
     }
 
     updateUI() {
+        if(textBox && textBox.value) {
+            this.setState({
+                modalMsgLength: textBox.value.length
+            });
+        } else {
+            this.setState({
+                modalMsgLength: 0
+            })
+        }
+
         this.setState({
             returnMessage: null,
             retAppend: ""
@@ -102,21 +102,22 @@ class Modal extends React.Component {
 
 
         let originalPost = [
-            e(User, {user: jsonObj.user, key: this.props.className + " User"}),
-            e(Message, {jsonObj: jsonObj, key: this.props.className + " Message"})
+            e(User, {user: jsonObj.user, key: "modalUser"}),
+            e(Message, {jsonObj: jsonObj, key: "modalMessage"})
         ]
 
-        let modal = e('div', {className: this.props.className, ref: this.setRef},
-                        e('span', {className: this.props.className + "CloseButton", onClick: () => this.props.displayModal(false)}, "x"),
-                        e('div', {className: this.props.className + "Content"}, originalPost),
+        let modal = e('div', {className: "modal"},
+                        e('span', {className: "modalCloseButton", onClick: () => this.props.displayModal(false)}, "x"),
+                        e('div', {className: "modalContent"}, originalPost),
                         TextArea(modalTextAreaProps),
-                        e('div', {className: this.props.className + "ReplyButtonWrapper"},
-                            [e('div', {className: this.props.className + "ReturnMessage" + this.state.retAppend,
-                                        key: this.props.className + "ReturnMessage"}, this.state.returnMessage),
+                        e('span', {className:"modalCharCounter"}, this.state.modalMsgLength),
+                        e('div', {className: "modalReplyButtonWrapper"},
+                            [e('div', {className: "modalReturnMessage" + this.state.retAppend,
+                                        key: "modalReturnMessage"}, this.state.returnMessage),
                              Button(modalButtonProps)])
                         );
 
-        return e('div', {className: this.props.className + "Wrapper"}, modal);
+        return e('div', {className: "modalWrapper"}, modal);
     }
 }
 
