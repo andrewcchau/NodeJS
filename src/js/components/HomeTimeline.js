@@ -70,6 +70,7 @@ class HomeTimeline extends React.Component {
         }
 
         return e('div', {className: "UIContent"},
+                (this.state.displayModal ? e(Modal, { className: "modal", content: this.state.modalContent , displayModal: this.displayModal}) : null),
                 e(TimelineUI, { className: 'homeTLUIContainer',
                                 requestFunc: (this.props.test ? this.props.requestFunc : Request),
                                 filterFunc: (this.props.test ? this.props.filterFunc : RequestFilterTimeline),
@@ -78,8 +79,7 @@ class HomeTimeline extends React.Component {
                                 updateCallback: this.update,
                                 extraComponents: extraComponent
                                 }),
-                e('div', { className: "dataHome" }, component),
-                (this.state.displayModal ? e(Modal, { className: "modal", content: this.state.modalContent , displayModal: this.displayModal}) : null));
+                e('div', { className: "dataHome" }, component));
     }
 }
 

@@ -11,9 +11,6 @@ let textBox;
 class Modal extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            hidden: this.props.hidden
-        }
     }
 
     componentDidMount() {
@@ -62,11 +59,13 @@ class Modal extends React.Component {
             e(Message, {jsonObj: jsonObj, key: this.props.className + " Message"})
         ]
 
-        return e('div', {className: this.props.className},
-                    e('div', {className: this.props.className + "Content"}, originalPost),
-                    e('span', {className: this.props.className + "CloseButton", onClick: () => this.props.displayModal(false)}, "x"),
-                    TextArea(modalTextAreaProps),
-                    Button(modalButtonProps));
+        let modal = e('div', {className: this.props.className},
+                        e('span', {className: this.props.className + "CloseButton", onClick: () => this.props.displayModal(false)}, "x"),
+                        e('div', {className: this.props.className + "Content"}, originalPost),
+                        TextArea(modalTextAreaProps),
+                        Button(modalButtonProps));
+
+        return e('div', {className: this.props.className + "Wrapper"}, modal);
     }
 }
 

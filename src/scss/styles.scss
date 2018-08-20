@@ -8,6 +8,8 @@ $border-color: #C0C0C0;
 $item-width: 90%;
 $user-white: #f5f8fa;
 $user-blue: #1da1f2;
+$dark-grey: #4c525b;
+$light-grey: #eaebed;
 
 @mixin boldFontSize($pix) {
 	font-weight: bold;
@@ -115,58 +117,59 @@ textarea {
                 color: red;
             }
 
-            .item {
-                background-color: $light-blue;
-                align-items: center;
-                border-bottom: 1px solid $border-color;
-                display: grid;
-                grid-template-columns: 17% auto;
-                padding-top: 2px;
+            .item:nth-child(even) {
+                background-color: $tan;
+            }
+        }
 
-                .user {
+        .item, .modalContent {
+            background-color: $light-blue;
+            align-items: center;
+            border-bottom: 1px solid $border-color;
+            display: grid;
+            grid-template-columns: 17% auto;
+            padding-top: 2px;
+
+            .user {
+                margin-bottom: 5px;
+
+                .twitterName {
+                    @include boldFontSize(20px);
+                }
+
+                .twitterHandle {
+                    font: italic normal 15px $font;
                     margin-bottom: 5px;
-
-                    .twitterName {
-                        @include boldFontSize(20px);
-                    }
-
-                    .twitterHandle {
-                        font: italic normal 15px $font;
-                        margin-bottom: 5px;
-                    }
-                }
-
-                .message {
-                    text-align: left;
-
-                    .date {
-                        font-style: italic;
-                        font-size: 13px;
-                        margin-top: 5px;
-                        height: 10px;
-                    }
-
-                    .messageText {
-                        font-size: 17px;
-                    }
-                }
-
-                img {
-                    border-radius: 50%;
-                    margin-top: 10px;
-                    width: 60px;
-                    height: 60px;
                 }
             }
 
-            .item:nth-child(even) {
-                background-color: $tan;
+            .message {
+                text-align: left;
+
+                .date {
+                    font-style: italic;
+                    font-size: 13px;
+                    margin-top: 5px;
+                    height: 10px;
+                }
+
+                .messageText {
+                    font-size: 17px;
+                }
+            }
+
+            img {
+                border-radius: 50%;
+                margin-top: 10px;
+                width: 60px;
+                height: 60px;
             }
         }
 
         .dataHome {
             .replyButton {
                 display: block;
+                margin-top: 5px;
             }
         }
 
@@ -230,6 +233,47 @@ textarea {
 
         .returnMessage.error {
             color: red;
+        }
+    }
+
+    .modalWrapper {
+        z-index: 1;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        background-color: rgba(0,0,0,0.4);
+
+        .modal {
+            top: 0;
+            right: 0;
+            background-color: $light-grey;
+            height: 300px;
+            width: 900px;
+            margin: 12% auto;
+
+            .modalCloseButton {
+                float: right;
+                padding: 10px 10px;
+                font-size: 10px;
+                transition-duration: 0.4s;
+                font-size: 20px;
+            }
+
+            .modalCloseButton:hover {
+                color: white;
+                background-color: $dark-grey;
+            }
+
+            .modalContent {
+                clear: right;
+            }
+
+            .modalTextArea {
+                margin-top: 12px;
+                font-size: 15px;
+            }
         }
     }
 }
