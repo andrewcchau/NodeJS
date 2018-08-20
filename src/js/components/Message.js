@@ -1,5 +1,4 @@
 import React from 'react';
-import {Icon} from './GeneralComponents';
 
 const e = React.createElement;
 
@@ -33,17 +32,12 @@ class Message extends React.Component {
     }
 
     render() {
-        let replyButtonProps = {
-            className: "fas fa-reply",
-            key: "replyButton",
-            onClick: () => this.props.openModal(true, this.props.jsonObj)
-        }
-
         if(this.props.jsonObj) {
             return e('div', { className: "message" },
-                MessageDate(this.props.jsonObj.createdAt),
-                MessageLink(this.props.jsonObj.user.twitterHandle, this.props.jsonObj.id, this.props.jsonObj.twitterMessage),
-                (this.props.openModal ? Icon(replyButtonProps) : null));
+                        MessageDate(this.props.jsonObj.createdAt),
+                        MessageLink(this.props.jsonObj.user.twitterHandle, this.props.jsonObj.id, this.props.jsonObj.twitterMessage),
+                        (this.props.openModal ? e('i', {className: "fas fa-reply", onClick: () => this.props.openModal(true, this.props.jsonObj)}) : null)
+                    );
         } else {
             return e('div', { className: "message" },
                 MessageDate(), MessageLink());

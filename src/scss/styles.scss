@@ -9,7 +9,6 @@ $item-width: 90%;
 $user-white: #f5f8fa;
 $user-blue: #1da1f2;
 $dark-grey: #4c525b;
-$light-grey: #eaebed;
 
 @mixin boldFontSize($pix) {
 	font-weight: bold;
@@ -109,6 +108,7 @@ textarea {
             margin-top: 3px;
             transition-duration: 0.4s;
             width: 30px;
+            size: 5px;
         }
 
         .fas.fa-reply:hover {
@@ -196,7 +196,7 @@ textarea {
             right: 0;
 
             .modal {
-                background-color: $light-grey;
+                background-color: white;
                 height: 100%;
                 width: 980px;
                 border-left: 1px solid black;
@@ -218,8 +218,9 @@ textarea {
 
                 .modalContent {
                     clear: right;
-                    border-top: 1px solid $border-color;
+                    border-bottom: 0;
                     height: 150px;
+                    background-color: yellow;
 
                     .date {
                         margin-bottom: 5px;
