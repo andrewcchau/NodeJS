@@ -1,11 +1,8 @@
 import React from 'react';
-import _ from 'lodash';
 import {PostToTwitter} from '../services/httpCall';
 import {Button, TextArea} from './GeneralComponents';
 
 const e = React.createElement;
-
-let textBox;
 
 class PostTweetUI extends React.Component {
     constructor(props) {
@@ -13,7 +10,8 @@ class PostTweetUI extends React.Component {
         this.state = {
             postMsgLength: 0,
             returnMessage: null,
-            retAppend: ""
+            retAppend: "",
+            textBox: null
         }
         this.updateReturnMessage = this.updateReturnMessage.bind(this);
         this.updateUI = this.updateUI.bind(this);
@@ -21,13 +19,15 @@ class PostTweetUI extends React.Component {
 
     componentDidMount() {
         let tbClass = document.getElementsByClassName("postTextArea");
-        textBox = tbClass && tbClass[0];
+        this.setState({
+           textBox: tbClass && tbClass[0]
+        })
     }
 
-    updateReturnMessage(message) {
-        if(message) {
+    updateReturnMessage(statusCode) {
+        if(statusCode) {
             let success;
-            if(_.isEqual(message, 200)) {
+            if(statusCode == 200) {
                 success = true;
             } else {
                 success = false;
@@ -46,9 +46,9 @@ class PostTweetUI extends React.Component {
     }
 
     updateUI(event) {
-        if(textBox && textBox.value) {
+        if(this.state.textBox && this.state.textBox.value) {
             this.setState({
-                postMsgLength: textBox.value.length
+                postMsgLength: this.state.textBox.value.length
             });
         } else {
             this.setState({
@@ -79,7 +79,7 @@ class PostTweetUI extends React.Component {
             disabled: (this.state.postMsgLength > 0 ? false : true),
             message: "Post Tweet",
             onClick: () => {
-                PostToTwitter(textBox.value, this.updateReturnMessage);
+                PostToTwitter(this.state.textBox.value, this.updateReturnMessage);
             }
         }
 

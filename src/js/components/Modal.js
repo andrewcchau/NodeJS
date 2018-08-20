@@ -1,5 +1,4 @@
 import React from 'react';
-import _ from 'lodash';
 import {TextArea, Button} from './GeneralComponents';
 import {ReplyToTweet} from '../services/httpCall';
 import User from './User';
@@ -7,15 +6,14 @@ import Message from './Message';
 
 const e = React.createElement;
 
-let textBox;
-
 class Modal extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             modalMsgLength: 0,
             returnMessage: null,
-            retAppend: ""
+            retAppend: "",
+            textBox: null
         }
 
         this.updateReturnMessage = this.updateReturnMessage.bind(this);
@@ -23,13 +21,15 @@ class Modal extends React.Component {
 
     componentDidMount() {
         let tbClass = document.getElementsByClassName("modalTextArea");
-        textBox = tbClass && tbClass[0];
+        this.setState({
+            textBox: tbClass && tbClass[0]
+        })
     }
 
     updateUI() {
-        if(textBox && textBox.value) {
+        if(this.state.textBox && this.state.textBox.value) {
             this.setState({
-                modalMsgLength: textBox.value.length
+                modalMsgLength: this.state.textBox.value.length
             });
         } else {
             this.setState({
@@ -43,10 +43,10 @@ class Modal extends React.Component {
         })
     }
 
-    updateReturnMessage(message) {
-        if(message) {
+    updateReturnMessage(statusCode) {
+        if(statusCode) {
             let success;
-            if(_.isEqual(message, 200)) {
+            if(statusCode == 200) {
                 success = true;
             } else {
                 success = false;
@@ -77,7 +77,7 @@ class Modal extends React.Component {
             onClick: () => {
                 let post = {
                     statusID: (jsonObj ? jsonObj.id : null),
-                    message: (textBox ? textBox.value : null)
+                    message: (this.state.textBox ? this.state.textBox.value : null)
                 }
                 ReplyToTweet(post, this.updateReturnMessage)
             }
