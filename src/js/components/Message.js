@@ -1,5 +1,5 @@
 import React from 'react';
-import {Button} from './GeneralComponents';
+import {Icon} from './GeneralComponents';
 
 const e = React.createElement;
 
@@ -34,9 +34,8 @@ class Message extends React.Component {
 
     render() {
         let replyButtonProps = {
-            className: "replyButton",
+            className: "fas fa-reply",
             key: "replyButton",
-            message: "Reply",
             onClick: () => this.props.openModal(true, this.props.jsonObj)
         }
 
@@ -44,7 +43,7 @@ class Message extends React.Component {
             return e('div', { className: "message" },
                 MessageDate(this.props.jsonObj.createdAt),
                 MessageLink(this.props.jsonObj.user.twitterHandle, this.props.jsonObj.id, this.props.jsonObj.twitterMessage),
-                (this.props.openModal ? Button(replyButtonProps) : null));
+                (this.props.openModal ? Icon(replyButtonProps) : null));
         } else {
             return e('div', { className: "message" },
                 MessageDate(), MessageLink());

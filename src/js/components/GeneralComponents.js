@@ -64,10 +64,20 @@ const TextArea = (properties) => {
     }
 }
 
+const Icon = (properties) => {
+    if(properties) {
+        return e('i', { className: properties.className,
+                        onClick: properties.onClick,
+                        key: properties.key });
+    } else {
+        return e('i');
+    }
+}
+
 const statusEnum = {
     PENDING: "Pending",
     ERROR: "Error",
     NO_MATCH: "No Match"
 }
 
-export {Header, Mismatch, Pending, Error, Button, TextBox, TextArea, statusEnum};
+export {Header, Mismatch, Pending, Error, Button, TextBox, TextArea, statusEnum, Icon};

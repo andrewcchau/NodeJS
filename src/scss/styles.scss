@@ -27,6 +27,10 @@ body {
 	font-family: $font;
 }
 
+body.modal-enabled {
+    overflow: hidden;
+}
+
 textarea {
     resize: none;
 }
@@ -89,7 +93,7 @@ textarea {
             margin: 15px ((100% - $item-width) / 2) 10px ((100% - $item-width) / 2);
         }
 
-        .userTimelineButton, .homeTimelineButton, .filterButton, .postButton, .replyButton {
+        .userTimelineButton, .homeTimelineButton, .filterButton, .postButton, .modalReplyButton {
             background-color: white;
             border-radius: 12px;
             border: 1px solid;
@@ -99,9 +103,20 @@ textarea {
             padding: 5px 10px;
         }
 
-        .userTimelineButton:hover, .homeTimelineButton:hover, .filterButton.active:hover, .replyButton:hover {
+        .userTimelineButton:hover, .homeTimelineButton:hover, .filterButton.active:hover, .modalReplyButton:hover {
             background-color: $blue;
             color: white;
+        }
+
+        .fas.fa-reply {
+            display: block;
+            margin-top: 3px;
+            transition-duration: 0.4s;
+            width: 30px;
+        }
+
+        .fas.fa-reply:hover {
+            color: $blue;
         }
 
         .dataHome, .dataUser {
@@ -173,12 +188,78 @@ textarea {
             }
         }
 
-        .modal {
-            display: block;
-        }
-
         .dataHome:empty, .dataUser:empty {
             display: none;
+        }
+
+        .modalWrapper {
+            z-index: 1;
+            width: 100%;
+            height: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: rgba(0,0,0,0.4);
+
+            .modal {
+                top: 0;
+                right: 0;
+                background-color: $light-grey;
+                height: 350px;
+                width: 900px;
+                margin: 12% auto;
+                border: 1px solid black;
+
+                .modalCloseButton {
+                    float: right;
+                    padding: 10px 15px;
+                    font-size: 10px;
+                    transition-duration: 0.4s;
+                    font-size: 20px;
+                }
+
+                .modalCloseButton:hover {
+                    color: white;
+                    background-color: $dark-grey;
+                }
+
+                .modalContent {
+                    clear: right;
+                    border-top: 1px solid $border-color;
+
+                    .date {
+                        margin-bottom: 5px;
+                    }
+                }
+
+                .modalTextArea {
+                    margin-top: 12px;
+                    font-size: 15px;
+                }
+
+                .modalReplyButtonWrapper {
+                    margin-top: 5px;
+                    text-align: right;
+
+                    .modalReturnMessage {
+                        position: relative;
+                        display: inline;
+                        margin-right: 10px;
+                    }
+
+                    .modalReturnMessage.success {
+                        color: green;
+                    }
+
+                    .modalReturnMessage.error {
+                        color: red;
+                    }
+
+                    .modalReplyButton {
+                        margin-right: 200px;
+                    }
+                }
+            }
         }
 
         .dataUser {
@@ -233,47 +314,6 @@ textarea {
 
         .returnMessage.error {
             color: red;
-        }
-    }
-
-    .modalWrapper {
-        z-index: 1;
-        width: 100%;
-        height: 100%;
-        position: absolute;
-        top: 0;
-        left: 0;
-        background-color: rgba(0,0,0,0.4);
-
-        .modal {
-            top: 0;
-            right: 0;
-            background-color: $light-grey;
-            height: 300px;
-            width: 900px;
-            margin: 12% auto;
-
-            .modalCloseButton {
-                float: right;
-                padding: 10px 10px;
-                font-size: 10px;
-                transition-duration: 0.4s;
-                font-size: 20px;
-            }
-
-            .modalCloseButton:hover {
-                color: white;
-                background-color: $dark-grey;
-            }
-
-            .modalContent {
-                clear: right;
-            }
-
-            .modalTextArea {
-                margin-top: 12px;
-                font-size: 15px;
-            }
         }
     }
 }
