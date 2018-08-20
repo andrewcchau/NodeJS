@@ -16,12 +16,31 @@ class Modal extends React.Component {
             returnMessage: null,
             retAppend: ""
         }
+
         this.updateReturnMessage = this.updateReturnMessage.bind(this);
+        this.setRef = this.setRef.bind(this);
+        this.handleClickOutside = this.handleClickOutside.bind(this);
     }
 
     componentDidMount() {
         let tbClass = document.getElementsByClassName("modalTextArea");
         textBox = tbClass && tbClass[0];
+        document.addEventListener('mousedown', this.handleClickOutside);
+    }
+
+    componentWillUnmount() {
+        document.removeEventListener('mousedown', this.handleClickOutside);
+    }
+
+    setRef(node) {
+        this.ref = node;
+    }
+
+    handleClickOutside(event) {
+        if(this.ref && !this.ref.contains(event.target)) {
+            this.props.displayModal(false);
+        }
+
     }
 
     updateUI() {
@@ -87,7 +106,7 @@ class Modal extends React.Component {
             e(Message, {jsonObj: jsonObj, key: this.props.className + " Message"})
         ]
 
-        let modal = e('div', {className: this.props.className},
+        let modal = e('div', {className: this.props.className, ref: this.setRef},
                         e('span', {className: this.props.className + "CloseButton", onClick: () => this.props.displayModal(false)}, "x"),
                         e('div', {className: this.props.className + "Content"}, originalPost),
                         TextArea(modalTextAreaProps),
