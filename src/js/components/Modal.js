@@ -1,5 +1,5 @@
 import React from 'react';
-import {TextArea, Button} from './GeneralComponents';
+import {TextAreaAndButton} from './GeneralComponents';
 import {ReplyToTweet} from '../services/httpCall';
 import {Tweet} from './Tweets';
 
@@ -94,14 +94,20 @@ class Modal extends React.Component {
             onKeyUp: () => this.updateUI()
         }
 
+        let textAreaAndButtonProps = {
+            textAreaProperties: modalTextAreaProps,
+            buttonWrapperProperties: {
+                className: "modalReplyButtonWrapper",
+                returnMessageClass: "modalReturnMessage" + this.state.retAppend,
+                returnMessage: this.state.returnMessage
+            },
+            buttonProperties: modalButtonProps
+        }
+
         let modal = e('div', {className: "modal"},
                         e('span', {className: "modalCloseButton", onClick: () => this.props.displayModal(false)}, "x"),
                         Tweet({jsonObj:jsonObj}),
-                        TextArea(modalTextAreaProps),
-                        e('div', {className: "modalReplyButtonWrapper"},
-                            [e('div', {className: "modalReturnMessage" + this.state.retAppend,
-                                        key: "modalReturnMessage"}, this.state.returnMessage),
-                             Button(modalButtonProps)])
+                        TextAreaAndButton(textAreaAndButtonProps)
                         );
 
         return e('div', {className: "modalWrapper"}, modal);

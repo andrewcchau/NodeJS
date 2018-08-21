@@ -252,10 +252,6 @@ body {
                 }
 
                 .modalReplyButtonWrapper {
-                    text-align: right;
-                    position: relative;
-                    bottom: 10px;
-
                     .modalReturnMessage {
                         position: relative;
                         display: inline;
@@ -300,17 +296,17 @@ body {
                 background-color: $user-white;
             }
         }
+
+        .postButtonWrapper, .modalReplyButtonWrapper {
+            text-align: right;
+            position: relative;
+            bottom: 10px;
+        }
     }
 
     .UIContent.PostTweet {
         position: relative;
         display: inline-block;
-
-        .postButtonWrapper {
-            text-align: right;
-            position: relative;
-            bottom: 10px;
-        }
 
         .returnMessage {
             position: relative;

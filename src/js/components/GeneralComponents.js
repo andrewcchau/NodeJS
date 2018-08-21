@@ -67,10 +67,27 @@ const TextArea = (properties) => {
     }
 }
 
+const TextAreaAndButton = (properties) => {
+    if(properties) {
+        let buttonWrapperProps = properties.buttonWrapperProperties;
+        return e('div', {className: "textEntryWrapper"},
+                    TextArea(properties.textAreaProperties),
+                    e('div', {className: buttonWrapperProps.className},
+                        [e('div', { className: buttonWrapperProps.returnMessageClass,
+                                    key: buttonWrapperProps.returnMessageClass},
+                                    buttonWrapperProps.returnMessage),
+                         Button(properties.buttonProperties)
+                        ])
+                );
+    } else {
+        return e('div', {className: "textEntryWrapper"});
+    }
+}
+
 const statusEnum = {
     PENDING: "Pending",
     ERROR: "Error",
     NO_MATCH: "No Match"
 }
 
-export {Header, Mismatch, Pending, Error, Button, TextBox, TextArea, statusEnum};
+export {Header, Mismatch, Pending, Error, Button, TextBox, TextArea, statusEnum, TextAreaAndButton};

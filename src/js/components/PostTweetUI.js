@@ -1,6 +1,6 @@
 import React from 'react';
 import {PostToTwitter} from '../services/httpCall';
-import {Button, TextArea} from './GeneralComponents';
+import {TextAreaAndButton} from './GeneralComponents';
 
 const e = React.createElement;
 
@@ -84,10 +84,18 @@ class PostTweetUI extends React.Component {
             }
         }
 
+        let textAreaAndButtonProps = {
+            textAreaProperties: textBoxProperties,
+            buttonWrapperProperties: {
+                className: "postButtonWrapper",
+                returnMessageClass: "returnMessage" + this.state.retAppend,
+                returnMessage: this.state.returnMessage
+            },
+            buttonProperties: buttonProperties
+        }
+
         return e('div', {className: "UIContent PostTweet"},
-                TextArea(textBoxProperties),
-                e('div',{className: "postButtonWrapper"}, ([e('div', {className: "returnMessage" + this.state.retAppend, key: "returnMessage"}, this.state.returnMessage),
-                            Button(buttonProperties)]))
+                TextAreaAndButton(textAreaAndButtonProps)
                 );
     }
 }
