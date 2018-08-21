@@ -10,7 +10,7 @@ describe('Modal Creation Test', () => {
     it('Should create a "modalWrapper" div with accompanying child elements', () => {
         const wrapper = shallow(e(Modal, {content: JsonObj[0]}));
         expect(wrapper.children().exists()).toEqual(true);
-        expect(wrapper.find('div').length).toEqual(5);
+        expect(wrapper.find('div').length).toEqual(7);
         expect(wrapper.hasClass('modalWrapper')).toEqual(true);
 
         let modal = wrapper.childAt(0);

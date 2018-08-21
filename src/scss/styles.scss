@@ -213,7 +213,7 @@ body {
             .modal {
                 background-color: white;
                 height: 100%;
-                width: 980px;
+                width: 600px;
                 border-left: 1px solid black;
                 position: absolute;
                 right: 0;
@@ -236,6 +236,7 @@ body {
                     border-bottom: 0;
                     height: 150px;
                     background-color: yellow;
+                    grid-template-columns: 25% auto;
 
                     .date {
                         margin-bottom: 5px;
@@ -301,6 +302,10 @@ body {
             text-align: right;
             position: relative;
             bottom: 10px;
+        }
+
+        .modalReplyButtonWrapper {
+            left: 190px;
         }
     }
 
