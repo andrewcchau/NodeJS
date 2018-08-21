@@ -70,11 +70,12 @@ class PostTweetUI extends React.Component {
             placeholder: "Enter Tweet",
             key: "postTextArea",
             onKeyUp: (event) => this.updateUI(event),
-            maxLength: 280
+            maxLength: 280,
+            messageLength: this.state.postMsgLength
         }
 
         let buttonProperties = {
-            className: "postButton",
+            className: "postButton" + (this.state.postMsgLength > 0 ? " active" : ""),
             key: "postButton",
             disabled: (this.state.postMsgLength > 0 ? false : true),
             message: "Post Tweet",
@@ -85,7 +86,6 @@ class PostTweetUI extends React.Component {
 
         return e('div', {className: "UIContent PostTweet"},
                 TextArea(textBoxProperties),
-                e('span', {className: "charCounter"}, this.state.postMsgLength),
                 e('div',{className: "postButtonWrapper"}, ([e('div', {className: "returnMessage" + this.state.retAppend, key: "returnMessage"}, this.state.returnMessage),
                             Button(buttonProperties)]))
                 );

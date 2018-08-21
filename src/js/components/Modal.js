@@ -70,9 +70,10 @@ class Modal extends React.Component {
         }
 
         let modalButtonProps = {
-            className: "modalReplyButton",
+            className: "modalReplyButton" + (this.state.modalMsgLength > 0 ? " active" : ""),
             key: "modalReplyButton",
             message: "Submit",
+            disabled: (this.state.modalMsgLength > 0 ? false: true),
             onClick: () => {
                 let post = {
                     statusID: (jsonObj ? jsonObj.id : null),
@@ -89,6 +90,7 @@ class Modal extends React.Component {
             cols: 60,
             placeholder: "Enter Reply",
             maxLength: 280 - username.length - 2,
+            messageLength: this.state.modalMsgLength,
             onKeyUp: () => this.updateUI()
         }
 
@@ -96,7 +98,6 @@ class Modal extends React.Component {
                         e('span', {className: "modalCloseButton", onClick: () => this.props.displayModal(false)}, "x"),
                         Tweet({jsonObj:jsonObj}),
                         TextArea(modalTextAreaProps),
-                        e('span', {className:"modalCharCounter"}, this.state.modalMsgLength),
                         e('div', {className: "modalReplyButtonWrapper"},
                             [e('div', {className: "modalReturnMessage" + this.state.retAppend,
                                         key: "modalReturnMessage"}, this.state.returnMessage),

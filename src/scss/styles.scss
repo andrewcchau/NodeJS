@@ -26,8 +26,23 @@ body {
 	font-family: $font;
 }
 
-textarea {
-    resize: none;
+.textAreaWrapper {
+    position: relative;
+    display: inline-block;
+    height: 200px;
+
+    textarea {
+        resize: none;
+        display: block;
+        width: 450px;
+        height: 150px;
+    }
+
+    .charCounter {
+        position: relative;
+        bottom: 25px;
+        margin-left: 405px;
+    }
 }
 
 .title {
@@ -98,7 +113,7 @@ textarea {
             padding: 5px 10px;
         }
 
-        .userTimelineButton:hover, .homeTimelineButton:hover, .filterButton.active:hover, .modalReplyButton:hover {
+        .userTimelineButton:hover, .homeTimelineButton:hover, .filterButton.active:hover, .postButton.active:hover, .modalReplyButton.active:hover {
             background-color: $blue;
             color: white;
         }
@@ -227,20 +242,19 @@ textarea {
                     }
                 }
 
-                .modalTextArea {
-                    margin-top: 12px;
-                    font-size: 15px;
-                }
+                .textAreaWrapper {
+                    height: 150px;
 
-                .modalCharCounter {
-                    position: absolute;
-                    top: 283px;
-                    right: 257px;
+                    .modalTextArea {
+                        margin-top: 12px;
+                        font-size: 15px;
+                    }
                 }
 
                 .modalReplyButtonWrapper {
-                    margin-top: 5px;
                     text-align: right;
+                    position: relative;
+                    bottom: 10px;
 
                     .modalReturnMessage {
                         position: relative;
@@ -257,7 +271,7 @@ textarea {
                     }
 
                     .modalReplyButton {
-                        margin-right: 240px;
+                        margin-right: 260px;
                     }
                 }
             }
@@ -293,14 +307,9 @@ textarea {
         display: inline-block;
 
         .postButtonWrapper {
-            margin-top: 5px;
             text-align: right;
-        }
-
-        .charCounter {
-          position: absolute;
-          bottom: 43px;
-          right: 12px;
+            position: relative;
+            bottom: 10px;
         }
 
         .returnMessage {

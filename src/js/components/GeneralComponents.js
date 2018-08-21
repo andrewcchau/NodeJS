@@ -52,13 +52,16 @@ const TextBox = (properties) => {
 
 const TextArea = (properties) => {
     if(properties) {
-        return e('textarea', { className: properties.className,
-                            rows: properties.rows,
-                            cols: properties.cols,
-                            placeholder: properties.placeholder,
-                            key: properties.key,
-                            onKeyUp: properties.onKeyUp,
-                            maxLength: properties.maxLength});
+        return e('div', {className: "textAreaWrapper"},
+                e('textarea', { className: properties.className,
+                                rows: properties.rows,
+                                cols: properties.cols,
+                                placeholder: properties.placeholder,
+                                key: properties.key,
+                                onKeyUp: properties.onKeyUp,
+                                maxLength: properties.maxLength}),
+                e('span', {className: "charCounter"}, properties.messageLength)
+                );
     } else {
         return e('textarea');
     }
