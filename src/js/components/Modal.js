@@ -1,8 +1,7 @@
 import React from 'react';
 import {TextArea, Button} from './GeneralComponents';
 import {ReplyToTweet} from '../services/httpCall';
-import User from './User';
-import Message from './Message';
+import {Tweet} from './Tweets';
 
 const e = React.createElement;
 
@@ -93,15 +92,9 @@ class Modal extends React.Component {
             onKeyUp: () => this.updateUI()
         }
 
-
-        let originalPost = [
-            e(User, {user: jsonObj.user, key: "modalUser"}),
-            e(Message, {jsonObj: jsonObj, key: "modalMessage"})
-        ]
-
         let modal = e('div', {className: "modal"},
                         e('span', {className: "modalCloseButton", onClick: () => this.props.displayModal(false)}, "x"),
-                        e('div', {className: "modalContent"}, originalPost),
+                        Tweet({jsonObj:jsonObj}),
                         TextArea(modalTextAreaProps),
                         e('span', {className:"modalCharCounter"}, this.state.modalMsgLength),
                         e('div', {className: "modalReplyButtonWrapper"},

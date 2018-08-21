@@ -128,12 +128,12 @@ textarea {
                 color: red;
             }
 
-            .item:nth-child(even) {
+            .tweet:nth-child(even) {
                 background-color: $tan;
             }
         }
 
-        .item, .modalContent {
+        .tweet {
             background-color: $light-blue;
             align-items: center;
             border-bottom: 1px solid $border-color;
@@ -216,7 +216,7 @@ textarea {
                     background-color: $dark-grey;
                 }
 
-                .modalContent {
+                .tweet {
                     clear: right;
                     border-bottom: 0;
                     height: 150px;
@@ -264,7 +264,7 @@ textarea {
         }
 
         .dataUser {
-            .item {
+            .tweet {
                 background-color: $user-blue;
                 grid-template-columns: 17% auto;
                 padding-top: 11px;
@@ -282,7 +282,7 @@ textarea {
                 }
             }
 
-            .item:nth-child(even) {
+            .tweet:nth-child(even) {
                 background-color: $user-white;
             }
         }
