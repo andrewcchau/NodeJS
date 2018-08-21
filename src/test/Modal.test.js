@@ -20,11 +20,20 @@ describe('Modal Creation Test', () => {
         /* Test the rendering of all child elements */
         expect(modal.childAt(0).hasClass('modalCloseButton')).toEqual(true);
         expect(modal.childAt(0).text()).toEqual('x');
-        expect(modal.childAt(1).hasClass('modalContent')).toEqual(true);
+        expect(modal.childAt(1).hasClass('tweet')).toEqual(true);
         expect(modal.childAt(1).children().exists()).toEqual(true);
-        expect(modal.childAt(2).hasClass('modalTextArea')).toEqual(true);
-        expect(modal.childAt(3).hasClass('modalCharCounter')).toEqual(true);
-        expect(modal.childAt(4).hasClass('modalReplyButtonWrapper')).toEqual(true);
-        expect(modal.childAt(4).children().exists()).toEqual(true);
+        expect(modal.childAt(2).hasClass('textEntryWrapper')).toEqual(true);
+        expect(modal.childAt(2).children().exists()).toEqual(true);
+
+        let textAreaWrapper = modal.childAt(2).childAt(0);
+        expect(textAreaWrapper.hasClass('textAreaWrapper')).toEqual(true);
+        expect(textAreaWrapper.childAt(0).hasClass('modalTextArea')).toEqual(true);
+        expect(textAreaWrapper.childAt(1).hasClass('charCounter')).toEqual(true);
+
+        let modalReplyButtonWrapper = modal.childAt(2).childAt(1);
+        expect(modalReplyButtonWrapper.hasClass('modalReplyButtonWrapper')).toEqual(true);
+        expect(modalReplyButtonWrapper.children().exists()).toEqual(true);
+        expect(modalReplyButtonWrapper.childAt(0).hasClass('modalReturnMessage')).toEqual(true);
+        expect(modalReplyButtonWrapper.childAt(1).hasClass('modalReplyButton')).toEqual(true);
     })
 });
