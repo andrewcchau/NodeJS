@@ -20,6 +20,7 @@ class HomeTimeline extends React.Component {
         }
         this.update = this.update.bind(this);
         this.displayModal = this.displayModal.bind(this);
+        this.setTextBox = this.setTextBox.bind(this);
         Request(this.update);
     }
 
@@ -49,10 +50,19 @@ class HomeTimeline extends React.Component {
         if(content) {
             modalContent = content;
         }
+        if(this.state.textBox) {
+            this.state.textBox.value = '';
+        }
         this.setState({
             modalContent: modalContent,
             displayModal: toggle
         });
+    }
+
+    setTextBox(element) {
+        this.setState({
+            textBox: element
+        })
     }
 
     render() {
@@ -70,7 +80,9 @@ class HomeTimeline extends React.Component {
         }
 
         return e('div', {className: "UIContent"},
-                (this.state.displayModal ? e(Modal, { content: this.state.modalContent , displayModal: this.displayModal}) : null),
+                (this.state.displayModal ? e(Modal, { content: this.state.modalContent,
+                                                        sendTextBox: this.setTextBox,
+                                                        displayModal: this.displayModal}) : null),
                 e(TimelineUI, { className: 'homeTLUIContainer',
                                 requestFunc: (this.props.test ? this.props.requestFunc : Request),
                                 filterFunc: (this.props.test ? this.props.filterFunc : RequestFilterTimeline),

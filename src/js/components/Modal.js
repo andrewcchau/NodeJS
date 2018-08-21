@@ -1,4 +1,5 @@
 import React from 'react';
+import _ from 'lodash';
 import {TextAreaAndButton} from './GeneralComponents';
 import {ReplyToTweet} from '../services/httpCall';
 import {Tweet} from './Tweets';
@@ -12,7 +13,8 @@ class Modal extends React.Component {
             modalMsgLength: 0,
             returnMessage: null,
             retAppend: "",
-            textBox: null
+            textBox: null,
+            content: this.props.content
         }
 
         this.updateReturnMessage = this.updateReturnMessage.bind(this);
@@ -23,6 +25,7 @@ class Modal extends React.Component {
         this.setState({
             textBox: tbClass && tbClass[0]
         })
+        this.props.sendTextBox(this.state.textBox);
     }
 
     updateUI() {
@@ -66,7 +69,7 @@ class Modal extends React.Component {
     render() {
         let username = "", jsonObj = this.props.content;
         if(jsonObj) {
-            username = jsonObj.user.name;
+            username = jsonObj.user.twitterHandle;
         }
 
         let modalButtonProps = {
@@ -91,7 +94,7 @@ class Modal extends React.Component {
             placeholder: "Enter Reply",
             maxLength: 280 - username.length - 2,
             messageLength: this.state.modalMsgLength,
-            onKeyUp: () => this.updateUI()
+            onKeyUp: () => this.updateUI(),
         }
 
         let textAreaAndButtonProps = {

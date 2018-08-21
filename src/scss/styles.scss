@@ -128,6 +128,7 @@ body {
 
         .fas.fa-reply:hover {
             color: $blue;
+            cursor: pointer;
         }
 
         .dataHome, .dataUser {
@@ -192,13 +193,6 @@ body {
             }
         }
 
-        .dataHome {
-            .replyButton {
-                display: block;
-                margin-top: 5px;
-            }
-        }
-
         .dataHome:empty, .dataUser:empty {
             display: none;
         }
@@ -238,8 +232,16 @@ body {
                     background-color: yellow;
                     grid-template-columns: 25% auto;
 
-                    .date {
-                        margin-bottom: 5px;
+                    .message {
+                        width: 430px;
+
+                        .date {
+                            margin-bottom: 5px;
+                        }
+
+                        .messageText {
+                            word-wrap: break-word;
+                        }
                     }
                 }
 
