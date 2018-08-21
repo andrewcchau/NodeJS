@@ -16,11 +16,12 @@ class HomeTimeline extends React.Component {
             tweets: null,
             status: statusEnum.PENDING,
             modalContent: null,
-            displayModal: false
+            displayModal: false,
         }
         this.update = this.update.bind(this);
         this.displayModal = this.displayModal.bind(this);
-        this.setTextBox = this.setTextBox.bind(this);
+        this.modalTextBox = React.createRef();
+        this.clearModalTextBox = this.clearModalTextBox.bind(this);
         Request(this.update);
     }
 
@@ -49,9 +50,7 @@ class HomeTimeline extends React.Component {
         let modalContent;
         if(content) {
             modalContent = content;
-        }
-        if(this.state.textBox) {
-            this.state.textBox.value = '';
+            this.clearModalTextBox();
         }
         this.setState({
             modalContent: modalContent,
@@ -59,10 +58,10 @@ class HomeTimeline extends React.Component {
         });
     }
 
-    setTextBox(element) {
-        this.setState({
-            textBox: element
-        })
+    clearModalTextBox() {
+        if(this.modalTextBox.current) {
+            this.modalTextBox.current.clearTextBox();
+        }
     }
 
     render() {
@@ -81,8 +80,8 @@ class HomeTimeline extends React.Component {
 
         return e('div', {className: "UIContent"},
                 (this.state.displayModal ? e(Modal, { content: this.state.modalContent,
-                                                        sendTextBox: this.setTextBox,
-                                                        displayModal: this.displayModal}) : null),
+                                                        displayModal: this.displayModal,
+                                                        ref: this.modalTextBox}) : null),
                 e(TimelineUI, { className: 'homeTLUIContainer',
                                 requestFunc: (this.props.test ? this.props.requestFunc : Request),
                                 filterFunc: (this.props.test ? this.props.filterFunc : RequestFilterTimeline),

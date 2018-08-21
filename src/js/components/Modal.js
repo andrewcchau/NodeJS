@@ -14,10 +14,10 @@ class Modal extends React.Component {
             returnMessage: null,
             retAppend: "",
             textBox: null,
-            content: this.props.content
         }
 
         this.updateReturnMessage = this.updateReturnMessage.bind(this);
+        this.clearTextBox = this.clearTextBox.bind(this);
     }
 
     componentDidMount() {
@@ -25,7 +25,6 @@ class Modal extends React.Component {
         this.setState({
             textBox: tbClass && tbClass[0]
         })
-        this.props.sendTextBox(this.state.textBox);
     }
 
     updateUI() {
@@ -42,6 +41,13 @@ class Modal extends React.Component {
         this.setState({
             returnMessage: null,
             retAppend: ""
+        })
+    }
+
+    clearTextBox() {
+        this.state.textBox.value = '';
+        this.setState({
+            modalMsgLength: 0
         })
     }
 
