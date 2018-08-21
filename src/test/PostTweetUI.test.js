@@ -10,26 +10,33 @@ describe('Post Tweet UI Test Render Everything', () => {
         const wrapper = shallow(e(PostTweetUI));
         expect(wrapper.hasClass('UIContent PostTweet')).toEqual(true);
         expect(wrapper.children().exists()).toEqual(true);
-        expect(wrapper.find('div').length).toEqual(3);
+        expect(wrapper.find('div').length).toEqual(5);
         expect(wrapper.find('span').length).toEqual(1);
         expect(wrapper.find('button').length).toEqual(1);
 
         /* TextArea */
-        let child = wrapper.childAt(0);
-        expect(child.hasClass('postTextArea')).toEqual(true);
-        expect(child.props().rows).toEqual(6);
-        expect(child.props().cols).toEqual(50);
-        expect(child.props().placeholder).toEqual('Enter Tweet');
+        let entryWrapper = wrapper.childAt(0);
+        expect(entryWrapper.hasClass('textEntryWrapper')).toEqual(true);
+        expect(entryWrapper.children().exists()).toEqual(true);
+
+        let textAreaWrapper = entryWrapper.childAt(0);
+        expect(textAreaWrapper.hasClass('textAreaWrapper')).toEqual(true);
+
+        let postTextArea = textAreaWrapper.childAt(0);
+        expect(postTextArea.hasClass('postTextArea')).toEqual(true);
+        expect(postTextArea.props().rows).toEqual(6);
+        expect(postTextArea.props().cols).toEqual(50);
+        expect(postTextArea.props().placeholder).toEqual('Enter Tweet');
 
         /* Char Counter */
-        child = wrapper.childAt(1);
-        expect(child.hasClass('charCounter')).toEqual(true);
-        expect(child.text()).toEqual('0');
+        let charCtr = textAreaWrapper.childAt(1);
+        expect(charCtr.hasClass('charCounter')).toEqual(true);
+        expect(charCtr.text()).toEqual('0');
 
         /* Post Button */
-        child = wrapper.childAt(2).childAt(1);
-        expect(child.hasClass('postButton')).toEqual(true);
-        expect(child.props().disabled).toEqual(true);
-        expect(child.text()).toEqual('Post Tweet');
+        let postButton = entryWrapper.childAt(1).childAt(1);
+        expect(postButton.hasClass('postButton')).toEqual(true);
+        expect(postButton.props().disabled).toEqual(true);
+        expect(postButton.text()).toEqual('Post Tweet');
     });
 });
