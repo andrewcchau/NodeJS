@@ -28,9 +28,24 @@ const PostToTwitter = (content, callback) => {
             method: 'POST',
             mode: "cors",
             headers: {
-                "Content-Type": "application/x-www-form-urlencoded"
+                "Content-Type": "application/json"
             },
-            body: encodeURIComponent("message") + "=" + encodeURIComponent(content)
+            body: JSON.stringify({message: content})
+        })
+        .then(res => callback(res.status), rej => callback(rej.status))
+        .catch(() => callback(null));
+    }
+}
+
+const ReplyToTweet = (content, callback) => {
+    if(content) {
+        return fetch('http://localhost:8080/api/1.0/twitter/tweet/reply', {
+            method: 'POST',
+            mode: 'cors',
+            headers: {
+                    "Content-Type": "application/json"
+            },
+            body: JSON.stringify({statusID: content.statusID, message: content.message})
         })
         .then(res => callback(res.status), rej => callback(rej.status))
         .catch(() => callback(null));
@@ -38,4 +53,4 @@ const PostToTwitter = (content, callback) => {
 }
 
 export default Request;
-export {Request, RequestUserTimeline, RequestFilterTimeline, PostToTwitter};
+export {Request, RequestUserTimeline, RequestFilterTimeline, PostToTwitter, ReplyToTweet};

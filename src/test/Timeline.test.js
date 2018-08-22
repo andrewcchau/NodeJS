@@ -1,35 +1,16 @@
 import {shallow, mount} from 'enzyme';
 import React from 'react';
+import JsonObj from './JSONTest';
 import Tweets from '../js/components/Tweets';
 import UserTimeline from '../js/components/UserTimeline';
 import HomeTimeline from '../js/components/HomeTimeline';
 
 const e = React.createElement;
 
-let message = "button message",
-    handle = "TesterHandle",
-    name = "Tester",
-    img = "https://http.cat/404",
-    date = "December 17, 1995 03:24:00",
-    id = "123456";
-
 /* Test HomeTimeline Component */
 const callBackFunc = (cb) => {
-    cb(jsonObj);
+    cb(JsonObj);
 }
-
-const json = (message, handle, name, img, created, id) => {
-    return '[{"twitterMessage":"' + message + '",' +
-            '"user": {' +
-                '"twitterHandle":"' + handle + '",' +
-                '"name":"' + name + '",' +
-                '"profileImageURL":"' + img +
-            '"},' +
-            '"createdAt":"' + created + '",' +
-            '"id":"' + id + '"}]';
-}
-
-let jsonObj = JSON.parse(json(message, handle, name, img, date, id));
 
 describe('Home Timeline Test No Input', () => {
     it('Should have children components but nothing else', () => {

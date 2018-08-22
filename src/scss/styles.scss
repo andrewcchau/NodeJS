@@ -8,6 +8,7 @@ $border-color: #C0C0C0;
 $item-width: 90%;
 $user-white: #f5f8fa;
 $user-blue: #1da1f2;
+$dark-grey: #4c525b;
 
 @mixin boldFontSize($pix) {
 	font-weight: bold;
@@ -25,8 +26,23 @@ body {
 	font-family: $font;
 }
 
-textarea {
-    resize: none;
+.textAreaWrapper {
+    position: relative;
+    display: inline-block;
+    height: 200px;
+
+    textarea {
+        resize: none;
+        display: block;
+        width: 450px;
+        height: 150px;
+    }
+
+    .charCounter {
+        position: relative;
+        bottom: 25px;
+        margin-left: 405px;
+    }
 }
 
 .title {
@@ -87,7 +103,7 @@ textarea {
             margin: 15px ((100% - $item-width) / 2) 10px ((100% - $item-width) / 2);
         }
 
-        .userTimelineButton, .homeTimelineButton, .filterButton, .postButton {
+        .userTimelineButton, .homeTimelineButton, .filterButton, .postButton, .modalReplyButton {
             background-color: white;
             border-radius: 12px;
             border: 1px solid;
@@ -97,9 +113,22 @@ textarea {
             padding: 5px 10px;
         }
 
-        .userTimelineButton:hover, .homeTimelineButton:hover, .filterButton.active:hover {
+        .userTimelineButton:hover, .homeTimelineButton:hover, .filterButton.active:hover, .postButton.active:hover, .modalReplyButton.active:hover {
             background-color: $blue;
             color: white;
+        }
+
+        .fas.fa-reply {
+            display: block;
+            margin-top: 3px;
+            transition-duration: 0.4s;
+            width: 30px;
+            font-size: 20px;
+        }
+
+        .fas.fa-reply:hover {
+            color: $blue;
+            cursor: pointer;
         }
 
         .dataHome, .dataUser {
@@ -115,52 +144,52 @@ textarea {
                 color: red;
             }
 
-            .item {
-                background-color: $light-blue;
-                align-items: center;
-                border-bottom: 1px solid $border-color;
-                display: grid;
-                grid-template-columns: 17% auto;
-                padding-top: 2px;
+            .tweet:nth-child(even) {
+                background-color: $tan;
+            }
+        }
 
-                .user {
+        .tweet {
+            background-color: $light-blue;
+            align-items: center;
+            border-bottom: 1px solid $border-color;
+            display: grid;
+            grid-template-columns: 17% auto;
+            padding-top: 2px;
+
+            .user {
+                margin-bottom: 5px;
+
+                .twitterName {
+                    @include boldFontSize(20px);
+                }
+
+                .twitterHandle {
+                    font: italic normal 15px $font;
                     margin-bottom: 5px;
-
-                    .twitterName {
-                        @include boldFontSize(20px);
-                    }
-
-                    .twitterHandle {
-                        font: italic normal 15px $font;
-                        margin-bottom: 5px;
-                    }
-                }
-
-                .message {
-                    text-align: left;
-
-                    .date {
-                        font-style: italic;
-                        font-size: 13px;
-                        margin-top: 5px;
-                        height: 10px;
-                    }
-
-                    .messageText {
-                        font-size: 17px;
-                    }
-                }
-
-                img {
-                    border-radius: 50%;
-                    margin-top: 10px;
-                    width: 60px;
-                    height: 60px;
                 }
             }
 
-            .item:nth-child(even) {
-                background-color: $tan;
+            .message {
+                text-align: left;
+
+                .date {
+                    font-style: italic;
+                    font-size: 13px;
+                    margin-top: 5px;
+                    height: 10px;
+                }
+
+                .messageText {
+                    font-size: 17px;
+                }
+            }
+
+            img {
+                border-radius: 50%;
+                margin-top: 10px;
+                width: 60px;
+                height: 60px;
             }
         }
 
@@ -168,8 +197,88 @@ textarea {
             display: none;
         }
 
+        .modalWrapper {
+            z-index: 1;
+            height: 100%;
+            position: fixed;
+            top: 0;
+            right: 0;
+
+            .modal {
+                background-color: white;
+                height: 100%;
+                width: 600px;
+                border-left: 1px solid black;
+                position: absolute;
+                right: 0;
+
+                .modalCloseButton {
+                    float: right;
+                    padding: 10px 15px;
+                    font-size: 10px;
+                    transition-duration: 0.4s;
+                    font-size: 20px;
+                }
+
+                .modalCloseButton:hover {
+                    color: white;
+                    background-color: $dark-grey;
+                }
+
+                .tweet {
+                    clear: right;
+                    border-bottom: 0;
+                    height: 150px;
+                    margin-left: 0.5px;
+                    background-color: yellow;
+                    grid-template-columns: 25% auto;
+
+                    .message {
+                        width: 430px;
+
+                        .date {
+                            margin-bottom: 5px;
+                        }
+
+                        .messageText {
+                            word-wrap: break-word;
+                        }
+                    }
+                }
+
+                .textAreaWrapper {
+                    height: 150px;
+
+                    .modalTextArea {
+                        margin-top: 12px;
+                        font-size: 15px;
+                    }
+                }
+
+                .modalReplyButtonWrapper {
+                    .modalReturnMessage {
+                        position: relative;
+                        display: inline;
+                        margin-right: 10px;
+                    }
+
+                    .modalReturnMessage.success {
+                        color: green;
+                    }
+
+                    .modalReturnMessage.error {
+                        color: red;
+                    }
+
+                    .modalReplyButton {
+                        margin-right: 260px;
+                    }
+                }
+            }
+        }
+
         .dataUser {
-            .item {
+            .tweet {
                 background-color: $user-blue;
                 grid-template-columns: 17% auto;
                 padding-top: 11px;
@@ -187,26 +296,25 @@ textarea {
                 }
             }
 
-            .item:nth-child(even) {
+            .tweet:nth-child(even) {
                 background-color: $user-white;
             }
+        }
+
+        .postButtonWrapper, .modalReplyButtonWrapper {
+            text-align: right;
+            position: relative;
+            bottom: 10px;
+        }
+
+        .modalReplyButtonWrapper {
+            left: 190px;
         }
     }
 
     .UIContent.PostTweet {
         position: relative;
         display: inline-block;
-
-        .postButtonWrapper {
-            margin-top: 5px;
-            text-align: right;
-        }
-
-        .charCounter {
-          position: absolute;
-          bottom: 43px;
-          right: 12px;
-        }
 
         .returnMessage {
             position: relative;

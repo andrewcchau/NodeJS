@@ -52,16 +52,35 @@ const TextBox = (properties) => {
 
 const TextArea = (properties) => {
     if(properties) {
-        return e('textarea', { className: properties.className,
-                            rows: properties.rows,
-                            cols: properties.cols,
-                            placeholder: properties.placeholder,
-                            key: properties.key,
-                            onKeyUp: properties.onKeyUp,
-                            onKeyPress: properties.onKeyPress,
-                            maxLength: properties.maxLength});
+        return e('div', {className: "textAreaWrapper"},
+                e('textarea', { className: properties.className,
+                                rows: properties.rows,
+                                cols: properties.cols,
+                                placeholder: properties.placeholder,
+                                key: properties.key,
+                                onKeyUp: properties.onKeyUp,
+                                maxLength: properties.maxLength}),
+                e('span', {className: "charCounter"}, properties.messageLength)
+                );
     } else {
         return e('textarea');
+    }
+}
+
+const TextAreaAndButton = (properties) => {
+    if(properties) {
+        let buttonWrapperProps = properties.buttonWrapperProperties;
+        return e('div', {className: "textEntryWrapper"},
+                    TextArea(properties.textAreaProperties),
+                    e('div', {className: buttonWrapperProps.className},
+                        [e('div', { className: buttonWrapperProps.returnMessageClass,
+                                    key: buttonWrapperProps.returnMessageClass},
+                                    buttonWrapperProps.returnMessage),
+                         Button(properties.buttonProperties)
+                        ])
+                );
+    } else {
+        return e('div', {className: "textEntryWrapper"});
     }
 }
 
@@ -71,4 +90,4 @@ const statusEnum = {
     NO_MATCH: "No Match"
 }
 
-export {Header, Mismatch, Pending, Error, Button, TextBox, TextArea, statusEnum};
+export {Header, Mismatch, Pending, Error, Button, TextBox, TextArea, statusEnum, TextAreaAndButton};

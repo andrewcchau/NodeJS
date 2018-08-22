@@ -5,6 +5,7 @@ import TimelineUI from './TimelineUI';
 import FilterUI from './FilterUI';
 import {Request, RequestFilterTimeline} from '../services/httpCall';
 import {Mismatch, Pending, Error, statusEnum} from './GeneralComponents';
+import Modal from './Modal';
 
 const e = React.createElement;
 
@@ -14,8 +15,13 @@ class HomeTimeline extends React.Component {
         this.state = {
             tweets: null,
             status: statusEnum.PENDING,
+            modalContent: null,
+            displayModal: false,
         }
         this.update = this.update.bind(this);
+        this.displayModal = this.displayModal.bind(this);
+        this.modalTextBox = React.createRef();
+        this.clearModalTextBox = this.clearModalTextBox.bind(this);
         Request(this.update);
     }
 
@@ -40,12 +46,30 @@ class HomeTimeline extends React.Component {
         }
     }
 
+    displayModal(toggle, content){
+        let modalContent;
+        if(content) {
+            modalContent = content;
+            this.clearModalTextBox();
+        }
+        this.setState({
+            modalContent: modalContent,
+            displayModal: toggle
+        });
+    }
+
+    clearModalTextBox() {
+        if(this.modalTextBox.current) {
+            this.modalTextBox.current.clearTextBox();
+        }
+    }
+
     render() {
         let component;
         let extraComponent = e(FilterUI, {update: this.update});
 
         if(this.state.tweets && !_.isEmpty(this.state.tweets)) {
-            component = e(Tweets, { tweets: this.state.tweets });
+            component = e(Tweets, { tweets: this.state.tweets, openModal: this.displayModal});
         } else if(_.isEqual(this.state.status, statusEnum.NO_MATCH)) {
             component = Mismatch("No tweets match your search query.");
         } else if(_.isEqual(this.state.status, statusEnum.PENDING)) {
@@ -55,6 +79,9 @@ class HomeTimeline extends React.Component {
         }
 
         return e('div', {className: "UIContent"},
+                (this.state.displayModal ? e(Modal, { content: this.state.modalContent,
+                                                        displayModal: this.displayModal,
+                                                        ref: this.modalTextBox}) : null),
                 e(TimelineUI, { className: 'homeTLUIContainer',
                                 requestFunc: (this.props.test ? this.props.requestFunc : Request),
                                 filterFunc: (this.props.test ? this.props.filterFunc : RequestFilterTimeline),

@@ -4,6 +4,7 @@ import Tweets from './Tweets';
 import TimelineUI from './TimelineUI';
 import {RequestUserTimeline} from '../services/httpCall';
 import {Pending, Error, statusEnum} from './GeneralComponents';
+import Modal from './Modal';
 
 const e = React.createElement;
 
@@ -12,9 +13,12 @@ class UserTimeline extends React.Component {
         super(props);
         this.state = {
             tweets: null,
-            status: statusEnum.PENDING
+            status: statusEnum.PENDING,
+            modalContent: null,
+            displayModal: false
         }
         this.update = this.update.bind(this);
+        this.displayModal = this.displayModal.bind(this);
         RequestUserTimeline(this.update);
     }
 
@@ -32,11 +36,18 @@ class UserTimeline extends React.Component {
         }
     }
 
+    displayModal(toggle, tweet){
+        this.setState({
+            modalContent: tweet,
+            displayModal: toggle
+        });
+    }
+
     render() {
         let component;
 
         if(this.state.tweets && !_.isEmpty(this.state.tweets)) {
-            component = e(Tweets, { tweets: this.state.tweets, excludeHandle: true });
+            component = e(Tweets, { tweets: this.state.tweets, excludeHandle: true, openModal: this.displayModal });
         } else if(_.isEqual(this.state.status, statusEnum.PENDING)) {
             component = Pending();
         } else if(this.state.tweets && _.isEmpty(this.state.tweets)){
@@ -47,6 +58,7 @@ class UserTimeline extends React.Component {
 
 
         return e('div', {className: "UIContent"},
+                (this.state.displayModal ? e(Modal, { content: this.state.modalContent , displayModal: this.displayModal}) : null),
                 e(TimelineUI, { className: "userTLUIContainer",
                                 requestFunc: (this.props.test ? this.props.requestFunc : RequestUserTimeline),
                                 buttonClass: 'userTimelineButton',

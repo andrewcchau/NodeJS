@@ -1,11 +1,8 @@
 import React from 'react';
-import _ from 'lodash';
 import {PostToTwitter} from '../services/httpCall';
-import {Button, TextArea} from './GeneralComponents';
+import {TextAreaAndButton} from './GeneralComponents';
 
 const e = React.createElement;
-
-let textBox;
 
 class PostTweetUI extends React.Component {
     constructor(props) {
@@ -13,7 +10,8 @@ class PostTweetUI extends React.Component {
         this.state = {
             postMsgLength: 0,
             returnMessage: null,
-            retAppend: ""
+            returnMsgClassAppend: "",
+            textBox: null
         }
         this.updateReturnMessage = this.updateReturnMessage.bind(this);
         this.updateUI = this.updateUI.bind(this);
@@ -21,50 +19,33 @@ class PostTweetUI extends React.Component {
 
     componentDidMount() {
         let tbClass = document.getElementsByClassName("postTextArea");
-        textBox = tbClass && tbClass[0];
+        this.setState({
+           textBox: tbClass && tbClass[0]
+        })
     }
 
-    updateReturnMessage(message) {
-        if(message) {
-            let success;
-            if(_.isEqual(message, 200)) {
-                success = true;
-            } else {
-                success = false;
-            }
+    updateReturnMessage(statusCode) {
+        if(statusCode) {
+            let success = statusCode == 200;
 
             this.setState({
                 returnMessage: (success ? "Post Success!" : "Post Failed!"),
-                retAppend: (success ? " success" : " error")
+                returnMsgClassAppend: (success ? " success" : " error")
             });
         } else {
             this.setState({
                 returnMessage: "Post Failed!",
-                retAppend: " error"
+                returnMsgClassAppend: " error"
             })
         }
     }
 
-    checkCharCount(event) {
-        if(textBox && textBox.value.length >= 280) {
-            return false;
-        }
-    }
-
     updateUI(event) {
-        if(textBox && textBox.value) {
-            this.setState({
-                postMsgLength: textBox.value.length
-            });
-        } else {
-            this.setState({
-                postMsgLength: 0
-            });
-        }
-
         this.setState({
+            postMsgLength: this.state.textBox && this.state.textBox.value
+                                && this.state.textBox.value.length || 0,
             returnMessage: null,
-            retAppend: ""
+            returnMsgClassAppend: ""
         })
     }
 
@@ -76,25 +57,32 @@ class PostTweetUI extends React.Component {
             placeholder: "Enter Tweet",
             key: "postTextArea",
             onKeyUp: (event) => this.updateUI(event),
-            onKeyPress: (event) => this.checkCharCount(event),
-            maxLength: 280
+            maxLength: 280,
+            messageLength: this.state.postMsgLength
         }
 
         let buttonProperties = {
-            className: "postButton",
+            className: "postButton" + (this.state.postMsgLength > 0 ? " active" : ""),
             key: "postButton",
             disabled: (this.state.postMsgLength > 0 ? false : true),
             message: "Post Tweet",
             onClick: () => {
-                PostToTwitter(textBox.value, this.updateReturnMessage);
+                PostToTwitter(this.state.textBox.value, this.updateReturnMessage);
             }
         }
 
+        let textAreaAndButtonProps = {
+            textAreaProperties: textBoxProperties,
+            buttonWrapperProperties: {
+                className: "postButtonWrapper",
+                returnMessageClass: "returnMessage" + this.state.returnMsgClassAppend,
+                returnMessage: this.state.returnMessage
+            },
+            buttonProperties: buttonProperties
+        }
+
         return e('div', {className: "UIContent PostTweet"},
-                TextArea(textBoxProperties),
-                e('span', {className: "charCounter"}, this.state.postMsgLength),
-                e('div',{className: "postButtonWrapper"}, ([e('div', {className: "returnMessage" + this.state.retAppend, key: "returnMessage"}, this.state.returnMessage),
-                            Button(buttonProperties)]))
+                TextAreaAndButton(textAreaAndButtonProps)
                 );
     }
 }
