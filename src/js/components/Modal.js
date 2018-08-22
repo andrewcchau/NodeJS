@@ -12,7 +12,7 @@ class Modal extends React.Component {
         this.state = {
             modalMsgLength: 0,
             returnMessage: null,
-            retAppend: "",
+            returnMsgClassAppend: "",
             textBox: null,
         }
 
@@ -28,19 +28,11 @@ class Modal extends React.Component {
     }
 
     updateUI() {
-        if(this.state.textBox && this.state.textBox.value) {
-            this.setState({
-                modalMsgLength: this.state.textBox.value.length
-            });
-        } else {
-            this.setState({
-                modalMsgLength: 0
-            })
-        }
-
         this.setState({
+            modalMsgLength: this.state.textBox && this.state.textBox.value
+                                && this.state.textBox.value.length || 0,
             returnMessage: null,
-            retAppend: ""
+            returnMsgClassAppend: ""
         })
     }
 
@@ -53,21 +45,16 @@ class Modal extends React.Component {
 
     updateReturnMessage(statusCode) {
         if(statusCode) {
-            let success;
-            if(statusCode == 200) {
-                success = true;
-            } else {
-                success = false;
-            }
+            let success = statusCode == 200;
 
             this.setState({
                 returnMessage: (success ? "Replied Successfully!" : "Failed to Reply!"),
-                retAppend: (success ? " success" : " error")
+                returnMsgClassAppend: (success ? " success" : " error")
             })
         } else {
             this.setState({
                 returnMessage: "Failed to Reply!",
-                retAppend: " error"
+                returnMsgClassAppend: " error"
             })
         }
     }
@@ -107,7 +94,7 @@ class Modal extends React.Component {
             textAreaProperties: modalTextAreaProps,
             buttonWrapperProperties: {
                 className: "modalReplyButtonWrapper",
-                returnMessageClass: "modalReturnMessage" + this.state.retAppend,
+                returnMessageClass: "modalReturnMessage" + this.state.returnMsgClassAppend,
                 returnMessage: this.state.returnMessage
             },
             buttonProperties: modalButtonProps

@@ -36,13 +36,9 @@ class UserTimeline extends React.Component {
         }
     }
 
-    displayModal(toggle, content){
-        let modalContent;
-        if(content) {
-            modalContent = content;
-        }
+    displayModal(toggle, tweet){
         this.setState({
-            modalContent: modalContent,
+            modalContent: tweet,
             displayModal: toggle
         });
     }

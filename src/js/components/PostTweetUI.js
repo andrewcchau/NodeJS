@@ -10,7 +10,7 @@ class PostTweetUI extends React.Component {
         this.state = {
             postMsgLength: 0,
             returnMessage: null,
-            retAppend: "",
+            returnMsgClassAppend: "",
             textBox: null
         }
         this.updateReturnMessage = this.updateReturnMessage.bind(this);
@@ -26,39 +26,26 @@ class PostTweetUI extends React.Component {
 
     updateReturnMessage(statusCode) {
         if(statusCode) {
-            let success;
-            if(statusCode == 200) {
-                success = true;
-            } else {
-                success = false;
-            }
+            let success = statusCode == 200;
 
             this.setState({
                 returnMessage: (success ? "Post Success!" : "Post Failed!"),
-                retAppend: (success ? " success" : " error")
+                returnMsgClassAppend: (success ? " success" : " error")
             });
         } else {
             this.setState({
                 returnMessage: "Post Failed!",
-                retAppend: " error"
+                returnMsgClassAppend: " error"
             })
         }
     }
 
     updateUI(event) {
-        if(this.state.textBox && this.state.textBox.value) {
-            this.setState({
-                postMsgLength: this.state.textBox.value.length
-            });
-        } else {
-            this.setState({
-                postMsgLength: 0
-            });
-        }
-
         this.setState({
+            postMsgLength: this.state.textBox && this.state.textBox.value
+                                && this.state.textBox.value.length || 0,
             returnMessage: null,
-            retAppend: ""
+            returnMsgClassAppend: ""
         })
     }
 
@@ -88,7 +75,7 @@ class PostTweetUI extends React.Component {
             textAreaProperties: textBoxProperties,
             buttonWrapperProperties: {
                 className: "postButtonWrapper",
-                returnMessageClass: "returnMessage" + this.state.retAppend,
+                returnMessageClass: "returnMessage" + this.state.returnMsgClassAppend,
                 returnMessage: this.state.returnMessage
             },
             buttonProperties: buttonProperties
