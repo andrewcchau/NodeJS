@@ -15,7 +15,7 @@ gulp.task('hello', () => {
 /* Starts the UI server */
 gulp.task('server', () => {
     connect.server( {
-        root: ['src', 'dist'],
+        root: 'dist',
         port: 9000
     })
 });
@@ -25,6 +25,11 @@ gulp.task('sass', () => {
     return gulp.src('./src/scss/*.scss')
         .pipe(sass().on('error', sass.logError))
         .pipe(gulp.dest('./dist/css'));
+});
+
+gulp.task('html', () => {
+    return gulp.src('./src/*.html')
+        .pipe(gulp.dest('./dist/'));
 });
 
 const bundle = (b) => {
@@ -60,4 +65,4 @@ gulp.task('js', () => {
 });
 
 /* GULP command that executes everything */
-gulp.task('dev', ['sass', 'js', 'server']);
+gulp.task('dev', ['sass', 'js', 'html', 'server']);
